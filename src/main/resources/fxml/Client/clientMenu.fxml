@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="180.0" style="-fx-background-radius: 10;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bank.app.controllers.client.clientMenuController">
+   <children>
+      <AnchorPane prefHeight="753.0" prefWidth="180.0" style="-fx-background-color: #3c6255;">
+         <children>
+            <VBox alignment="CENTER" prefHeight="80.0" prefWidth="160.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <ImageView fitHeight="45.0" fitWidth="137.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/LogoHorizontal.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </VBox>
+            <VBox prefHeight="400.0" prefWidth="160.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+               <children>
+                  <Button fx:id="btn_dashboard" alignment="BASELINE_LEFT" mnemonicParsing="false" prefWidth="150.0" style="-fx-background-color: #EAE7B1; -fx-background-radius: 8;" text="Dashboard" textFill="#3c6255">
+                     <graphic>
+                        <FontAwesomeIconView fill="#3c6255" glyphName="HOME" size="25" translateX="-1.0" />
+                     </graphic>
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btn_transaction" alignment="BASELINE_LEFT" mnemonicParsing="false" prefWidth="150.0" style="-fx-background-color: #EAE7B1; -fx-background-radius: 8;" text="  Transaction" textFill="#3c6255">
+                     <graphic>
+                        <FontAwesomeIconView fill="#3c6255" glyphName="DOLLAR" size="25" translateX="5.0" />
+                     </graphic>
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btn_profle" alignment="BASELINE_LEFT" mnemonicParsing="false" prefWidth="150.0" style="-fx-background-color: #EAE7B1; -fx-background-radius: 8;" text="  Profile" textFill="#3c6255">
+                     <graphic>
+                        <FontAwesomeIconView fill="#3c6255" glyphName="USER" size="25" translateX="3.0" />
+                     </graphic>
+                     <VBox.margin>
+                        <Insets bottom="50.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btn_logout" alignment="CENTER" mnemonicParsing="false" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #61876E; -fx-background-radius: 8;" text="LOGOUT" textFill="#eae7b1">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>

@@ -1,0 +1,27 @@
+.login_container {
+    -fx-background-image: url("../images/Background.jpg");
+}
+
+.root {
+    -fx-text-fill: #eae7b1;
+}
+
+/*Account Selector choicebox style*/
+
+.text-field {
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+    -fx-text-fill: #eae7b1;
+    -fx-tick-label-fill: #eae7b1;
+}
+
+.jfx-combo-box {
+    -fx-prompt-text-fill: #eae7b1;
+}
+
+.jfx-combo-box .cell {
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+    -fx-text-fill: #eae7b1;
+}
+

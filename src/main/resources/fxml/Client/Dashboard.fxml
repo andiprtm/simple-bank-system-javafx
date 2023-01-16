@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="750.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bank.app.controllers.client.DashboardController">
+   <children>
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#3c6255" height="84.0" layoutX="7.0" layoutY="-10.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="843.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="-10.0" />
+      <HBox alignment="CENTER_RIGHT" layoutX="643.0" layoutY="8.0" prefHeight="60.0" prefWidth="200.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="8.0">
+         <children>
+            <Label fx:id="tv_say_hi" text="Hi, Andi" textFill="#eae7b1">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </Label>
+            <FontAwesomeIconView fill="#eae7b1" glyphName="USER" size="30" />
+         </children>
+         <padding>
+            <Insets right="15.0" />
+         </padding>
+      </HBox>
+      <Label layoutX="22.0" layoutY="24.0" text="DASHBOARD" textFill="#eae7b1" AnchorPane.leftAnchor="22.0" AnchorPane.topAnchor="24.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="349.0" layoutY="94.0" text="Saldo Akhir" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="94.0">
+         <font>
+            <Font name="System Bold" size="28.0" />
+         </font>
+      </Label>
+      <Label fx:id="tv_saldo_akhir" alignment="CENTER" contentDisplay="CENTER" layoutX="284.0" layoutY="145.0" text="Rp. 200,000,000.00" textFill="#61876e" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="140.0">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" layoutX="1.0" layoutY="222.0" prefHeight="100.0" prefWidth="850.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="222.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="150.0">
+               <children>
+                  <Label fx:id="tv_value_deposit" text="Rp. 20,000,000.00" textFill="#61876e">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIconView fill="#366f49" glyphName="ARROW_UP" />
+                     </graphic>
+                  </Label>
+                  <Label text="DEPOSIT">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+               <HBox.margin>
+                  <Insets right="30.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="150.0">
+               <children>
+                  <Label fx:id="tv_transfer_masuk" text="Rp. 20,000,000.00" textFill="#61876e">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIconView fill="#366f49" glyphName="ARROW_UP" />
+                     </graphic>
+                  </Label>
+                  <Label text="TRANSFER MASUK">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+               <HBox.margin>
+                  <Insets right="30.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="150.0">
+               <children>
+                  <Label fx:id="tv_transfer_keluar" text="Rp. 20,000,000.00" textFill="#a41818">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIconView fill="#d01212" glyphName="ARROW_DOWN" />
+                     </graphic>
+                  </Label>
+                  <Label text="TRANSFER KELUAR">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+               <HBox.margin>
+                  <Insets right="30.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="150.0">
+               <children>
+                  <Label fx:id="tv_tarik_tunai" text="Rp. 20,000,000.00" textFill="#a41818">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIconView fill="#d01212" glyphName="ARROW_DOWN" />
+                     </graphic>
+                  </Label>
+                  <Label text="TARIK TUNAI">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <Line endX="255.0" layoutX="434.5" layoutY="318.0" startX="-284.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="318.0" />
+      <HBox alignment="CENTER" layoutY="340.0" prefHeight="70.0" prefWidth="850.0" AnchorPane.bottomAnchor="340.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Button fx:id="btn_transfer" mnemonicParsing="false" style="-fx-background-color: #3c6255; -fx-background-radius: 8;" text="TRANSFER" textFill="#eae7b1">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="btn_tarik_tunai" mnemonicParsing="false" style="-fx-background-color: #3c6255; -fx-background-radius: 8;" text="TARIK TUNAI" textFill="#eae7b1">
+               <HBox.margin>
+                  <Insets left="40.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+      <Label alignment="CENTER" layoutX="360.0" layoutY="416.0" text="Transaksi Terakhir" textFill="#3c6255" AnchorPane.bottomAnchor="314.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <ListView fx:id="transaction_listview" layoutX="95.0" layoutY="443.0" prefHeight="278.0" prefWidth="660.0" style="-fx-background-radius: 10;" AnchorPane.bottomAnchor="29.0" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="95.0" />
+   </children>
+</AnchorPane>
