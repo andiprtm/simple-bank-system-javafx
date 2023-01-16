@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
 
 <AnchorPane prefHeight="750.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bank.app.controllers.client.ProfileController">
    <children>
@@ -12,5 +13,62 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
+      <VBox layoutY="75.0" prefHeight="676.0" prefWidth="850.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Label text="Username">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="tv_username" text="Belum Diatur">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label text="Nama">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="tv_name" text="Belum Diatur">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label text="Alamat">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="tv_address" text="Belum Diatur">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label text="Nomor Handphone">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="tv_nomorhp" text="Belum Diatur">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label text="Tipe Akun">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="tv_tipeakun" text="Belum Diatur">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </VBox>
    </children>
 </AnchorPane>

@@ -1,5 +1,6 @@
 package com.bank.app.controllers;
 
+import com.bank.app.controllers.client.DashboardController;
 import com.bank.app.models.Model;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;

@@ -25,7 +25,7 @@
             </Label>
             <HBox alignment="CENTER">
                <children>
-                  <Label fx:id="tv_errorTransfer" style="-fx-background-color: #ff9900; -fx-background-radius: 8;" text="Pastikan Data yang Diinputkan Sudah Benar !!" textFill="WHITE">
+                  <Label fx:id="tv_errorWithdraw" style="-fx-background-color: #ff9900; -fx-background-radius: 8;" text="Pastikan Data yang Diinputkan Sudah Benar !!" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -43,9 +43,9 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="35.0" prefWidth="200.0">
                <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="128.0">
+                  <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="145.0">
                      <children>
-                        <Label text="Nominal Transfer" textFill="#a6bb8d">
+                        <Label prefHeight="20.0" prefWidth="150.0" text="Nominal Tarik Tunai" textFill="#a6bb8d">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -54,7 +54,7 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <TextField fx:id="tf_nominalTransfer" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #61876E; -fx-background-radius: 8;" styleClass="text-field" stylesheets="@../../style/login.css" />
+                        <TextField fx:id="tf_nominalWithdraw" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #61876E; -fx-background-radius: 8;" styleClass="text-field" stylesheets="@../../style/login.css" />
                      </children>
                   </HBox>
                </children>
@@ -64,7 +64,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="35.0" prefWidth="200.0">
                <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="128.0">
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="145.0">
                      <children>
                         <Label text="PIN" textFill="#a6bb8d">
                            <font>
@@ -75,7 +75,7 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <PasswordField fx:id="tf_PIN" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #61876E; -fx-background-radius: 8;" styleClass="text-field" stylesheets="@../../style/login.css" />
+                        <PasswordField fx:id="wd_pin" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #61876E; -fx-background-radius: 8;" styleClass="text-field" stylesheets="@../../style/login.css" />
                      </children>
                   </HBox>
                </children>
@@ -85,12 +85,12 @@
             </HBox>
             <HBox alignment="CENTER">
                <children>
-                  <Button fx:id="btn_cancel" mnemonicParsing="false" style="-fx-background-color: #EAE7B1;" text="Kembali ke Dashboard" textFill="#3c6255">
+                  <Button fx:id="btn_toDashboard" mnemonicParsing="false" style="-fx-background-color: #EAE7B1;" text="Kembali ke Dashboard" textFill="#3c6255">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btn_transfer" mnemonicParsing="false" style="-fx-background-color: #61876E;" text="Tarik Lur" textFill="#eae7b1">
+                  <Button fx:id="btn_withdraw" mnemonicParsing="false" style="-fx-background-color: #61876E;" text="Tarik Lur" textFill="#eae7b1">
                      <HBox.margin>
                         <Insets left="20.0" />
                      </HBox.margin>
