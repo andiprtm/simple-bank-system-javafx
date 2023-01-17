@@ -1,6 +1,7 @@
 package com.bank.app.controllers;
 
 import com.bank.app.controllers.client.DashboardController;
+import com.bank.app.models.Customer;
 import com.bank.app.models.Model;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -51,13 +52,19 @@ public class LoginController implements Initializable {
                 label_eror.setVisible(true);
             }
         } else {
-            if (field_username.getText().equals("andi") && field_password.getText().equals("123")) {
+            if (!field_username.getText().equals("") && !field_password.getText().equals("")) {
                 label_eror.setVisible(false);
-                System.out.println("Login Client Berhasil");
                 Stage stage = (Stage) button_login.getScene().getWindow();
-                Model.getInstance().getViewFactory().closeStage(stage);
-                System.out.println(field_username.getText());
-                Model.getInstance().getViewFactory().showClientWindow();
+                Customer customer = new Customer(field_username.getText(), field_password.getText());
+                customer.authenticate();
+                if (customer.getLocalCustomerId() != null) {
+                    System.out.println(field_username.getText());
+                    Model.getInstance().getViewFactory().closeStage(stage);
+                    System.out.println("Login Client Berhasil");
+                    Model.getInstance().getViewFactory().showClientWindow();
+                } else {
+                    label_eror.setVisible(true);
+                }
             } else {
                 label_eror.setVisible(true);
             }
