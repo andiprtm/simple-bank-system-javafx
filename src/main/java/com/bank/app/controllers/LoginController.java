@@ -44,7 +44,9 @@ public class LoginController implements Initializable {
         if (dropdwon_tipe_user.getValue().equals(userType[0])) {
             if (field_username.getText().equals("andi") && field_password.getText().equals("1234")) {
                 label_eror.setVisible(false);
-                System.out.println("Login Admin Berhasil");
+                Stage stage = (Stage) button_login.getScene().getWindow();
+                Model.getInstance().getViewFactory().closeStage(stage);
+                Model.getInstance().getViewFactory().showAdminWindow();
             } else {
                 label_eror.setVisible(true);
             }

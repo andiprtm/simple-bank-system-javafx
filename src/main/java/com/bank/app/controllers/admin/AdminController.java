@@ -1,4 +1,30 @@
 package com.bank.app.controllers.admin;
 
-public class AdminController {
+import com.bank.app.models.Model;
+import javafx.fxml.Initializable;
+import javafx.scene.layout.BorderPane;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class AdminController implements Initializable {
+    public BorderPane admin_parent;
+
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        Model.getInstance().getViewFactory().getAdminSelectedMenuItem().addListener((observableValue, oldValue, newValue) -> {
+            switch (newValue){
+                case "Nasabah":
+                    admin_parent.setCenter(Model.getInstance().getViewFactory().getClientView());
+                    break;
+                case "Deposit":
+                    admin_parent.setCenter(Model.getInstance().getViewFactory().getDepositView());
+                    break;
+                default:
+                    admin_parent.setCenter(Model.getInstance().getViewFactory().getCreateClientView());
+                    break;
+            }
+        });
+    }
 }

@@ -1,7 +1,6 @@
 package com.bank.app.controllers.client;
 
 import com.bank.app.models.Model;
-import com.bank.app.views.ViewFactory;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;

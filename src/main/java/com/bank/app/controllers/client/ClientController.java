@@ -21,4 +21,9 @@ public class ClientController implements Initializable {
             }
         });
     }
+
+    public void refreshDashboard(){
+        client_parent.setCenter(Model.getInstance().getViewFactory().getDashboardView());
+        System.out.println("refresh dipanggil");
+    }
 }

@@ -41,6 +41,7 @@ public class DashboardController implements Initializable {
     }
 
     public void setWelcomeText(String Username){
+        System.out.println("wc text" + Username);
         tv_say_hi.setText(Username);
     }
 }
