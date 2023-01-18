@@ -6,16 +6,16 @@ import java.math.BigDecimal;
 import java.sql.*;
 
 public class Customer {
-    Integer customerId;
-    String accountType;
-    Boolean isActive;
-    Integer pin;
-    String username;
-    String password;
-    String name;
-    String address;
-    String phone;
-    BigDecimal balance;
+    public Integer customerId;
+    public String accountType;
+    public Boolean isActive;
+    public Integer pin;
+    public String username;
+    public String password;
+    public String name;
+    public String address;
+    public String phone;
+    public BigDecimal balance;
     Connection conn = ConnectionManager.getInstance().getConnection();
 
     public Customer(String username, String password){

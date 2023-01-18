@@ -1,6 +1,5 @@
 package com.bank.app.controllers;
 
-import com.bank.app.controllers.client.DashboardController;
 import com.bank.app.models.Customer;
 import com.bank.app.models.Model;
 import javafx.fxml.Initializable;
@@ -12,7 +11,6 @@ import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
 
-
     public Label label_pilih_tipe_user;
     public ComboBox<Object> dropdwon_tipe_user;
     public Label label_username;
@@ -22,7 +20,6 @@ public class LoginController implements Initializable {
     public Label label_eror;
     public Button button_login;
     Object[] userType = {"Pegawai", "Nasabah"};
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -61,6 +58,7 @@ public class LoginController implements Initializable {
                     System.out.println(field_username.getText());
                     Model.getInstance().getViewFactory().closeStage(stage);
                     System.out.println("Login Client Berhasil");
+                    Model.getInstance().getViewFactory().setUsername(field_username.getText());
                     Model.getInstance().getViewFactory().showClientWindow();
                 } else {
                     label_eror.setVisible(true);

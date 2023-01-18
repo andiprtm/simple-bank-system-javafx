@@ -1,6 +1,8 @@
 package com.bank.app.views;
 
 import com.bank.app.controllers.client.ClientController;
+import com.bank.app.controllers.client.DashboardController;
+import com.bank.app.models.Model;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +18,10 @@ public class ViewFactory {
     private AnchorPane dashboardView;
     private AnchorPane transactionView;
     private AnchorPane profileView;
+    private String username;
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public ViewFactory() {
         this.clientSelectedMenuItem = new SimpleStringProperty("");
@@ -28,7 +34,11 @@ public class ViewFactory {
     public AnchorPane getDashboardView() {
         if(dashboardView == null) {
             try {
-                dashboardView = new FXMLLoader(getClass().getResource("/fxml/client/Dashboard.fxml")).load();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/client/Dashboard.fxml"));
+                dashboardView = loader.load();
+
+                DashboardController controller = loader.getController();
+                controller.setWelcomeText(this.username);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -86,6 +96,7 @@ public class ViewFactory {
         stage.setScene(scene);
         stage.setTitle("Dashboard Client");
         stage.show();
+        Model.getInstance().getViewFactory().getClientSelectedMenuItem().setValue("Dashboard");
     }
 
     public void showTransferWindow(){
