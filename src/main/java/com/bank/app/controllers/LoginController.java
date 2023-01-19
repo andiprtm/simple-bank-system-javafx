@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -57,10 +58,13 @@ public class LoginController implements Initializable {
                 Customer customer = new Customer(field_username.getText(), field_password.getText());
                 customer.authenticate();
                 if (customer.getLocalCustomerId() != null) {
-                    System.out.println(field_username.getText());
+                    customer.getCustomerData();
+
                     Model.getInstance().getViewFactory().closeStage(stage);
                     System.out.println("Login Client Berhasil");
-                    Model.getInstance().getViewFactory().setUsername(field_username.getText());
+
+                    Model.getInstance().getViewFactory().setCustomerData(customer);
+                    Model.getInstance().getViewFactory().setSummary();
                     Model.getInstance().getViewFactory().showClientWindow();
                 } else {
                     label_eror.setVisible(true);

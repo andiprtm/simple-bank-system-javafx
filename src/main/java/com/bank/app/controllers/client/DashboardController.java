@@ -1,5 +1,6 @@
 package com.bank.app.controllers.client;
 
+import com.bank.app.controllers.utils.CurrencyController;
 import com.bank.app.models.Model;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -7,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
+import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -43,5 +45,18 @@ public class DashboardController implements Initializable {
     public void setWelcomeText(String Username){
         System.out.println("wc text" + Username);
         tv_say_hi.setText(Username);
+    }
+
+    public void setSaldoAkhir (BigDecimal balance) {
+        String parseCurrency = new CurrencyController().getIndonesianCurrency(balance);
+        this.tv_saldo_akhir.setText(parseCurrency);
+    }
+
+
+    public void setSummary (BigDecimal summaryTransferIn, BigDecimal summaryTransferOut, BigDecimal summaryWithdraw, BigDecimal summaryDeposit) {
+        this.tv_transfer_keluar.setText(new CurrencyController().getIndonesianCurrency(summaryTransferOut));
+        this.tv_transfer_masuk.setText(new CurrencyController().getIndonesianCurrency(summaryTransferIn));
+        this.tv_tarik_tunai.setText(new CurrencyController().getIndonesianCurrency(summaryWithdraw));
+        this.tv_value_deposit.setText(new CurrencyController().getIndonesianCurrency(summaryDeposit));
     }
 }
