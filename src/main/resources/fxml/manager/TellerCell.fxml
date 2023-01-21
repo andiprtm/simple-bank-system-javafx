@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxWidth="-Infinity" prefHeight="60.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="60.0" prefWidth="550.0" style="-fx-background-color: #3C6255; -fx-background-radius: 10;" AnchorPane.leftAnchor="125.0" AnchorPane.rightAnchor="125.0">
+            <children>
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="112.0">
+               <children>
+                  <FontAwesomeIconView fill="#eae7b1" glyphName="USER" size="28" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                      <Label fx:id="tv_username" text="Username" textFill="#eae7b1">
+                          <HBox.margin>
+                              <Insets />
+                          </HBox.margin>
+                          <font>
+                              <Font name="System Bold" size="14.0" />
+                          </font>
+                      </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                      <Label fx:id="tv_phone" text="Phone" textFill="#eae7b1">
+                          <HBox.margin>
+                              <Insets />
+                          </HBox.margin>
+                          <font>
+                              <Font name="System Bold" size="14.0" />
+                          </font>
+                      </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="tv_tipe_pegawai" text="Manager/Teller" textFill="#eae7b1">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            </children>
+        </HBox>
+    </children>
+   <padding>
+      <Insets left="20.0" right="20.0" />
+   </padding>
+</AnchorPane>

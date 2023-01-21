@@ -31,6 +31,7 @@ public class TransferController implements Initializable {
         System.out.println("Back to Login");
         Stage stage = (Stage) btn_cancel.getScene().getWindow();
         Model.getInstance().getViewFactory().closeStage(stage);
+
         Model.getInstance().getViewFactory().showClientWindow();
     }
 }

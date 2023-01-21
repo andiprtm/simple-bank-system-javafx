@@ -6,8 +6,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-import java.math.BigDecimal;
 import java.net.URL;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
@@ -22,8 +22,15 @@ public class LoginController implements Initializable {
     public Button button_login;
     Object[] userType = {"Pegawai", "Nasabah"};
 
+    public String statusCheck;
+
+    public String[] statusPegawai = {"Teller","Manager"};
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        Random angkarandom = new Random();
+        statusCheck = statusPegawai[1];
+
         dropdwon_tipe_user.getItems().addAll(userType);
         dropdwon_tipe_user.setValue(userType[1]);
 
@@ -45,9 +52,16 @@ public class LoginController implements Initializable {
         if (dropdwon_tipe_user.getValue().equals(userType[0])) {
             if (field_username.getText().equals("andi") && field_password.getText().equals("1234")) {
                 label_eror.setVisible(false);
-                Stage stage = (Stage) button_login.getScene().getWindow();
-                Model.getInstance().getViewFactory().closeStage(stage);
-                Model.getInstance().getViewFactory().showAdminWindow();
+                if(statusCheck.equals(statusPegawai[0])){
+                    Stage stage = (Stage) button_login.getScene().getWindow();
+                    Model.getInstance().getViewFactory().closeStage(stage);
+                    Model.getInstance().getViewFactory().showAdminWindow();
+                }else{
+                    Stage stage = (Stage) button_login.getScene().getWindow();
+                    Model.getInstance().getViewFactory().closeStage(stage);
+                    Model.getInstance().getViewFactory().showManagerWindow();
+                }
+
             } else {
                 label_eror.setVisible(true);
             }

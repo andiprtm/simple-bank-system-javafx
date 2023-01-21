@@ -1,22 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bank.app.controllers.client.TransactionController">
+<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="client-container" stylesheets="@../../style/Client.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bank.app.controllers.client.TransactionController">
    <children>
-      <Label alignment="CENTER" prefHeight="53.0" prefWidth="850.0" text="Transaksi" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#3c6255" height="84.0" layoutX="17.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="843.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="-10.0" />
+      <HBox alignment="CENTER_RIGHT" layoutX="653.0" layoutY="18.0" prefHeight="60.0" prefWidth="200.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="8.0">
+         <children>
+            <Label fx:id="tv_say_hi" text="Hi, Andi" textFill="#eae7b1">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </Label>
+            <FontAwesomeIconView fill="#eae7b1" glyphName="USER" size="30" />
+         </children>
+         <padding>
+            <Insets right="15.0" />
+         </padding>
+      </HBox>
+      <Label layoutX="28.0" layoutY="21.0" text="TRANSAKSI" textFill="#eae7b1" AnchorPane.leftAnchor="22.0" AnchorPane.topAnchor="24.0">
          <font>
-            <Font name="System Bold" size="36.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <ListView fx:id="listview_transaksi" layoutY="94.0" prefHeight="646.0" prefWidth="850.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#3c6255" height="38.0" layoutX="7.0" layoutY="129.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="431.0" />
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#3c6255" height="564.0" layoutX="7.0" layoutY="179.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="588.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="7.0" />
+      <ListView fx:id="listview_transaksi" layoutX="9.0" layoutY="182.0" prefHeight="555.0" prefWidth="581.0" style="-fx-background-color: TRANSPARANT; -fx-background-radius: 10;" stylesheets="@../../style/Client.css" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="9.0">
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
+         <styleClass>
+            <String fx:value="list-cell" />
+            <String fx:value="scroll-bar" />
+         </styleClass>
       </ListView>
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#3c6255" height="184.0" layoutX="608.0" layoutY="179.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="242.0" />
+      <Label layoutX="22.0" layoutY="134.0" text="Daftar Transaksi" textFill="#eae7b1" AnchorPane.leftAnchor="22.0" AnchorPane.topAnchor="134.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="665.0" layoutY="190.0" text="Total Transaksi" textFill="#eae7b1" AnchorPane.rightAnchor="64.0" AnchorPane.topAnchor="190.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="tv_jumlah_transaksi" layoutX="684.0" layoutY="215.0" text="26" textFill="#eae7b1" AnchorPane.rightAnchor="83.0" AnchorPane.topAnchor="215.0">
+         <font>
+            <Font name="System Bold" size="78.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

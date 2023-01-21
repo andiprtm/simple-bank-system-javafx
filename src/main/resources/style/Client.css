@@ -1,0 +1,35 @@
+
+.client-container{
+    -fx-background-color: transparent;
+}
+
+.client-container .list-view {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+}
+
+.client-container .list-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 10 0 10 0;
+}
+
+.client-container .scroll-bar{
+    -fx-background-color: transparent;
+}
+
+.client-container .scroll-bar:vertical {
+    -fx-background-color: #61876E;
+    -fx-background-radius: 4;
+    -fx-border-width: 0;
+}
+
+.client-container .scroll-bar:vertical .thumb {
+    -fx-background-color: #EAE7B1;
+    -fx-background-radius: 4;
+    -fx-border-width: 0;
+}
+
+.client-container .list-cell:selected {
+    -fx-background-radius: 10;
+    -fx-background-color: #EAE7B1;
+}

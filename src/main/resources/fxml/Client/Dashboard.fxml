@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -11,7 +12,6 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
-
 
 <AnchorPane prefHeight="750.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bank.app.controllers.client.DashboardController">
    <children>
@@ -163,6 +163,13 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <ListView fx:id="transaction_listview" layoutX="95.0" layoutY="443.0" prefHeight="278.0" prefWidth="660.0" style="-fx-background-radius: 10;" AnchorPane.bottomAnchor="29.0" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="95.0" />
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#3c6255" height="295.0" layoutX="124.0" layoutY="444.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="592.0" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="124.0" AnchorPane.rightAnchor="141.0" />
+      <ListView fx:id="transaction_listview" layoutX="130.0" layoutY="452.0" maxWidth="-Infinity" prefHeight="278.0" prefWidth="581.0" style="-fx-background-radius: 10;" stylesheets="@../../style/Client.css" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="146.0">
+         <styleClass>
+            <String fx:value="list-cell" />
+            <String fx:value="client-container" />
+            <String fx:value="scroll-bar" />
+            <String fx:value="thumb" />
+         </styleClass></ListView>
    </children>
 </AnchorPane>

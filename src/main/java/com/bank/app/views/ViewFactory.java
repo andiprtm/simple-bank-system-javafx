@@ -3,7 +3,9 @@ package com.bank.app.views;
 import com.bank.app.controllers.admin.AdminController;
 import com.bank.app.controllers.client.ClientController;
 import com.bank.app.controllers.client.DashboardController;
+import com.bank.app.controllers.manager.TellerController;
 import com.bank.app.models.Customer;
+import com.bank.app.controllers.manager.ManagerController;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -35,6 +37,15 @@ public class ViewFactory {
     private AnchorPane ClientView;
     private AnchorPane CreateClientView;
 
+    //Manager Views
+    private final StringProperty managerSelectedMenuItem;
+    private AnchorPane CreateTellerView;
+    private AnchorPane TellerView;
+
+    /*
+    * initialization and setter
+    * */
+
     public void setSummary() {
         this.summaryTransferIn = customer.getTransactionFromReceiver(customer.customerId, "Transfer");
         this.summaryTransferOut = customer.getTransactionFromSender(customer.customerId, "Transfer");
@@ -44,50 +55,49 @@ public class ViewFactory {
 
     public void setCustomerData(Customer customer) {
         this.customer = customer;
+
     }
 
     public ViewFactory() {
         this.clientSelectedMenuItem = new SimpleStringProperty("");
         this.adminSelectedMenuItem = new SimpleStringProperty("");
+        this.managerSelectedMenuItem = new SimpleStringProperty(" ");
     }
 
     /*
     * Client View Section
     * */
+
     public StringProperty getClientSelectedMenuItem() {
         return clientSelectedMenuItem;
     }
 
     public AnchorPane getDashboardView() {
-        //if(dashboardView == null) {
-            try {
-                this.setSummary();
-                String[] name = this.customer.name.split(" ");
+        try {
+            this.setSummary();
+            String[] name = this.customer.name.split(" ");
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/client/Dashboard.fxml"));
-                dashboardView = loader.load();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/client/Dashboard.fxml"));
+            dashboardView = loader.load();
 
-                DashboardController controller = loader.getController();
-                controller.setWelcomeText("Hi, " + name[0]);
-                controller.setSaldoAkhir(this.customer.balance);
-                controller.setSummary(this.summaryTransferIn, this.summaryTransferOut, this.summaryWithdraw, this.summaryDeposit);
+            DashboardController controller = loader.getController();
+            controller.setWelcomeText("Hi, " + name[0]);
+            controller.setSaldoAkhir(this.customer.balance);
+            controller.setSummary(this.summaryTransferIn, this.summaryTransferOut, this.summaryWithdraw, this.summaryDeposit);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-                System.out.println("Welcome " + this.customer.name);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        //}
         return dashboardView;
     }
 
     public AnchorPane getTransactionView() {
-        if(transactionView == null) {
-            try {
-                transactionView = new FXMLLoader(getClass().getResource("/fxml/client/Transaction.fxml")).load();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        try {
+            transactionView = new FXMLLoader(getClass().getResource("/fxml/client/Transaction.fxml")).load();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
         return transactionView;
     }
 
@@ -162,14 +172,23 @@ public class ViewFactory {
         stage.show();
     }
 
-    public void closeStage(Stage stage){
-        stage.setOnCloseRequest(e -> {
-            Platform.exit();
-        });
-        stage.close();
+    public void showDetailTransactionWindow(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/client/DetailTransaksi.fxml"));
+        Scene scene = null;
+        try{
+            scene = new Scene(loader.load());
+        } catch (IOException e){
+            throw new RuntimeException(e);
+        }
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Detail Transaksi");
+        stage.show();
     }
 
-    //Admin (Teller & Manager) Views Section
+    /*
+    * Admin (Teller) Views Section
+    * */
     public StringProperty getAdminSelectedMenuItem() {
         return adminSelectedMenuItem;
     }
@@ -186,12 +205,10 @@ public class ViewFactory {
     }
 
     public AnchorPane getClientView(){
-        if(ClientView == null) {
-            try {
-                ClientView = new FXMLLoader(getClass().getResource("/fxml/admin/Clients.fxml")).load();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        try {
+            ClientView = new FXMLLoader(getClass().getResource("/fxml/admin/Clients.fxml")).load();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return ClientView;
     }
@@ -221,5 +238,89 @@ public class ViewFactory {
         stage.setScene(scene);
         stage.setTitle("Dashboard Admin");
         stage.show();
+    }
+
+    public void showDetailClientWindow(){
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/admin/DetailClient.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Detail Client");
+        stage.show();
+    }
+
+    /*
+    * Manager Views Section
+    * */
+
+    public StringProperty getManagerSelectedMenuItem(){
+        return managerSelectedMenuItem;
+    }
+
+    public AnchorPane getCreateTellerView(){
+        if(CreateTellerView == null) {
+            try {
+                CreateTellerView = new FXMLLoader(getClass().getResource("/fxml/manager/CreateTeller.fxml")).load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return CreateTellerView;
+    }
+
+    public AnchorPane getTellerView(){
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/manager/Tellers.fxml"));
+                TellerView = loader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        return TellerView;
+    }
+
+    public void showManagerWindow(){
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/manager/Manager.fxml"));
+        ManagerController managerController = new ManagerController();
+        fxmlLoader.setController(managerController);
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Dashboard Manager");
+        stage.show();
+    }
+
+    public void showDetailTellerWindow(){
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/manager/DetailTeller.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Detail Teller");
+        stage.show();
+    }
+
+    /*
+    * Close Stage
+    * */
+
+    public void closeStage(Stage stage){
+        stage.setOnCloseRequest(e -> {
+            Platform.exit();
+        });
+        stage.close();
     }
 }

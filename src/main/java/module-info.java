@@ -17,6 +17,7 @@ module com.bank.app {
     exports com.bank.app.controllers;
     exports com.bank.app.controllers.admin;
     exports com.bank.app.controllers.client;
+    exports com.bank.app.controllers.manager;
     exports com.bank.app.models;
     exports com.bank.app.views;
 }

@@ -2,6 +2,7 @@ package com.bank.app.controllers.admin;
 
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
@@ -16,6 +17,8 @@ public class CreateClientController implements Initializable {
     public TextField tf_nomorHandphone;
     public ComboBox<Object> cb_tipeAkun;
     public Button btn_tambahNasabah;
+    public TextField tf_pin;
+    public CheckBox ckb_verifikasi;
 
     Object[] tipeAkun = {"Silver", "Gold", "Platinum"};
 
