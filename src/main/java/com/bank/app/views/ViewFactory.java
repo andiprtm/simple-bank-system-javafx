@@ -3,12 +3,16 @@ package com.bank.app.views;
 import com.bank.app.controllers.admin.AdminController;
 import com.bank.app.controllers.client.ClientController;
 import com.bank.app.controllers.client.DashboardController;
+import com.bank.app.controllers.client.TransactionController;
+import com.bank.app.controllers.client.TransferController;
 import com.bank.app.controllers.manager.TellerController;
 import com.bank.app.models.Customer;
 import com.bank.app.controllers.manager.ManagerController;
+import com.bank.app.models.Transaction;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -47,10 +51,12 @@ public class ViewFactory {
     * */
 
     public void setSummary() {
-        this.summaryTransferIn = customer.getTransactionFromReceiver(customer.customerId, "Transfer");
-        this.summaryTransferOut = customer.getTransactionFromSender(customer.customerId, "Transfer");
-        this.summaryDeposit = customer.getTransactionFromReceiver(customer.customerId, "Deposit");
-        this.summaryWithdraw = customer.getTransactionFromSender(customer.customerId, "Withdraw");
+        Transaction transaction = new Transaction();
+
+        this.summaryTransferIn = transaction.getTransactionFromReceiver(customer.customerId, "Transfer");
+        this.summaryTransferOut = transaction.getTransactionFromSender(customer.customerId, "Transfer");
+        this.summaryDeposit = transaction.getTransactionFromReceiver(customer.customerId, "Deposit");
+        this.summaryWithdraw = transaction.getTransactionFromSender(customer.customerId, "Withdraw");
     }
 
     public void setCustomerData(Customer customer) {
@@ -82,7 +88,7 @@ public class ViewFactory {
 
             DashboardController controller = loader.getController();
             controller.setWelcomeText("Hi, " + name[0]);
-            controller.setSaldoAkhir(this.customer.balance);
+            controller.setSaldoAkhir(customer.updatedBalance());
             controller.setSummary(this.summaryTransferIn, this.summaryTransferOut, this.summaryWithdraw, this.summaryDeposit);
         } catch (IOException e) {
             e.printStackTrace();
@@ -93,7 +99,13 @@ public class ViewFactory {
 
     public AnchorPane getTransactionView() {
         try {
-            transactionView = new FXMLLoader(getClass().getResource("/fxml/client/Transaction.fxml")).load();
+            String[] name = this.customer.name.split(" ");
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/client/Transaction.fxml"));
+            transactionView = loader.load();
+
+            TransactionController controller = loader.getController();
+            controller.setWelcomeText("Hi, " + name[0]);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -149,6 +161,8 @@ public class ViewFactory {
         Scene scene = null;
         try {
             scene = new Scene(fxmlLoader.load());
+            TransferController transferController = fxmlLoader.getController();
+            transferController.setCustomer(this.customer);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

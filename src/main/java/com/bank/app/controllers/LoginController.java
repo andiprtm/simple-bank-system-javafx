@@ -71,7 +71,7 @@ public class LoginController implements Initializable {
                 Stage stage = (Stage) button_login.getScene().getWindow();
                 Customer customer = new Customer(field_username.getText(), field_password.getText());
                 customer.authenticate();
-                if (customer.getLocalCustomerId() != null) {
+                if (customer.customerId != null) {
                     customer.getCustomerData();
 
                     Model.getInstance().getViewFactory().closeStage(stage);
