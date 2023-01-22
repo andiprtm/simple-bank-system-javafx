@@ -78,7 +78,6 @@ public class LoginController implements Initializable {
                     System.out.println("Login Client Berhasil");
 
                     Model.getInstance().getViewFactory().setCustomerData(customer);
-                    Model.getInstance().getViewFactory().setSummary();
                     Model.getInstance().getViewFactory().showClientWindow();
                 } else {
                     label_eror.setVisible(true);

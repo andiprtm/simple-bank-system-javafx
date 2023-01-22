@@ -47,15 +47,6 @@ public class ViewFactory {
     * initialization and setter
     * */
 
-    public void setSummary() {
-        Transaction transaction = new Transaction();
-
-        this.summaryTransferIn = transaction.getTransactionFromReceiver(customer.customerId, "Transfer");
-        this.summaryTransferOut = transaction.getTransactionFromSender(customer.customerId, "Transfer");
-        this.summaryDeposit = transaction.getTransactionFromReceiver(customer.customerId, "Deposit");
-        this.summaryWithdraw = transaction.getTransactionFromSender(customer.customerId, "Withdraw");
-    }
-
     public void setCustomerData(Customer customer) {
         this.customer = customer;
 
@@ -77,16 +68,12 @@ public class ViewFactory {
 
     public AnchorPane getDashboardView() {
         try {
-            this.setSummary();
-            String[] name = this.customer.name.split(" ");
-
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/client/Dashboard.fxml"));
             dashboardView = loader.load();
-
             DashboardController controller = loader.getController();
-            controller.setWelcomeText("Hi, " + name[0]);
-            controller.setSaldoAkhir(customer.updatedBalance());
-            controller.setSummary(this.summaryTransferIn, this.summaryTransferOut, this.summaryWithdraw, this.summaryDeposit);
+            controller.setCustomer(customer);
+            controller.setSaldoAkhir();
+            controller.setSummary();
         } catch (IOException e) {
             e.printStackTrace();
         }
