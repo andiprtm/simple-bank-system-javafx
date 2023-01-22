@@ -1,10 +1,7 @@
 package com.bank.app.views;
 
 import com.bank.app.controllers.admin.AdminController;
-import com.bank.app.controllers.client.ClientController;
-import com.bank.app.controllers.client.DashboardController;
-import com.bank.app.controllers.client.TransactionController;
-import com.bank.app.controllers.client.TransferController;
+import com.bank.app.controllers.client.*;
 import com.bank.app.controllers.manager.TellerController;
 import com.bank.app.models.Customer;
 import com.bank.app.controllers.manager.ManagerController;
@@ -177,6 +174,8 @@ public class ViewFactory {
         Scene scene = null;
         try {
             scene = new Scene(fxmlLoader.load());
+            WithdrawController withdrawController = fxmlLoader.getController();
+            withdrawController.setCustomer(customer);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

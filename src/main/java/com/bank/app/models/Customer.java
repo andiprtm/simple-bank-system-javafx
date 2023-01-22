@@ -278,7 +278,9 @@ public class Customer {
         return isSuccess;
     }
 
-    public void withdrawBalance (BigDecimal amount) {
+    public Boolean withdrawBalance (BigDecimal amount, Label label) {
+        Boolean isSuccess = null;
+
         BigDecimal adminFeeTotal = amount.multiply(BigDecimal.valueOf(adminFee));
         BigDecimal amountAfterAdminFee = amount.add(adminFeeTotal);
 
@@ -297,15 +299,19 @@ public class Customer {
 
                 Transaction transaction = new Transaction();
                 transaction.createTransaction(this.customerId, this.customerId, amount, "Withdraw", false, "Saldo anda tidak cukup untuk melakukan penarikan sebesar " + amount + " + biaya admin sebesar " + adminFeeTotal, adminFeeTotal);
-                System.out.println("Saldo anda tidak cukup untuk melakukan penarikan sebesar " + amount + " + biaya admin sebesar " + adminFeeTotal);
 
             }
 
+            isSuccess = true;
+
         } else {
 
-            System.out.println("Maksimal penarikan adalah " + this.maximumWithdraw);
+            label.setText("Maksimal penarikan adalah " + this.maximumWithdraw);
+            isSuccess = false;
 
         }
+
+        return isSuccess;
     }
 
     public void depositBalance (BigDecimal amount) {

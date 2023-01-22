@@ -11,8 +11,10 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class TransferController implements Initializable {
@@ -55,12 +57,21 @@ public class TransferController implements Initializable {
 
     public Boolean transfer() {
         Boolean isSuccess = null;
+        
         if (!tf_username.getText().equals("") && !tf_nominalTransfer.getText().equals("") && !tf_PIN.getText().equals("")) {
-            if (customer.pin == Integer.parseInt(tf_PIN.getText())) {
-                isSuccess = customer.transferToAnotherBankAccount(tf_username.getText(), new BigDecimal(tf_nominalTransfer.getText()), tv_errorTransfer);
-            } else {
-                tv_errorTransfer.setText("PIN salah");
-                isSuccess =  false;
+            try {
+                BigDecimal transferAmount = new BigDecimal(tf_nominalTransfer.getText());
+                Integer pin = Integer.parseInt(tf_PIN.getText());
+
+                if (Objects.equals(customer.pin, pin)) {
+                    isSuccess = customer.transferToAnotherBankAccount(tf_username.getText(), transferAmount, tv_errorTransfer);
+                } else {
+                    tv_errorTransfer.setText("PIN salah");
+                    isSuccess =  false;
+                }
+            } catch (NumberFormatException e) {
+                tv_errorTransfer.setText("Input tidak sah!");
+                isSuccess = false;
             }
         } else {
             tv_errorTransfer.setText("Isi semua form dibawah ini!");
