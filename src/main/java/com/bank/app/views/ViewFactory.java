@@ -74,6 +74,7 @@ public class ViewFactory {
             controller.setCustomer(customer);
             controller.setSaldoAkhir();
             controller.setSummary();
+            controller.setTransactionList();
         } catch (IOException e) {
             e.printStackTrace();
         }
