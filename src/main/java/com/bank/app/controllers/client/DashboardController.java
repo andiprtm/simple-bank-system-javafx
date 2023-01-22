@@ -16,7 +16,6 @@ import javafx.stage.Stage;
 
 import java.math.BigDecimal;
 import java.net.URL;
-import java.sql.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -34,13 +33,26 @@ public class DashboardController implements Initializable {
     public Button btn_transfer;
     public Button btn_tarik_tunai;
     public ListView<TransactionModel> transaction_listview;
-    public String[] sender ;
-    public String[] receiver ;
-    public BigDecimal[] amount ;
-    public Timestamp[] date ;
     Connection conn = ConnectionManager.getInstance().getConnection();
-
     TransactionModel[] transactionModels = new TransactionModel[5];
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        btn_tarik_tunai.setOnAction(event -> {
+            System.out.println("Tarik Tunai");
+            Stage stage = (Stage) btn_tarik_tunai.getScene().getWindow();
+            Model.getInstance().getViewFactory().closeStage(stage);
+            Model.getInstance().getViewFactory().showWithdrawWindow();
+        });
+
+        btn_transfer.setOnAction(event -> {
+            System.out.println("Transfer");
+            Stage stage = (Stage) btn_transfer.getScene().getWindow();
+            Model.getInstance().getViewFactory().closeStage(stage);
+            Model.getInstance().getViewFactory().showTransferWindow();
+        });
+
+    }
 
     public void setTransactionList () {
         try {
@@ -103,37 +115,6 @@ public class DashboardController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-//        setTransactionList();
-//        System.out.println("Initialize method");
-//        for(int i = 0; i < 5; i++){
-//            transactionModels[i] = new TransactionModel(sender[i], receiver[i], amount[i], date[i]);
-//        }
-//
-//        transaction_listview.setCellFactory(tellerListView -> new TransactionCellFactory());
-//
-//        transaction_listview.setItems(FXCollections.observableArrayList(transactionModels));
-//
-//        transaction_listview.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
-//            System.out.println(newValue.amountProperty().getValue());
-//        });
-
-        btn_tarik_tunai.setOnAction(event -> {
-            System.out.println("Tarik Tunai");
-            Stage stage = (Stage) btn_tarik_tunai.getScene().getWindow();
-            Model.getInstance().getViewFactory().closeStage(stage);
-            Model.getInstance().getViewFactory().showWithdrawWindow();
-        });
-
-        btn_transfer.setOnAction(event -> {
-            System.out.println("Transfer");
-            Stage stage = (Stage) btn_transfer.getScene().getWindow();
-            Model.getInstance().getViewFactory().closeStage(stage);
-            Model.getInstance().getViewFactory().showTransferWindow();
-        });
-
     }
 
     public void setCustomer(Customer customer) {

@@ -2,21 +2,17 @@ package com.bank.app.views;
 
 import com.bank.app.controllers.admin.AdminController;
 import com.bank.app.controllers.client.*;
-import com.bank.app.controllers.manager.TellerController;
 import com.bank.app.models.Customer;
 import com.bank.app.controllers.manager.ManagerController;
-import com.bank.app.models.Transaction;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 
 public class ViewFactory {
     //Client Data
@@ -80,13 +76,13 @@ public class ViewFactory {
 
     public AnchorPane getTransactionView() {
         try {
-            String[] name = this.customer.name.split(" ");
-
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/client/Transaction.fxml"));
             transactionView = loader.load();
 
             TransactionController controller = loader.getController();
-            controller.setWelcomeText("Hi, " + name[0]);
+            controller.setCustomer(customer);
+            controller.setCountRow();
+            controller.setTransactionList();
         } catch (IOException e) {
             e.printStackTrace();
         }
