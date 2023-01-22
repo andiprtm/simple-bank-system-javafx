@@ -43,13 +43,6 @@ public class TransactionController implements Initializable {
         });
     }
 
-    public void setData(String[] sender, String[] receiver, BigDecimal[] amount, Timestamp[] date){
-        this.sender = sender;
-        this.receiver = receiver;
-        this.amount = amount;
-        this.date = date;
-    }
-
     public void setWelcomeText(String Username){
         System.out.println("wc text" + Username);
         tv_say_hi.setText(Username);
