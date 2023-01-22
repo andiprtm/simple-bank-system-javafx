@@ -16,9 +16,11 @@ import javafx.stage.Stage;
 
 import java.math.BigDecimal;
 import java.net.URL;
-import java.security.PublicKey;
 import java.sql.*;
-import java.time.LocalDate;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class DashboardController implements Initializable {
@@ -44,17 +46,43 @@ public class DashboardController implements Initializable {
         try {
             PreparedStatement ps = conn.prepareStatement("""
                     SELECT th.transaction_date,
-                         (SELECT cd.name FROM customer_data cd WHERE cd.id_customer=th.transaction_sender) AS transaction_sender,
-                         (SELECT cd.name FROM customer_data cd WHERE cd.id_customer=th.transaction_receiver) AS transaction_receiver,
-                         transaction_amount,
-                         transaction_admin_fee,
-                         (SELECT tt.transaction_type FROM transaction_type tt WHERE tt.id_transaction_type=th.transaction_type_id) AS transaction_type,
-                         transaction_status,
-                         transaction_message
+                           (SELECT cd.name FROM customer_data cd WHERE cd.id_customer=th.transaction_sender) AS transaction_sender,
+                           (SELECT cd.name FROM customer_data cd WHERE cd.id_customer=th.transaction_receiver) AS transaction_receiver,
+                           th.transaction_amount,
+                           th.transaction_admin_fee,
+                           (SELECT tt.transaction_type FROM transaction_type tt WHERE tt.id_transaction_type=th.transaction_type_id) AS transaction_type,
+                           th.transaction_status,
+                           th.transaction_message
                     FROM transaction_history th
-                    WHERE th.transaction_sender=?;""");
+                    WHERE (th.transaction_type_id=1 OR th.transaction_type_id=2) AND th.transaction_sender=?
+                    UNION
+                    SELECT th.transaction_date,
+                           (SELECT cd.name FROM customer_data cd WHERE cd.id_customer=th.transaction_sender) AS transaction_sender,
+                           (SELECT cd.name FROM customer_data cd WHERE cd.id_customer=th.transaction_receiver) AS transaction_receiver,
+                           th.transaction_amount,
+                           th.transaction_admin_fee,
+                           (SELECT tt.transaction_type FROM transaction_type tt WHERE tt.id_transaction_type=th.transaction_type_id) AS transaction_type,
+                           th.transaction_status,
+                           th.transaction_message
+                    FROM transaction_history th
+                    WHERE th.transaction_type_id=3 AND th.transaction_sender=?
+                    UNION
+                    SELECT th.transaction_date,
+                           (SELECT cd.name FROM customer_data cd WHERE cd.id_customer=th.transaction_sender) AS transaction_sender,
+                           (SELECT cd.name FROM customer_data cd WHERE cd.id_customer=th.transaction_receiver) AS transaction_receiver,
+                           th.transaction_amount,
+                           th.transaction_admin_fee,
+                           (SELECT tt.transaction_type FROM transaction_type tt WHERE tt.id_transaction_type=th.transaction_type_id) AS transaction_type,
+                           th.transaction_status,
+                           th.transaction_message
+                    FROM transaction_history th
+                    WHERE th.transaction_type_id=3 AND th.transaction_receiver=?
+                    ORDER BY transaction_date desc
+                    LIMIT 5;""");
 
             ps.setInt(1, customer.customerId);
+            ps.setInt(2, customer.customerId);
+            ps.setInt(3, customer.customerId);
 
             System.out.println(customer.customerId);
 

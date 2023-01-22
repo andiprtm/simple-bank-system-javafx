@@ -21,10 +21,6 @@ import java.math.BigDecimal;
 public class ViewFactory {
     //Client Data
     public Customer customer;
-    public BigDecimal summaryTransferIn;
-    public BigDecimal summaryTransferOut;
-    public BigDecimal summaryDeposit;
-    public BigDecimal summaryWithdraw;
 
     //Client Views
     private final StringProperty clientSelectedMenuItem;

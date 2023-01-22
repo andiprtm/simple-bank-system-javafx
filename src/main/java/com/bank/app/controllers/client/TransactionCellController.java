@@ -24,9 +24,10 @@ public class TransactionCellController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        String[] date = transactionModel.dateProperty().getValue().toString().split(" ");
         tv_sender.setText(transactionModel.senderProperty().getValue());
         tv_receiver.setText(transactionModel.receiverProperty().getValue());
         tv_amount.setText(transactionModel.amountProperty().getValue().toString());
-        tv_date.setText(transactionModel.dateProperty().getValue().toString());
+        tv_date.setText(date[0]);
     }
 }
