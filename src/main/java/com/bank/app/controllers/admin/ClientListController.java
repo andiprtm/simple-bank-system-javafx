@@ -9,6 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -84,7 +85,9 @@ public class ClientListController implements Initializable {
 
             listview_Client.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
                 System.out.println(newValue.phoneProperty().getValue());
-                Model.getInstance().getViewFactory().showDetailTellerWindow();
+                Model.getInstance().getViewFactory().showDetailClientWindow();
+                Stage stage = (Stage) listview_Client.getScene().getWindow();
+                stage.close();
             });
         } catch (SQLException e) {
             e.printStackTrace();

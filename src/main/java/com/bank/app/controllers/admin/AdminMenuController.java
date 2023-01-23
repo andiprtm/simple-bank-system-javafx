@@ -16,7 +16,9 @@ public class AdminMenuController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        addListener();
+        btn_buatNasabah.setOnAction(actionEvent -> onBuatNasabah());
+        btn_nasabah.setOnAction(actionEvent -> onNasabah());
+        btn_deposit.setOnAction(actionEvent -> onDeposit());
         btn_logout.setOnAction(event -> {
             System.out.println("Logout");
             Stage stage = (Stage) btn_logout.getScene().getWindow();
@@ -32,7 +34,7 @@ public class AdminMenuController implements Initializable {
     }
 
     public void onBuatNasabah(){
-        Model.getInstance().getViewFactory().getAdminSelectedMenuItem().setValue("Buat Nasabah");
+        Model.getInstance().getViewFactory().getAdminSelectedMenuItem().setValue("AddNasabah");
     }
 
     public void onNasabah(){

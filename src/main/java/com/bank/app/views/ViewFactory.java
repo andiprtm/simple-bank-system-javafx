@@ -229,7 +229,7 @@ public class ViewFactory {
     }
 
     public AnchorPane getCreateClientView(){
-        if(CreateClientView == null) {
+        //if(CreateClientView == null) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/admin/CreateClient.fxml"));
                 CreateClientView = loader.load();
@@ -239,11 +239,12 @@ public class ViewFactory {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
+        //}
         return CreateClientView;
     }
 
     public void showAdminWindow(){
+        System.out.println("admin page di load");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/admin/admin.fxml"));
         AdminController adminController = new AdminController();
         fxmlLoader.setController(adminController);
@@ -257,7 +258,7 @@ public class ViewFactory {
         stage.setScene(scene);
         stage.setTitle("Dashboard Admin");
         stage.show();
-        adminController.refreshCreateClientView();
+        adminController.refreshListNasabah();
     }
 
     public void showDetailClientWindow(){

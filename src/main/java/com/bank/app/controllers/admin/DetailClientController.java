@@ -1,8 +1,10 @@
 package com.bank.app.controllers.admin;
 
+import com.bank.app.models.Model;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -58,6 +60,13 @@ public class DetailClientController implements Initializable {
             box_when_edit_click.setVisible(false);
             tv_title_page.setText("DETAIL NASABAH");
             setFalse();
+        });
+
+        // BUTTON KEMBALI KE LIST NASABAH DITEKAN
+        btn_kembaliKeList.setOnAction(actionEvent -> {
+            Stage stage = (Stage) btn_kembaliKeList.getScene().getWindow();
+            Model.getInstance().getViewFactory().closeStage(stage);
+            Model.getInstance().getViewFactory().showAdminWindow();
         });
 
         // DOUBLE SET UNTUK CADANGAN

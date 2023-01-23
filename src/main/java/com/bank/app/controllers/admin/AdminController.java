@@ -1,7 +1,6 @@
 package com.bank.app.controllers.admin;
 
 import com.bank.app.models.Model;
-import com.bank.app.models.Teller;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.BorderPane;
 
@@ -14,14 +13,21 @@ public class AdminController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Model.getInstance().getViewFactory().getAdminSelectedMenuItem().addListener((observableValue, oldValue, newValue) -> {
-            switch (newValue) {
-                case "Nasabah" -> admin_parent.setCenter(Model.getInstance().getViewFactory().getClientView());
-                case "Deposit" -> admin_parent.setCenter(Model.getInstance().getViewFactory().getDepositView());
-                default -> admin_parent.setCenter(Model.getInstance().getViewFactory().getCreateClientView());
+            System.out.println(newValue);
+            if(newValue!= null) {
+                switch (newValue) {
+                    case "Nasabah" -> admin_parent.setCenter(Model.getInstance().getViewFactory().getClientView());
+                    case "Deposit" -> admin_parent.setCenter(Model.getInstance().getViewFactory().getDepositView());
+                    case "AddNasabah" -> admin_parent.setCenter(Model.getInstance().getViewFactory().getCreateClientView());
+                    default -> admin_parent.setCenter(Model.getInstance().getViewFactory().getClientView());
+                }
             }
         });
     }
 
+    public void refreshListNasabah() {
+        admin_parent.setCenter(Model.getInstance().getViewFactory().getClientView());
+    }
     public void refreshCreateClientView() {
         admin_parent.setCenter(Model.getInstance().getViewFactory().getCreateClientView());
     }

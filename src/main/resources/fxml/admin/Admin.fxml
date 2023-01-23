@@ -10,7 +10,7 @@
     </left>
 
     <center>
-        <fx:include source="CreateClient.fxml"/>
+        <fx:include source="Clients.fxml"/>
     </center>
 
 </BorderPane>

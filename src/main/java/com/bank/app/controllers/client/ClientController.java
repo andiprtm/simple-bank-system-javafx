@@ -12,6 +12,7 @@ public class ClientController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Model.getInstance().getViewFactory().getClientSelectedMenuItem().addListener((observableValue, oldValue, newValue) -> {
+            System.out.println(newValue);
             if (newValue != null) {
                 switch (newValue) {
                     case "Transaction" -> client_parent.setCenter(Model.getInstance().getViewFactory().getTransactionView());

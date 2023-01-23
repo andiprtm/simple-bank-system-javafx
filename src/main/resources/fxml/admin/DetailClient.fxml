@@ -15,7 +15,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bank.app.controllers.admin.DetailClientController">
+<AnchorPane maxWidth="-Infinity" prefHeight="750.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bank.app.controllers.admin.DetailClientController">
     <children>
         <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#3c6255" height="84.0" layoutX="27.0" layoutY="10.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="843.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="-10.0" />
         <HBox alignment="CENTER_RIGHT" layoutX="663.0" layoutY="28.0" prefHeight="60.0" prefWidth="200.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="8.0">
@@ -39,26 +39,26 @@
                 <Font name="System Bold" size="18.0" />
             </font>
         </Label>
-        <VBox prefHeight="672.0" prefWidth="857.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <VBox maxWidth="-Infinity" prefHeight="650.0" prefWidth="850.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <children>
                 <Label fx:id="tv_alert" alignment="CENTER" prefHeight="45.0" prefWidth="853.0" style="-fx-background-color: #eae7b1; -fx-background-radius: 10;" text="Pastikan Semua Data Telah Terisi" textFill="#3c6255" visible="false">
                     <font>
                         <Font name="System Bold" size="27.0" />
                     </font>
                     <VBox.margin>
-                        <Insets bottom="5.0" />
+                        <Insets bottom="10.0" />
                     </VBox.margin>
                 </Label>
                 <HBox>
                     <children>
-                        <VBox prefWidth="380.0">
+                        <VBox prefWidth="406.0">
                             <children>
                         <Label text="Id Nasabah" textFill="#3c6255">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="tf_idNasabah" editable="false" maxWidth="-Infinity" prefWidth="300.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css" text="NOT SET">
+                        <TextField fx:id="tf_idNasabah" editable="false" maxWidth="-Infinity" prefWidth="356.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css" text="NOT SET">
                            <VBox.margin>
                               <Insets bottom="10.0" />
                            </VBox.margin>
@@ -68,7 +68,7 @@
                                         <Font name="System Bold" size="14.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="tf_username" editable="false" maxWidth="-Infinity" prefWidth="300.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css" text="NOT SET">
+                                <TextField fx:id="tf_username" editable="false" maxWidth="-Infinity" prefWidth="356.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css" text="NOT SET">
                                     <VBox.margin>
                                         <Insets bottom="10.0" />
                                     </VBox.margin>
@@ -78,7 +78,7 @@
                                         <Font name="System Bold" size="14.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="tf_password" maxWidth="-Infinity" prefWidth="300.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css" text="NOT SET">
+                                <TextField fx:id="tf_password" maxWidth="-Infinity" prefWidth="356.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css" text="NOT SET">
                                     <VBox.margin>
                                         <Insets bottom="10.0" />
                                     </VBox.margin>
@@ -88,7 +88,7 @@
                                         <Font name="System Bold" size="14.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="tf_nama" maxWidth="-Infinity" prefWidth="300.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css" text="NOT SET">
+                                <TextField fx:id="tf_nama" maxWidth="-Infinity" prefWidth="356.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css" text="NOT SET">
                                     <VBox.margin>
                                         <Insets bottom="10.0" />
                                     </VBox.margin>
@@ -98,26 +98,26 @@
                                         <Font name="System Bold" size="14.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="tf_alamat" maxWidth="-Infinity" prefWidth="300.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css" text="NOT SET">
+                                <TextField fx:id="tf_alamat" maxWidth="-Infinity" prefWidth="356.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css" text="NOT SET">
                                     <VBox.margin>
                                         <Insets bottom="10.0" />
                                     </VBox.margin>
                                 </TextField>
                             </children>
                         </VBox>
-                        <VBox prefWidth="25.0">
+                        <VBox>
                             <children>
                                 <Line endX="-100.00001525878906" endY="308.0" startX="-100.0" stroke="#3c615473" strokeLineCap="ROUND" strokeWidth="4.0" />
                             </children>
                         </VBox>
-                        <VBox prefWidth="405.0">
+                        <VBox prefWidth="406.0">
                             <children>
                                 <Label text="Nomor Handphone" textFill="#3c6255">
                                     <font>
                                         <Font name="System Bold" size="14.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="tf_nomorHandphone" maxWidth="-Infinity" prefWidth="300.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css" text="NOT SET">
+                                <TextField fx:id="tf_nomorHandphone" maxWidth="-Infinity" prefWidth="356.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css" text="NOT SET">
                                     <VBox.margin>
                                         <Insets bottom="10.0" />
                                     </VBox.margin>
@@ -127,7 +127,7 @@
                                         <Font name="System Bold" size="14.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="tf_pin" maxWidth="-Infinity" prefWidth="300.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css" text="NOT SET">
+                                <TextField fx:id="tf_pin" maxWidth="-Infinity" prefWidth="356.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css" text="NOT SET">
                                     <VBox.margin>
                                         <Insets bottom="10.0" />
                                     </VBox.margin>
@@ -137,7 +137,7 @@
                                         <Font name="System Bold" size="14.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="tf_saldo" maxWidth="-Infinity" prefWidth="300.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css" text="NOT SET">
+                                <TextField fx:id="tf_saldo" maxWidth="-Infinity" prefWidth="356.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css" text="NOT SET">
                                     <VBox.margin>
                                         <Insets bottom="10.0" />
                                     </VBox.margin>
@@ -147,7 +147,7 @@
                                         <Font name="System Bold" size="14.0" />
                                     </font>
                                 </Label>
-                                <ComboBox fx:id="cb_tipeAkun" prefHeight="32.0" prefWidth="200.0" style="-fx-background-color: #61876E; -fx-background-radius: 8;" stylesheets="@../../style/login.css">
+                                <ComboBox fx:id="cb_tipeAkun" prefHeight="32.0" prefWidth="250.0" style="-fx-background-color: #61876E; -fx-background-radius: 8;" stylesheets="@../../style/login.css">
                                     <VBox.margin>
                                         <Insets bottom="10.0" />
                                     </VBox.margin>
@@ -168,9 +168,9 @@
                            </styleClass>
                         </ComboBox>
                             </children>
-                            <padding>
-                                <Insets left="30.0" />
-                            </padding>
+                     <padding>
+                        <Insets left="50.0" />
+                     </padding>
                         </VBox>
                     </children>
                     <VBox.margin>
@@ -191,7 +191,7 @@
                      <children>
                         <HBox fx:id="box_btn_to_edit">
                            <children>
-                              <Button fx:id="btn_kembaliKeList" mnemonicParsing="false" prefHeight="32.0" style="-fx-background-color: #3c6255;" text="Kembali ke List" textFill="#eae7b1">
+                              <Button fx:id="btn_kembaliKeList" mnemonicParsing="false" prefHeight="32.0" style="-fx-background-color: #3c6255; -fx-background-radius: 8;" text="Kembali ke List" textFill="#eae7b1">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
@@ -199,7 +199,7 @@
                                     <Insets right="20.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button fx:id="btn_editNasabah" mnemonicParsing="false" prefHeight="32.0" prefWidth="140.0" style="-fx-background-color: #3c6255;" text="Edit Nasabah" textFill="#eae7b1">
+                              <Button fx:id="btn_editNasabah" mnemonicParsing="false" prefHeight="32.0" prefWidth="140.0" style="-fx-background-color: #3c6255; -fx-background-radius: 8;" text="Edit Nasabah" textFill="#eae7b1">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
@@ -211,7 +211,7 @@
                         </HBox>
                         <HBox fx:id="box_when_edit_click" visible="false">
                            <children>
-                              <Button fx:id="btn_updateNasabah" mnemonicParsing="false" prefHeight="32.0" prefWidth="140.0" style="-fx-background-color: #3c6255;" text="Update Nasabah" textFill="#eae7b1">
+                              <Button fx:id="btn_updateNasabah" mnemonicParsing="false" prefHeight="32.0" prefWidth="140.0" style="-fx-background-color: #3c6255; -fx-background-radius: 8;" text="Update Nasabah" textFill="#eae7b1">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
@@ -227,7 +227,7 @@
             </HBox>
             </children>
             <padding>
-                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                <Insets bottom="20.0" left="20.0" right="20.0" top="5.0" />
             </padding>
         </VBox>
     </children>

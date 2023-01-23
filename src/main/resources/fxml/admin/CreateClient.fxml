@@ -51,14 +51,14 @@
             </Label>
             <HBox>
                <children>
-                  <VBox prefWidth="380.0">
+                  <VBox prefWidth="406.0">
                      <children>
                         <Label text="Username" textFill="#3c6255">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="tf_username" maxWidth="-Infinity" prefWidth="300.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css">
+                        <TextField fx:id="tf_username" maxWidth="-Infinity" prefWidth="356.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css">
                            <VBox.margin>
                               <Insets bottom="10.0" />
                            </VBox.margin>
@@ -68,7 +68,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="tf_password" maxWidth="-Infinity" prefWidth="300.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css">
+                        <TextField fx:id="tf_password" maxWidth="-Infinity" prefWidth="356.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css">
                            <VBox.margin>
                               <Insets bottom="10.0" />
                            </VBox.margin>
@@ -78,7 +78,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="tf_nama" maxWidth="-Infinity" prefWidth="300.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css">
+                        <TextField fx:id="tf_nama" maxWidth="-Infinity" prefWidth="356.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css">
                            <VBox.margin>
                               <Insets bottom="10.0" />
                            </VBox.margin>
@@ -88,26 +88,26 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="tf_alamat" maxWidth="-Infinity" prefWidth="300.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css">
+                        <TextField fx:id="tf_alamat" maxWidth="-Infinity" prefWidth="356.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css">
                            <VBox.margin>
                               <Insets bottom="10.0" />
                            </VBox.margin>
                         </TextField>
                      </children>
                   </VBox>
-                  <VBox prefWidth="25.0">
+                  <VBox>
                      <children>
                         <Line endX="-100.00001525878906" endY="244.5" startX="-100.0" stroke="#3c615473" strokeLineCap="ROUND" strokeWidth="4.0" />
                      </children>
                   </VBox>
-                  <VBox prefWidth="405.0">
+                  <VBox prefWidth="406.0">
                      <children>
                         <Label text="Nomor Handphone" textFill="#3c6255">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="tf_nomorHandphone" maxWidth="-Infinity" prefWidth="300.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css">
+                        <TextField fx:id="tf_nomorHandphone" maxWidth="-Infinity" prefWidth="356.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css">
                            <VBox.margin>
                               <Insets bottom="10.0" />
                            </VBox.margin>
@@ -117,7 +117,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="tf_pin" maxWidth="-Infinity" prefWidth="300.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css">
+                        <TextField fx:id="tf_pin" maxWidth="-Infinity" prefWidth="356.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css">
                            <VBox.margin>
                               <Insets bottom="10.0" />
                            </VBox.margin>
@@ -127,7 +127,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="tf_saldo_awal" maxWidth="-Infinity" prefWidth="300.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css">
+                        <TextField fx:id="tf_saldo_awal" maxWidth="-Infinity" prefWidth="356.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css">
                            <VBox.margin>
                               <Insets bottom="10.0" />
                            </VBox.margin>
@@ -148,7 +148,7 @@
                         </ComboBox>
                      </children>
                      <padding>
-                        <Insets left="30.0" />
+                        <Insets left="50.0" />
                      </padding>
                   </VBox>
                </children>

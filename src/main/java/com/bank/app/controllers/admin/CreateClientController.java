@@ -1,8 +1,10 @@
 package com.bank.app.controllers.admin;
 
+import com.bank.app.models.Model;
 import com.bank.app.models.Teller;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 import java.math.BigDecimal;
 import java.net.URL;
@@ -29,7 +31,9 @@ public class CreateClientController implements Initializable {
         cb_tipeAkun.getItems().addAll(tipeAkun);
 
         btn_tambahNasabah.setOnAction(actionEvent -> {
-
+            Stage stage = (Stage) btn_tambahNasabah.getScene().getWindow();
+            Model.getInstance().getViewFactory().closeStage(stage);
+            Model.getInstance().getViewFactory().showAdminWindow();
         });
     }
 
