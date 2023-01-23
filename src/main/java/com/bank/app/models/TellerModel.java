@@ -34,4 +34,8 @@ public class TellerModel {
     public StringProperty statusProperty() {
         return status;
     }
+
+    public StringProperty accountTypeProperty() {
+        return accountType;
+    }
 }

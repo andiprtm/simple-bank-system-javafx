@@ -37,7 +37,7 @@ public class ClientListController implements Initializable {
 
         listview_Client.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
             System.out.println(newValue.phoneProperty().getValue());
-            Model.getInstance().getViewFactory().showDetailTellerWindow();
+            Model.getInstance().getViewFactory().showDetailClientWindow();
         });
     }
 
