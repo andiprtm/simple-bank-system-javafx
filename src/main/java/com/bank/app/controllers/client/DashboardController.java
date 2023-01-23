@@ -115,7 +115,7 @@ public class DashboardController implements Initializable {
                         rs.getTimestamp("transaction_date"),
                         rs.getString("transaction_type"),
                         rs.getString("transaction_sender"),
-                        rs.getString("transaction_sender"),
+                        rs.getString("transaction_receiver"),
                         rs.getBigDecimal("transaction_amount"),
                         rs.getInt("admin_fee_percent")
                 );
