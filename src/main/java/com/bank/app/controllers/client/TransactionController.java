@@ -162,7 +162,15 @@ public class TransactionController implements Initializable {
 
             int i = 0;
             while (rs.next() && i < this.countRow) {
-                transactionModels[i] = new TransactionModel(rs.getString("transaction_sender"), rs.getString("transaction_receiver"), rs.getBigDecimal("transaction_amount"), rs.getTimestamp("transaction_date"));
+                transactionModels[i] = new TransactionModel(
+                        rs.getInt("id_transaction_history"),
+                        rs.getTimestamp("transaction_date"),
+                        rs.getString("transaction_type"),
+                        rs.getString("transaction_sender"),
+                        rs.getString("transaction_sender"),
+                        rs.getBigDecimal("transaction_amount"),
+                        rs.getInt("admin_fee_percent")
+                );
                 i++;
             }
 
@@ -180,7 +188,15 @@ public class TransactionController implements Initializable {
                     e.printStackTrace();
                 }
                 DetailTransaksiController detailTransactionController = loader.getController();
-                detailTransactionController.setData(newValue.dateProperty().getValue().toString(), newValue.senderProperty().getValue(), newValue.receiverProperty().getValue(), newValue.amountProperty().getValue(), new BigDecimal(2000));
+                detailTransactionController.setData(
+                        newValue.idTransactionProperty().getValue().toString(),
+                        newValue.transactionTypeProperty().getValue(),
+                        newValue.dateProperty().getValue().toString(),
+                        newValue.senderProperty().getValue(),
+                        newValue.receiverProperty().getValue(),
+                        newValue.amountProperty().getValue(),
+                        newValue.adminFeePercentProperty().getValue()
+                );
                 Stage stage = new Stage();
                 stage.setScene(scene);
                 stage.show();

@@ -110,7 +110,15 @@ public class DashboardController implements Initializable {
             ResultSet rs = ps.executeQuery();
             int i = 0;
             while (rs.next() && i < 5) {
-                transactionModels[i] = new TransactionModel(rs.getString("transaction_sender"), rs.getString("transaction_receiver"), rs.getBigDecimal("transaction_amount"), rs.getTimestamp("transaction_date"));
+                transactionModels[i] = new TransactionModel(
+                        rs.getInt("id_transaction_history"),
+                        rs.getTimestamp("transaction_date"),
+                        rs.getString("transaction_type"),
+                        rs.getString("transaction_sender"),
+                        rs.getString("transaction_sender"),
+                        rs.getBigDecimal("transaction_amount"),
+                        rs.getInt("admin_fee_percent")
+                );
                 i++;
             }
 
