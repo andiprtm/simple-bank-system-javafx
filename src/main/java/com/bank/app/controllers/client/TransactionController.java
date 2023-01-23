@@ -5,12 +5,19 @@ import com.bank.app.models.Customer;
 import com.bank.app.models.TransactionModel;
 import com.bank.app.views.TransactionCellFactory;
 import javafx.collections.FXCollections;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.print.PrinterJob;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.*;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class TransactionController implements Initializable {
@@ -146,7 +153,27 @@ public class TransactionController implements Initializable {
             listview_transaksi.setItems(FXCollections.observableArrayList(transactionModels));
 
             listview_transaksi.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
-                System.out.println(newValue.amountProperty().getValue());
+                //load halaman detail transaksi
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Client/DetailTransaksi.fxml"));
+                Scene scene = null;
+                try {
+                    scene = new Scene(loader.load());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                DetailTransaksiController detailTransactionController = loader.getController();
+                detailTransactionController.setData(newValue.dateProperty().getValue().toString(), newValue.senderProperty().getValue(), newValue.receiverProperty().getValue(), newValue.amountProperty().getValue(), new BigDecimal(2000));
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.show();
+
+                PrinterJob job = PrinterJob.createPrinterJob();
+                if (job != null) {
+                    boolean success = job.printPage(stage.getScene().getRoot());
+                    if (success) {
+                        job.endJob();
+                    }
+                }
             });
         } catch (SQLException e) {
             e.printStackTrace();
