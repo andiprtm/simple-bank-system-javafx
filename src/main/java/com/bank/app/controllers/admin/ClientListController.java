@@ -1,5 +1,6 @@
 package com.bank.app.controllers.admin;
 
+import com.bank.app.ConnectionManager;
 import com.bank.app.models.ClientModel;
 import com.bank.app.models.Model;
 import com.bank.app.models.Teller;
@@ -9,36 +10,24 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
-import java.math.BigDecimal;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class ClientListController implements Initializable {
     public Teller teller;
-    public String[] usernames = {"user1", "user2", "user3", "user4", "user5", "user6", "user7", "user8", "user9", "user10"};
-    public String[] phones = {"08123456789", "08123456788", "08123456787", "08123456786", "08123456785", "08123456784", "08123456789=3", "08123456782", "08123456781", "08123456780"};
-    public String[] addresses = {"Jl. Jalan1", "Jl. Jalan2", "Jl. Jalan3", "Jl. Jalan4", "Jl. Jalan5", "Jl. Jalan6", "Jl. Jalan7", "Jl. Jalan8", "Jl. Jalan9", "Jl. Jalan0"};
-    public String[] statuses = {"Active", "Active", "Active", "Active", "Active", "Active", "Active", "Active", "Active", "Active"};
-    public String[] accountTypes = {"Gold", "Silver","Platinum", "Gold", "Silver","Platinum", "Gold", "Silver","Platinum", "Gold"};
-    public BigDecimal[] balances = {new BigDecimal(1000000), new BigDecimal(2000000), new BigDecimal(3000000), new BigDecimal(4000000), new BigDecimal(5000000), new BigDecimal(6000000), new BigDecimal(7000000), new BigDecimal(8000000), new BigDecimal(9000000), new BigDecimal(10000000)};
+    public Integer countRow;
     public ListView<ClientModel> listview_Client;
-    public ClientModel[] clientModels = new ClientModel[usernames.length];
+
     public Label tv_say_hi;
+    Connection conn = ConnectionManager.getInstance().getConnection();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        for(int i = 0; i < usernames.length; i++){
-            clientModels[i] = new ClientModel(usernames[i], phones[i], addresses[i], statuses[i], accountTypes[i], balances[i]);
-        }
 
-        listview_Client.setCellFactory(tellerListView -> new ClientCellFactory());
-
-        listview_Client.setItems(FXCollections.observableArrayList(clientModels));
-
-        listview_Client.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
-            System.out.println(newValue.phoneProperty().getValue());
-            Model.getInstance().getViewFactory().showDetailTellerWindow();
-        });
     }
 
     public void setTellerData(Teller teller) {
@@ -46,5 +35,60 @@ public class ClientListController implements Initializable {
         String[] name = teller.name.split(" ");
 
         tv_say_hi.setText("Hi, " + name[0]);
+    }
+
+    public void setCountRow() {
+        try {
+            PreparedStatement ps = conn.prepareStatement("""
+                    SELECT COUNT(*) as total_rows FROM (
+                        SELECT DISTINCT cd.id_customer, cd.name, cd.address, cd.phone, cd.username, cba.account_balance, IF(cba.customer_is_active, 'Active', 'Not Active') as status, cat.customer_account_type
+                        FROM customer_bank_account cba, customer_account_type cat, customer_data cd
+                        WHERE cat.id_customer_account_type=cba.customer_account_type_id AND cba.customer_id=cd.id_customer
+                    ) AS total;""");
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                this.countRow = rs.getInt("total_rows");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setListCustomer() {
+        try {
+            PreparedStatement ps = conn.prepareStatement("""
+                    SELECT DISTINCT cd.id_customer, cd.name, cd.address, cd.phone, cd.username, cba.account_balance, IF(cba.customer_is_active, 'Active', 'Not Active') as status, cat.customer_account_type
+                    FROM customer_bank_account cba, customer_account_type cat, customer_data cd
+                    WHERE cat.id_customer_account_type=cba.customer_account_type_id AND cba.customer_id=cd.id_customer;""");
+
+            ResultSet rs = ps.executeQuery();
+
+            ClientModel[] clientModels = new ClientModel[this.countRow];
+
+            int i = 0;
+            while (rs.next() && i < this.countRow) {
+                clientModels[i] = new ClientModel(
+                        rs.getString("username"),
+                        rs.getString("phone"),
+                        rs.getString("address"),
+                        rs.getString("status"),
+                        rs.getString("customer_account_type"),
+                        rs.getBigDecimal("account_balance")
+                );
+                i++;
+            }
+
+            listview_Client.setCellFactory(tellerListView -> new ClientCellFactory());
+
+            listview_Client.setItems(FXCollections.observableArrayList(clientModels));
+
+            listview_Client.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+                System.out.println(newValue.phoneProperty().getValue());
+                Model.getInstance().getViewFactory().showDetailTellerWindow();
+            });
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

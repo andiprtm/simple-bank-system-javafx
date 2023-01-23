@@ -219,6 +219,8 @@ public class ViewFactory {
             ClientView = loader.load();
             ClientListController controller = loader.getController();
             controller.setTellerData(teller);
+            controller.setCountRow();
+            controller.setListCustomer();
         } catch (IOException e) {
             e.printStackTrace();
         }

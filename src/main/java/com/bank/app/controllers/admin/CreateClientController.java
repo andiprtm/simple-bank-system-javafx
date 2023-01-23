@@ -4,6 +4,7 @@ import com.bank.app.models.Teller;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
+import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -37,5 +38,23 @@ public class CreateClientController implements Initializable {
         String[] name = teller.name.split(" ");
 
         tv_say_hi.setText("Hi, " + name[0]);
+    }
+
+    public void addCustomerAccount() {
+        if (ckb_verifikasi.isSelected()) {
+            try {
+                String username = tf_username.getText();
+                String password = tf_password.getText();
+                String name = tf_nama.getText();
+                String address = tf_alamat.getText();
+                String phone = tf_nomorHandphone.getText();
+                String accountType = cb_tipeAkun.getValue().toString();
+                Integer pin = Integer.parseInt(tf_pin.getText());
+
+                teller.createCustomerAccount(accountType, username, password, name, address, phone, new BigDecimal(50000), pin);
+            } catch (NumberFormatException e) {
+                System.out.println("Input tidak sah!");
+            }
+        }
     }
 }
