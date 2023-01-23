@@ -152,8 +152,6 @@ public class TransactionController implements Initializable {
             ps.setInt(2, customer.customerId);
             ps.setInt(3, customer.customerId);
 
-            System.out.println(customer.customerId);
-
             ResultSet rs = ps.executeQuery();
 
             TransactionModel[] transactionModels = new TransactionModel[this.countRow];
