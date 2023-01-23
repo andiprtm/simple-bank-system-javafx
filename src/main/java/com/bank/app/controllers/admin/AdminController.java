@@ -16,7 +16,6 @@ public class AdminController implements Initializable {
             System.out.println(newValue);
             if(newValue!= null) {
                 switch (newValue) {
-                    case "Nasabah" -> admin_parent.setCenter(Model.getInstance().getViewFactory().getClientView());
                     case "Deposit" -> admin_parent.setCenter(Model.getInstance().getViewFactory().getDepositView());
                     case "AddNasabah" -> admin_parent.setCenter(Model.getInstance().getViewFactory().getCreateClientView());
                     default -> admin_parent.setCenter(Model.getInstance().getViewFactory().getClientView());
@@ -27,8 +26,5 @@ public class AdminController implements Initializable {
 
     public void refreshListNasabah() {
         admin_parent.setCenter(Model.getInstance().getViewFactory().getClientView());
-    }
-    public void refreshCreateClientView() {
-        admin_parent.setCenter(Model.getInstance().getViewFactory().getCreateClientView());
     }
 }

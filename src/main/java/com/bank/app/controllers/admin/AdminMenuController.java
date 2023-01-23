@@ -19,6 +19,8 @@ public class AdminMenuController implements Initializable {
         btn_buatNasabah.setOnAction(actionEvent -> onBuatNasabah());
         btn_nasabah.setOnAction(actionEvent -> onNasabah());
         btn_deposit.setOnAction(actionEvent -> onDeposit());
+        addListener();
+
         btn_logout.setOnAction(event -> {
             System.out.println("Logout");
             Stage stage = (Stage) btn_logout.getScene().getWindow();
@@ -28,6 +30,7 @@ public class AdminMenuController implements Initializable {
     }
 
     private void addListener(){
+        System.out.println("terset");
         btn_buatNasabah.setOnAction(actionEvent -> onBuatNasabah());
         btn_nasabah.setOnAction(actionEvent -> onNasabah());
         btn_deposit.setOnAction(actionEvent -> onDeposit());

@@ -59,8 +59,8 @@ public class ViewFactory {
     }
 
     public ViewFactory() {
-        this.clientSelectedMenuItem = new SimpleStringProperty("");
-        this.adminSelectedMenuItem = new SimpleStringProperty("");
+        this.clientSelectedMenuItem = new SimpleStringProperty(" ");
+        this.adminSelectedMenuItem = new SimpleStringProperty(" ");
         this.managerSelectedMenuItem = new SimpleStringProperty(" ");
     }
 
@@ -201,16 +201,15 @@ public class ViewFactory {
     }
 
     public AnchorPane getDepositView() {
-        if(DepositView == null) {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/admin/Deposit.fxml"));
-                DepositView = loader.load();
-                DepositController controller = loader.getController();
-                controller.setTellerData(teller);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/admin/Deposit.fxml"));
+            DepositView = loader.load();
+            DepositController controller = loader.getController();
+            controller.setTellerData(teller);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
         return DepositView;
     }
 
@@ -229,17 +228,14 @@ public class ViewFactory {
     }
 
     public AnchorPane getCreateClientView(){
-        //if(CreateClientView == null) {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/admin/CreateClient.fxml"));
-                CreateClientView = loader.load();
-
-                CreateClientController createClientController = loader.getController();
-                createClientController.setTellerData(teller);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        //}
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/admin/CreateClient.fxml"));
+            CreateClientView = loader.load();
+            CreateClientController createClientController = loader.getController();
+            createClientController.setTellerData(teller);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return CreateClientView;
     }
 

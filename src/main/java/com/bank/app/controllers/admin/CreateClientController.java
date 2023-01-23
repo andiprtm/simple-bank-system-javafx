@@ -31,8 +31,9 @@ public class CreateClientController implements Initializable {
         cb_tipeAkun.getItems().addAll(tipeAkun);
 
         btn_tambahNasabah.setOnAction(actionEvent -> {
+            //BERMASALAH
             Stage stage = (Stage) btn_tambahNasabah.getScene().getWindow();
-            Model.getInstance().getViewFactory().closeStage(stage);
+            stage.close();
             Model.getInstance().getViewFactory().showAdminWindow();
         });
     }
