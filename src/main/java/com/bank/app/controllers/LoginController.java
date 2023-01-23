@@ -1,8 +1,6 @@
 package com.bank.app.controllers;
 
-import com.bank.app.models.Customer;
-import com.bank.app.models.Employee;
-import com.bank.app.models.Model;
+import com.bank.app.models.*;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
@@ -48,20 +46,29 @@ public class LoginController implements Initializable {
 
 
     public void login() {
+        String username = field_username.getText();
+        String password = field_password.getText();
+
         if (dropdwon_tipe_user.getValue().equals(userType[0])) {
-            if (!field_username.getText().equals("") && !field_password.getText().equals("")) {
+            if (!username.equals("") && !password.equals("")) {
                 label_eror.setVisible(false);
-                Employee employee = new Employee(field_username.getText(), field_password.getText());
+                Employee employee = new Employee(username, password);
                 employee.authenticate();
                 if (employee.employeeId != null){
-                    employee.getEmployeeData();
                     if (employee.accountType.equals(statusPegawai[0])) {
+                        Teller teller = new Teller(username, password);
+                        teller.authenticate();
+                        teller.getEmployeeData();
                         Stage stage = (Stage) button_login.getScene().getWindow();
                         Model.getInstance().getViewFactory().closeStage(stage);
+                        Model.getInstance().getViewFactory().setTellerData(teller);
                         Model.getInstance().getViewFactory().showAdminWindow();
                     } else if (employee.accountType.equals(statusPegawai[1])) {
+                        Manager manager = new Manager(username, password);
+                        manager.getEmployeeData();
                         Stage stage = (Stage) button_login.getScene().getWindow();
                         Model.getInstance().getViewFactory().closeStage(stage);
+                        Model.getInstance().getViewFactory().setManagerData(manager);
                         Model.getInstance().getViewFactory().showManagerWindow();
                     }
                 } else {
@@ -71,10 +78,10 @@ public class LoginController implements Initializable {
                 label_eror.setVisible(true);
             }
         } else {
-            if (!field_username.getText().equals("") && !field_password.getText().equals("")) {
+            if (!username.equals("") && !password.equals("")) {
                 label_eror.setVisible(false);
                 Stage stage = (Stage) button_login.getScene().getWindow();
-                Customer customer = new Customer(field_username.getText(), field_password.getText());
+                Customer customer = new Customer(username, password);
                 customer.authenticate();
                 if (customer.customerId != null) {
                     customer.getCustomerData();

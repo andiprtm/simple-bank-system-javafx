@@ -2,16 +2,20 @@ package com.bank.app.controllers.admin;
 
 import com.bank.app.models.ClientModel;
 import com.bank.app.models.Model;
+import com.bank.app.models.Teller;
 import com.bank.app.views.ClientCellFactory;
 import javafx.collections.FXCollections;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
 import java.math.BigDecimal;
 import java.net.URL;
+import java.security.PublicKey;
 import java.util.ResourceBundle;
 
 public class ClientController implements Initializable {
+    public Teller teller;
     public String[] usernames = {"user1", "user2", "user3", "user4", "user5", "user6", "user7", "user8", "user9", "user10"};
     public String[] phones = {"08123456789", "08123456788", "08123456787", "08123456786", "08123456785", "08123456784", "08123456789=3", "08123456782", "08123456781", "08123456780"};
     public String[] addresses = {"Jl. Jalan1", "Jl. Jalan2", "Jl. Jalan3", "Jl. Jalan4", "Jl. Jalan5", "Jl. Jalan6", "Jl. Jalan7", "Jl. Jalan8", "Jl. Jalan9", "Jl. Jalan0"};
@@ -20,6 +24,7 @@ public class ClientController implements Initializable {
     public BigDecimal[] balances = {new BigDecimal(1000000), new BigDecimal(2000000), new BigDecimal(3000000), new BigDecimal(4000000), new BigDecimal(5000000), new BigDecimal(6000000), new BigDecimal(7000000), new BigDecimal(8000000), new BigDecimal(9000000), new BigDecimal(10000000)};
     public ListView<ClientModel> listview_Client;
     public ClientModel[] clientModels = new ClientModel[usernames.length];
+    public Label tv_say_hi;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -35,5 +40,12 @@ public class ClientController implements Initializable {
             System.out.println(newValue.phoneProperty().getValue());
             Model.getInstance().getViewFactory().showDetailTellerWindow();
         });
+    }
+
+    public void setTellerData(Teller teller) {
+        this.teller = teller;
+        String[] name = teller.name.split(" ");
+
+        tv_say_hi.setText("Hi, " + name[0]);
     }
 }

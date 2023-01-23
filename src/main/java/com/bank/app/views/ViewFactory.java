@@ -1,9 +1,14 @@
 package com.bank.app.views;
 
 import com.bank.app.controllers.admin.AdminController;
+import com.bank.app.controllers.admin.CreateClientController;
+import com.bank.app.controllers.admin.DepositController;
 import com.bank.app.controllers.client.*;
 import com.bank.app.models.Customer;
 import com.bank.app.controllers.manager.ManagerController;
+import com.bank.app.models.Employee;
+import com.bank.app.models.Manager;
+import com.bank.app.models.Teller;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -17,6 +22,8 @@ import java.io.IOException;
 public class ViewFactory {
     //Client Data
     public Customer customer;
+    public Teller teller;
+    public Manager manager;
 
     //Client Views
     private final StringProperty clientSelectedMenuItem;
@@ -41,7 +48,14 @@ public class ViewFactory {
 
     public void setCustomerData(Customer customer) {
         this.customer = customer;
+    }
 
+    public void setTellerData(Teller teller) {
+        this.teller = teller;
+    }
+
+    public void setManagerData(Manager manager) {
+        this.manager = manager;
     }
 
     public ViewFactory() {
@@ -129,7 +143,6 @@ public class ViewFactory {
         stage.setScene(scene);
         stage.setTitle("Dashboard Client");
         stage.show();
-        clientController = fxmlLoader.getController();
         clientController.refreshDashboard();
     }
 
@@ -189,7 +202,10 @@ public class ViewFactory {
     public AnchorPane getDepositView() {
         if(DepositView == null) {
             try {
-                DepositView = new FXMLLoader(getClass().getResource("/fxml/admin/Deposit.fxml")).load();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/admin/Deposit.fxml"));
+                DepositView = loader.load();
+                DepositController controller = loader.getController();
+                controller.setTellerData(teller);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -199,7 +215,10 @@ public class ViewFactory {
 
     public AnchorPane getClientView(){
         try {
-            ClientView = new FXMLLoader(getClass().getResource("/fxml/admin/Clients.fxml")).load();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/admin/Clients.fxml"));
+            ClientView = loader.load();
+            com.bank.app.controllers.admin.ClientController controller = loader.getController();
+            controller.setTellerData(teller);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -209,7 +228,11 @@ public class ViewFactory {
     public AnchorPane getCreateClientView(){
         if(CreateClientView == null) {
             try {
-                CreateClientView = new FXMLLoader(getClass().getResource("/fxml/admin/CreateClient.fxml")).load();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/admin/CreateClient.fxml"));
+                CreateClientView = loader.load();
+
+                CreateClientController createClientController = loader.getController();
+                createClientController.setTellerData(teller);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -231,6 +254,7 @@ public class ViewFactory {
         stage.setScene(scene);
         stage.setTitle("Dashboard Admin");
         stage.show();
+        adminController.refreshCreateClientView();
     }
 
     public void showDetailClientWindow(){

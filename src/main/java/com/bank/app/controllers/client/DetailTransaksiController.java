@@ -37,7 +37,7 @@ public class DetailTransaksiController implements Initializable {
         tv_nama_pengirim_username.setText(": "+NamaPengirimUsername);
         tv_nominal_transaksi.setText(": "+NominalTransaksi);
         tv_biaya_admin_persen.setText("Biaya Admin ("+BiayaAdminPersen+"%)");
-        tv_biaya_admin.setText(": "+NominalTransaksi.multiply(new BigDecimal(BiayaAdminPersen)).divide(new BigDecimal(100)));
+        tv_biaya_admin.setText(": "+ NominalTransaksi.multiply(new BigDecimal(BiayaAdminPersen)).divide(new BigDecimal(100)));
         tv_total_akhir.setText(": "+NominalTransaksi.add(NominalTransaksi.multiply(new BigDecimal(BiayaAdminPersen)).divide(new BigDecimal(100))));
 
 

@@ -31,6 +31,50 @@ public class Customer {
         this.password = password;
     }
 
+    public Customer(String username) {
+        this.username = username;
+        this.customerId = getCustomerId(username);
+    }
+
+    public Customer(String accountType, String username, String password, String name, String address, String phone, BigDecimal accountBalance, Integer pin) {
+        try {
+            PreparedStatement ps = conn.prepareStatement(
+                    "INSERT INTO customer_data (name, address, phone, username, password) VALUES (?, ?, ?, ?, ?);",
+                    Statement.RETURN_GENERATED_KEYS
+            );
+
+            ps.setString(1, name);
+            ps.setString(2, address);
+            ps.setString(3, phone);
+            ps.setString(4, username);
+            ps.setString(5, password);
+
+            int affectedRows = ps.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Gagal menambahkan data!");
+            }
+
+            try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    Integer newCustomerId = generatedKeys.getInt(1);
+                    Integer idAccountType =  getIdAccountType(accountType);
+                    if (idAccountType != null) {
+                        this.customerId = newCustomerId;
+                        createCustomerBankAccount(newCustomerId, idAccountType, accountBalance, pin);
+                    } else {
+                        System.out.println("Id account type tidak di temukan!");
+                    }
+                }
+                else {
+                    throw new SQLException("Gagal mendapatkan id!");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void authenticate() {
         try {
             PreparedStatement ps = conn.prepareStatement(
@@ -314,6 +358,51 @@ public class Customer {
         return isSuccess;
     }
 
+    public void setIsActive (Boolean isActive) {
+        try {
+            PreparedStatement ps = conn.prepareStatement(
+                    "UPDATE customer_bank_account SET customer_is_active=? WHERE customer_id=?"
+            );
+
+            ps.setBoolean(1, isActive);
+            ps.setInt(2, this.customerId);
+
+            int affectedRows = ps.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Gagal menambahkan data!");
+            } else {
+                this.isActive = isActive;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateCustomerData (String name, String address, String phone, String username, String password) {
+        try {
+            PreparedStatement ps = conn.prepareStatement(
+                    "UPDATE customer_data cd SET cd.name=?, cd.address=?, cd.phone=?, cd.username=?, cd.password=? WHERE cd.id_customer=?;",
+                    Statement.RETURN_GENERATED_KEYS
+            );
+
+            ps.setString(1, name);
+            ps.setString(2, address);
+            ps.setString(3, phone);
+            ps.setString(4, username);
+            ps.setString(5, password);
+            ps.setInt(6, this.customerId);
+
+            int affectedRows = ps.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Gagal mengupdate data!");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void depositBalance (BigDecimal amount) {
         BigDecimal remainingBalance = this.getBalanceAfterAddition(this.customerId, amount);
 
@@ -328,6 +417,72 @@ public class Customer {
 
             System.out.println("Maksimal deposit adalah " + this.maximumDeposit);
 
+        }
+    }
+
+    public Integer getIdAccountType (String accountType) {
+        Integer idAccountType = null;
+
+        try {
+            PreparedStatement ps = conn.prepareStatement(
+                    "SELECT cat.id_customer_account_type FROM customer_account_type cat WHERE cat.customer_account_type=?;"
+            );
+
+            ps.setString(1, accountType);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                idAccountType = rs.getInt("id_customer_account_type");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return idAccountType;
+    }
+
+    public void updateCustomerBankAccount (String accountType, Integer pin) {
+        Integer idAccountType = getIdAccountType(accountType);
+
+        try {
+            PreparedStatement ps = conn.prepareStatement(
+                    "UPDATE customer_bank_account cba SET cba.customer_account_type_id=?, cba.account_pin=? WHERE cba.customer_id=?;",
+                    Statement.RETURN_GENERATED_KEYS
+            );
+
+            ps.setInt(1, idAccountType);
+            ps.setInt(2, pin);
+            ps.setInt(3, this.customerId);
+
+            int affectedRows = ps.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Gagal mengupdate data!");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void createCustomerBankAccount (Integer customerId, Integer accountType, BigDecimal accountBalance, Integer pin) {
+        try {
+            PreparedStatement ps = conn.prepareStatement(
+                    "INSERT INTO customer_bank_account (customer_id, customer_account_type_id, account_balance, account_pin) VALUES (?, ?, ?, ?);",
+                    Statement.RETURN_GENERATED_KEYS
+            );
+
+            ps.setInt(1, customerId);
+            ps.setInt(2, accountType);
+            ps.setBigDecimal(3, accountBalance);
+            ps.setInt(4, pin);
+
+            int affectedRows = ps.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Gagal menambahkan data!");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }
