@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
@@ -45,83 +46,116 @@
                   <Font name="System Bold" size="27.0" />
                </font>
                <VBox.margin>
-                  <Insets bottom="15.0" />
+                  <Insets bottom="5.0" />
                </VBox.margin>
             </Label>
-            <Label text="Username" textFill="#3c6255">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Label>
-            <TextField fx:id="tf_username" maxWidth="-Infinity" prefWidth="300.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css">
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
-            </TextField>
-            <Label text="Password" textFill="#3c6255">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Label>
-            <TextField fx:id="tf_password" maxWidth="-Infinity" prefWidth="300.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css">
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
-            </TextField>
-            <Label text="Nama Lengkap" textFill="#3c6255">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Label>
-            <TextField fx:id="tf_nama" maxWidth="-Infinity" prefWidth="300.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css">
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
-            </TextField>
-            <Label text="Alamat" textFill="#3c6255">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Label>
-            <TextField fx:id="tf_alamat" maxWidth="-Infinity" prefWidth="300.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css">
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
-            </TextField>
-            <Label text="Nomor Handphone" textFill="#3c6255">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Label>
-            <TextField fx:id="tf_nomorHandphone" maxWidth="-Infinity" prefWidth="300.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css">
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
-            </TextField>
-            <Label text="PIN" textFill="#3c6255">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Label>
-            <TextField fx:id="tf_pin" maxWidth="-Infinity" prefWidth="300.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css">
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
-            </TextField>
-            <Label text="Tipe Akun" textFill="#3c6255">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Label>
-            <ComboBox fx:id="cb_tipeAkun" prefWidth="200.0" style="-fx-background-color: #61876E;" stylesheets="@../../style/login.css">
+            <HBox>
+               <children>
+                  <VBox prefWidth="380.0">
+                     <children>
+                        <Label text="Username" textFill="#3c6255">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tf_username" maxWidth="-Infinity" prefWidth="300.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Label text="Password" textFill="#3c6255">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tf_password" maxWidth="-Infinity" prefWidth="300.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Label text="Nama Lengkap" textFill="#3c6255">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tf_nama" maxWidth="-Infinity" prefWidth="300.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Label text="Alamat" textFill="#3c6255">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tf_alamat" maxWidth="-Infinity" prefWidth="300.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </TextField>
+                     </children>
+                  </VBox>
+                  <VBox prefWidth="25.0">
+                     <children>
+                        <Line endX="-100.00001525878906" endY="244.5" startX="-100.0" stroke="#3c615473" strokeLineCap="ROUND" strokeWidth="4.0" />
+                     </children>
+                  </VBox>
+                  <VBox prefWidth="405.0">
+                     <children>
+                        <Label text="Nomor Handphone" textFill="#3c6255">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tf_nomorHandphone" maxWidth="-Infinity" prefWidth="300.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Label text="PIN" textFill="#3c6255">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tf_pin" maxWidth="-Infinity" prefWidth="300.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Label text="Saldo Awal" textFill="#3c6255">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tf_saldo_awal" maxWidth="-Infinity" prefWidth="300.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Label text="Tipe Akun" textFill="#3c6255">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="cb_tipeAkun" prefHeight="32.0" prefWidth="200.0" style="-fx-background-color: #61876E; -fx-background-radius: 8;" stylesheets="@../../style/login.css">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                           <styleClass>
+                              <String fx:value="jfx-combo-box" />
+                              <String fx:value="cell" />
+                           </styleClass>
+                        </ComboBox>
+                     </children>
+                     <padding>
+                        <Insets left="30.0" />
+                     </padding>
+                  </VBox>
+               </children>
                <VBox.margin>
                   <Insets bottom="20.0" />
                </VBox.margin>
-               <styleClass>
-                  <String fx:value="jfx-combo-box" />
-                  <String fx:value="cell" />
-               </styleClass>
-            </ComboBox>
+            </HBox>
             <CheckBox fx:id="ckb_verifikasi" mnemonicParsing="false" text="Data Sudah Benar" textFill="#3c6255">
                <VBox.margin>
                   <Insets bottom="35.0" />

@@ -64,15 +64,6 @@
                </font></Label>
             <TextField fx:id="tf_amount" maxWidth="-Infinity" prefWidth="400.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css">
                <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
-            </TextField>
-            <Label text="PIN" textFill="#3c6255">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font></Label>
-            <TextField fx:id="tf_pin" maxWidth="-Infinity" prefWidth="200.0" style="-fx-background-color: #61876E; -fx-background-radius: 8; -fx-pref-height: 32;" styleClass="root" stylesheets="@../../style/login.css">
-               <VBox.margin>
                   <Insets bottom="20.0" />
                </VBox.margin>
             </TextField>

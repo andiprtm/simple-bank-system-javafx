@@ -39,7 +39,7 @@
       </Label>
       <VBox layoutY="79.0" prefHeight="671.0" prefWidth="857.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
          <children>
-            <Label alignment="CENTER" prefHeight="45.0" prefWidth="827.0" style="-fx-background-color: #eae7b1; -fx-background-radius: 10;" text="Mohon Isi Data Dengan Lengkap!" textFill="#3c6255" visible="false">
+            <Label fx:id="tv_alert" alignment="CENTER" prefHeight="45.0" prefWidth="827.0" style="-fx-background-color: #eae7b1; -fx-background-radius: 10;" text="Mohon Isi Data Dengan Lengkap!" textFill="#3c6255" visible="false">
                <font>
                   <Font name="System Bold" size="27.0" />
                </font>

@@ -5,6 +5,7 @@ import com.bank.app.models.TellerModel;
 import com.bank.app.views.TellerCellFactory;
 import javafx.collections.FXCollections;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
 import java.net.URL;
@@ -19,6 +20,7 @@ public class TellerController implements Initializable {
     public String[] status = {"aktif","aktif","aktif","aktif","aktif","aktif","aktif","aktif","aktif","aktif","aktif","aktif","aktif","aktif","aktif","aktif","aktif","aktif","aktif","aktif","aktif","aktif"};
     public String[] accountType = {"Manager","Teller","Manager","Teller","Manager","Teller","Manager","Teller","Manager","Teller","Manager","Teller","Manager","Teller","Manager","Teller","Manager","Teller","Manager","Teller","Manager","Teller"};
     public TellerModel[] tellerModel = new TellerModel[username2.length];
+    public Label tv_say_hi;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

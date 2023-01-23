@@ -19,6 +19,7 @@ public class CreateClientController implements Initializable {
     public TextField tf_pin;
     public CheckBox ckb_verifikasi;
     public Label tv_say_hi;
+    public Label tv_alert;
 
     Object[] tipeAkun = {"Silver", "Gold", "Platinum"};
 

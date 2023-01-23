@@ -14,10 +14,10 @@ public class DepositController implements Initializable {
     public Teller teller;
     public TextField tf_username;
     public TextField tf_amount;
-    public TextField tf_pin;
     public CheckBox ckb_verifikasi;
     public Button btn_deposit;
     public Label tv_say_hi;
+    public Label tv_alert;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
