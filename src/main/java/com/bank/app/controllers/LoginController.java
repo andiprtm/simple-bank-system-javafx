@@ -1,13 +1,13 @@
 package com.bank.app.controllers;
 
 import com.bank.app.models.Customer;
+import com.bank.app.models.Employee;
 import com.bank.app.models.Model;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.net.URL;
-import java.util.Random;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
@@ -28,7 +28,6 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Random angkarandom = new Random();
         statusCheck = statusPegawai[1];
 
         dropdwon_tipe_user.getItems().addAll(userType);
@@ -50,18 +49,24 @@ public class LoginController implements Initializable {
 
     public void login() {
         if (dropdwon_tipe_user.getValue().equals(userType[0])) {
-            if (field_username.getText().equals("andi") && field_password.getText().equals("1234")) {
+            if (!field_username.getText().equals("") && !field_password.getText().equals("")) {
                 label_eror.setVisible(false);
-                if(statusCheck.equals(statusPegawai[0])){
-                    Stage stage = (Stage) button_login.getScene().getWindow();
-                    Model.getInstance().getViewFactory().closeStage(stage);
-                    Model.getInstance().getViewFactory().showAdminWindow();
-                }else{
-                    Stage stage = (Stage) button_login.getScene().getWindow();
-                    Model.getInstance().getViewFactory().closeStage(stage);
-                    Model.getInstance().getViewFactory().showManagerWindow();
+                Employee employee = new Employee(field_username.getText(), field_password.getText());
+                employee.authenticate();
+                if (employee.employeeId != null){
+                    employee.getEmployeeData();
+                    if (employee.accountType.equals(statusPegawai[0])) {
+                        Stage stage = (Stage) button_login.getScene().getWindow();
+                        Model.getInstance().getViewFactory().closeStage(stage);
+                        Model.getInstance().getViewFactory().showAdminWindow();
+                    } else if (employee.accountType.equals(statusPegawai[1])) {
+                        Stage stage = (Stage) button_login.getScene().getWindow();
+                        Model.getInstance().getViewFactory().closeStage(stage);
+                        Model.getInstance().getViewFactory().showManagerWindow();
+                    }
+                } else {
+                    label_eror.setVisible(true);
                 }
-
             } else {
                 label_eror.setVisible(true);
             }
