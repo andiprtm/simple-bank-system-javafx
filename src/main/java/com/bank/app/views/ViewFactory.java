@@ -80,6 +80,7 @@ public class ViewFactory {
             controller.setCustomer(customer);
             controller.setSaldoAkhir();
             controller.setSummary();
+            controller.setCountRow();
             controller.setTransactionList();
         } catch (IOException e) {
             e.printStackTrace();
@@ -219,6 +220,8 @@ public class ViewFactory {
             ClientView = loader.load();
             ClientListController controller = loader.getController();
             controller.setTellerData(teller);
+            controller.setCountRow();
+            controller.setListCustomer();
         } catch (IOException e) {
             e.printStackTrace();
         }
