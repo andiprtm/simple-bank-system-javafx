@@ -44,39 +44,48 @@ public class TransactionController implements Initializable {
         try {
             PreparedStatement ps = conn.prepareStatement("""
                     SELECT COUNT(*) as total_rows FROM (
-                        SELECT th.transaction_date,
-                           (SELECT cd.name FROM customer_data cd WHERE cd.id_customer=th.transaction_sender) AS transaction_sender,
-                           (SELECT cd.name FROM customer_data cd WHERE cd.id_customer=th.transaction_receiver) AS transaction_receiver,
-                           th.transaction_amount,
-                           th.transaction_admin_fee,
-                           (SELECT tt.transaction_type FROM transaction_type tt WHERE tt.id_transaction_type=th.transaction_type_id) AS transaction_type,
-                           th.transaction_status,
-                           th.transaction_message
-                    FROM transaction_history th
-                    WHERE (th.transaction_type_id=1 OR th.transaction_type_id=2) AND th.transaction_sender=?
-                    UNION
-                    SELECT th.transaction_date,
-                           (SELECT cd.name FROM customer_data cd WHERE cd.id_customer=th.transaction_sender) AS transaction_sender,
-                           (SELECT cd.name FROM customer_data cd WHERE cd.id_customer=th.transaction_receiver) AS transaction_receiver,
-                           th.transaction_amount,
-                           th.transaction_admin_fee,
-                           (SELECT tt.transaction_type FROM transaction_type tt WHERE tt.id_transaction_type=th.transaction_type_id) AS transaction_type,
-                           th.transaction_status,
-                           th.transaction_message
-                    FROM transaction_history th
-                    WHERE th.transaction_type_id=3 AND th.transaction_sender=?
-                    UNION
-                    SELECT th.transaction_date,
-                           (SELECT cd.name FROM customer_data cd WHERE cd.id_customer=th.transaction_sender) AS transaction_sender,
-                           (SELECT cd.name FROM customer_data cd WHERE cd.id_customer=th.transaction_receiver) AS transaction_receiver,
-                           th.transaction_amount,
-                           th.transaction_admin_fee,
-                           (SELECT tt.transaction_type FROM transaction_type tt WHERE tt.id_transaction_type=th.transaction_type_id) AS transaction_type,
-                           th.transaction_status,
-                           th.transaction_message
-                    FROM transaction_history th
-                    WHERE th.transaction_type_id=3 AND th.transaction_receiver=?
-                    ORDER BY transaction_date desc
+                        SELECT th.transaction_type_id,
+                               th.transaction_date,
+                               (SELECT cd.name FROM customer_data cd WHERE cd.id_customer=th.transaction_sender) AS transaction_sender,
+                               (SELECT cd.name FROM customer_data cd WHERE cd.id_customer=th.transaction_receiver) AS transaction_receiver,
+                               th.transaction_amount,
+                               (ROUND((th.transaction_admin_fee / th.transaction_amount) * 100)) as admin_fee_percent,
+                               th.transaction_admin_fee,
+                               (SELECT tt.transaction_type FROM transaction_type tt WHERE tt.id_transaction_type=th.transaction_type_id) AS transaction_type,
+                               th.transaction_status,
+                               th.transaction_message,
+                               th.id_transaction_history
+                        FROM transaction_history th
+                        WHERE (th.transaction_type_id=1 OR th.transaction_type_id=2) AND th.transaction_sender=?
+                        UNION
+                        SELECT th.transaction_type_id,
+                               th.transaction_date,
+                               (SELECT cd.name FROM customer_data cd WHERE cd.id_customer=th.transaction_sender) AS transaction_sender,
+                               (SELECT cd.name FROM customer_data cd WHERE cd.id_customer=th.transaction_receiver) AS transaction_receiver,
+                               th.transaction_amount,
+                               (ROUND((th.transaction_admin_fee / th.transaction_amount) * 100)) as admin_fee_percent,
+                               th.transaction_admin_fee,
+                               (SELECT tt.transaction_type FROM transaction_type tt WHERE tt.id_transaction_type=th.transaction_type_id) AS transaction_type,
+                               th.transaction_status,
+                               th.transaction_message,
+                               th.id_transaction_history
+                        FROM transaction_history th
+                        WHERE th.transaction_type_id=3 AND th.transaction_sender=?
+                        UNION
+                        SELECT th.transaction_type_id,
+                               th.transaction_date,
+                               (SELECT cd.name FROM customer_data cd WHERE cd.id_customer=th.transaction_sender) AS transaction_sender,
+                               (SELECT cd.name FROM customer_data cd WHERE cd.id_customer=th.transaction_receiver) AS transaction_receiver,
+                               th.transaction_amount,
+                               (ROUND((th.transaction_admin_fee / th.transaction_amount) * 100)) as admin_fee_percent,
+                               th.transaction_admin_fee,
+                               (SELECT tt.transaction_type FROM transaction_type tt WHERE tt.id_transaction_type=th.transaction_type_id) AS transaction_type,
+                               th.transaction_status,
+                               th.transaction_message,
+                               th.id_transaction_history
+                        FROM transaction_history th
+                        WHERE th.transaction_type_id=3 AND th.transaction_receiver=?
+                        ORDER BY transaction_date desc
                     ) as total;""");
 
             ps.setInt(1, customer.customerId);
@@ -98,36 +107,45 @@ public class TransactionController implements Initializable {
     public void setTransactionList () {
         try {
             PreparedStatement ps = conn.prepareStatement("""
-                    SELECT th.transaction_date,
+                    SELECT th.transaction_type_id,
+                           th.transaction_date,
                            (SELECT cd.name FROM customer_data cd WHERE cd.id_customer=th.transaction_sender) AS transaction_sender,
                            (SELECT cd.name FROM customer_data cd WHERE cd.id_customer=th.transaction_receiver) AS transaction_receiver,
                            th.transaction_amount,
+                           (ROUND((th.transaction_admin_fee / th.transaction_amount) * 100)) as admin_fee_percent,
                            th.transaction_admin_fee,
                            (SELECT tt.transaction_type FROM transaction_type tt WHERE tt.id_transaction_type=th.transaction_type_id) AS transaction_type,
                            th.transaction_status,
-                           th.transaction_message
+                           th.transaction_message,
+                           th.id_transaction_history
                     FROM transaction_history th
                     WHERE (th.transaction_type_id=1 OR th.transaction_type_id=2) AND th.transaction_sender=?
                     UNION
-                    SELECT th.transaction_date,
+                    SELECT th.transaction_type_id,
+                           th.transaction_date,
                            (SELECT cd.name FROM customer_data cd WHERE cd.id_customer=th.transaction_sender) AS transaction_sender,
                            (SELECT cd.name FROM customer_data cd WHERE cd.id_customer=th.transaction_receiver) AS transaction_receiver,
                            th.transaction_amount,
+                           (ROUND((th.transaction_admin_fee / th.transaction_amount) * 100)) as admin_fee_percent,
                            th.transaction_admin_fee,
                            (SELECT tt.transaction_type FROM transaction_type tt WHERE tt.id_transaction_type=th.transaction_type_id) AS transaction_type,
                            th.transaction_status,
-                           th.transaction_message
+                           th.transaction_message,
+                           th.id_transaction_history
                     FROM transaction_history th
                     WHERE th.transaction_type_id=3 AND th.transaction_sender=?
                     UNION
-                    SELECT th.transaction_date,
+                    SELECT th.transaction_type_id,
+                           th.transaction_date,
                            (SELECT cd.name FROM customer_data cd WHERE cd.id_customer=th.transaction_sender) AS transaction_sender,
                            (SELECT cd.name FROM customer_data cd WHERE cd.id_customer=th.transaction_receiver) AS transaction_receiver,
                            th.transaction_amount,
+                           (ROUND((th.transaction_admin_fee / th.transaction_amount) * 100)) as admin_fee_percent,
                            th.transaction_admin_fee,
                            (SELECT tt.transaction_type FROM transaction_type tt WHERE tt.id_transaction_type=th.transaction_type_id) AS transaction_type,
                            th.transaction_status,
-                           th.transaction_message
+                           th.transaction_message,
+                           th.id_transaction_history
                     FROM transaction_history th
                     WHERE th.transaction_type_id=3 AND th.transaction_receiver=?
                     ORDER BY transaction_date desc;""");
