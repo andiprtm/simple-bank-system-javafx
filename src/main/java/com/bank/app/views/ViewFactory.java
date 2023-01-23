@@ -1,12 +1,12 @@
 package com.bank.app.views;
 
 import com.bank.app.controllers.admin.AdminController;
+import com.bank.app.controllers.admin.ClientListController;
 import com.bank.app.controllers.admin.CreateClientController;
 import com.bank.app.controllers.admin.DepositController;
 import com.bank.app.controllers.client.*;
 import com.bank.app.models.Customer;
 import com.bank.app.controllers.manager.ManagerController;
-import com.bank.app.models.Employee;
 import com.bank.app.models.Manager;
 import com.bank.app.models.Teller;
 import javafx.application.Platform;
@@ -217,7 +217,7 @@ public class ViewFactory {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/admin/Clients.fxml"));
             ClientView = loader.load();
-            com.bank.app.controllers.admin.ClientController controller = loader.getController();
+            ClientListController controller = loader.getController();
             controller.setTellerData(teller);
         } catch (IOException e) {
             e.printStackTrace();

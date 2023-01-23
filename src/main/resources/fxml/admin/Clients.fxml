@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="client-container" stylesheets="@../../style/Client.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bank.app.controllers.admin.ClientController">
+<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="client-container" stylesheets="@../../style/Client.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bank.app.controllers.admin.ClientListController">
     <children>
       <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#3c6255" height="84.0" layoutX="27.0" layoutY="10.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="843.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="-10.0" />
       <HBox alignment="CENTER_RIGHT" layoutX="663.0" layoutY="28.0" prefHeight="60.0" prefWidth="200.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="8.0">

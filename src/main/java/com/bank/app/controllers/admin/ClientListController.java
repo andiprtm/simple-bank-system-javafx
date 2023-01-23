@@ -11,10 +11,9 @@ import javafx.scene.control.ListView;
 
 import java.math.BigDecimal;
 import java.net.URL;
-import java.security.PublicKey;
 import java.util.ResourceBundle;
 
-public class ClientController implements Initializable {
+public class ClientListController implements Initializable {
     public Teller teller;
     public String[] usernames = {"user1", "user2", "user3", "user4", "user5", "user6", "user7", "user8", "user9", "user10"};
     public String[] phones = {"08123456789", "08123456788", "08123456787", "08123456786", "08123456785", "08123456784", "08123456789=3", "08123456782", "08123456781", "08123456780"};
