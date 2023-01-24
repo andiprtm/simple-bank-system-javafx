@@ -65,6 +65,7 @@ public class LoginController implements Initializable {
                         Model.getInstance().getViewFactory().showAdminWindow();
                     } else if (employee.accountType.equals(statusPegawai[1])) {
                         Manager manager = new Manager(username, password);
+                        manager.authenticate();
                         manager.getEmployeeData();
                         Stage stage = (Stage) button_login.getScene().getWindow();
                         Model.getInstance().getViewFactory().closeStage(stage);
