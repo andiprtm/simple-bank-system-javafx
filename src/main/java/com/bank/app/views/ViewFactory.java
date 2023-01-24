@@ -1,9 +1,6 @@
 package com.bank.app.views;
 
-import com.bank.app.controllers.admin.AdminController;
-import com.bank.app.controllers.admin.ClientListController;
-import com.bank.app.controllers.admin.CreateClientController;
-import com.bank.app.controllers.admin.DepositController;
+import com.bank.app.controllers.admin.*;
 import com.bank.app.controllers.client.*;
 import com.bank.app.models.Customer;
 import com.bank.app.controllers.manager.ManagerController;

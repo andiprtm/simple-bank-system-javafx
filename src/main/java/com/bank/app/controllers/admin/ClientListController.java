@@ -1,6 +1,7 @@
 package com.bank.app.controllers.admin;
 
 import com.bank.app.ConnectionManager;
+import com.bank.app.controllers.client.DetailTransaksiController;
 import com.bank.app.models.ClientModel;
 import com.bank.app.models.Model;
 import com.bank.app.models.Teller;
@@ -13,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -60,7 +62,7 @@ public class ClientListController implements Initializable {
     public void setListCustomer() {
         try {
             PreparedStatement ps = conn.prepareStatement("""
-                    SELECT DISTINCT cd.id_customer, cd.name, cd.address, cd.phone, cd.username, cba.account_balance, cba.account_pin, IF(cba.customer_is_active, 'Active', 'Not Active') as status, cat.customer_account_type
+                    SELECT DISTINCT cd.id_customer, cd.name, cd.address, cd.phone, cd.username, cd.password, cba.account_balance, cba.account_pin, IF(cba.customer_is_active, 'Active', 'Not Active') as status, cat.customer_account_type
                     FROM customer_bank_account cba, customer_account_type cat, customer_data cd
                     WHERE cat.id_customer_account_type=cba.customer_account_type_id AND cba.customer_id=cd.id_customer;""");
 
@@ -78,7 +80,7 @@ public class ClientListController implements Initializable {
                         rs.getString("address"),
                         rs.getString("phone"),
                         rs.getString("account_pin"),
-                        rs.getBigDecimal("customer_balance"),
+                        rs.getBigDecimal("account_balance"),
                         rs.getString("customer_account_type"),
                         rs.getString("status")
                 );
@@ -111,7 +113,9 @@ public class ClientListController implements Initializable {
                         newValue.accountTypeProperty().getValue(),
                         newValue.statusProperty().getValue()
                 );
-
+                Stage stage2 =  new Stage();
+                stage2.setScene(scene);
+                stage2.show();
                 // close stage list client
                 Stage stage = (Stage) listview_Client.getScene().getWindow();
                 stage.close();

@@ -1,5 +1,6 @@
 package com.bank.app.controllers.admin;
 
+import com.bank.app.models.Customer;
 import com.bank.app.models.Model;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -10,6 +11,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class DetailClientController implements Initializable {
+    public Customer customer;
     String[] tipeNasabah = {"Silver", "Gold", "Platinum"};
     String[] statusNasabah = {"Active", "Not Active"};
     public Label tv_say_hi;
@@ -77,6 +79,7 @@ public class DetailClientController implements Initializable {
         }
     }
 
+
     public void setData(String idUser, String username, String password, String nama, String alamat, String nomorHandphone, String pin, String saldo, String tipeAkun, String statusNasabahh) {
         tf_idNasabah.setText(idUser);
         tf_username.setText(username);
@@ -86,12 +89,10 @@ public class DetailClientController implements Initializable {
         tf_nomorHandphone.setText(nomorHandphone);
         tf_pin.setText(pin);
 
-        if(tipeAkun.equals("Silver")) {
-            cb_tipeAkun.setValue(tipeNasabah[0]);
-        }else if(tipeAkun.equals("Gold")) {
-            cb_tipeAkun.setValue(tipeNasabah[1]);
-        }else if(tipeAkun.equals("Platinum")) {
-            cb_tipeAkun.setValue(tipeNasabah[2]);
+        switch (tipeAkun) {
+            case "Silver" -> cb_tipeAkun.setValue(tipeNasabah[0]);
+            case "Gold" -> cb_tipeAkun.setValue(tipeNasabah[1]);
+            case "Platinum" -> cb_tipeAkun.setValue(tipeNasabah[2]);
         }
 
         if(statusNasabahh.equals("Active")) {
