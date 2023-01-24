@@ -11,7 +11,7 @@ import java.util.ResourceBundle;
 
 public class DetailClientController implements Initializable {
     String[] tipeNasabah = {"Silver", "Gold", "Platinum"};
-    Boolean[] statusNasabah = {true, false};
+    String[] statusNasabah = {"Active", "Not Active"};
     public Label tv_say_hi;
     public Label tv_alert;
     public TextField tf_password;
@@ -23,7 +23,7 @@ public class DetailClientController implements Initializable {
     public CheckBox ckb_verifikasi;
     public TextField tf_idNasabah;
     public TextField tf_saldo;
-    public ComboBox<Boolean> cb_statusNasabah;
+    public ComboBox<String> cb_statusNasabah;
     public HBox box_btn_to_edit;
     public Button btn_kembaliKeList;
     public Button btn_editNasabah;
@@ -77,8 +77,29 @@ public class DetailClientController implements Initializable {
         }
     }
 
-    public void setData() {
+    public void setData(String idUser, String username, String password, String nama, String alamat, String nomorHandphone, String pin, String saldo, String tipeAkun, String statusNasabahh) {
+        tf_idNasabah.setText(idUser);
+        tf_username.setText(username);
+        tf_password.setText(password);
+        tf_nama.setText(nama);
+        tf_alamat.setText(alamat);
+        tf_nomorHandphone.setText(nomorHandphone);
+        tf_pin.setText(pin);
 
+        if(tipeAkun.equals("Silver")) {
+            cb_tipeAkun.setValue(tipeNasabah[0]);
+        }else if(tipeAkun.equals("Gold")) {
+            cb_tipeAkun.setValue(tipeNasabah[1]);
+        }else if(tipeAkun.equals("Platinum")) {
+            cb_tipeAkun.setValue(tipeNasabah[2]);
+        }
+
+        if(statusNasabahh.equals("Active")) {
+            cb_statusNasabah.setValue(this.statusNasabah[0]);
+        }else if(statusNasabahh.equals("Not Active")) {
+            cb_statusNasabah.setValue(this.statusNasabah[1]);
+        }
+        tf_saldo.setText(saldo);
     }
 
     public void setFalse(){

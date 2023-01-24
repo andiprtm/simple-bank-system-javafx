@@ -6,7 +6,9 @@ import com.bank.app.models.Model;
 import com.bank.app.models.Teller;
 import com.bank.app.views.ClientCellFactory;
 import javafx.collections.FXCollections;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
@@ -88,8 +90,29 @@ public class ClientListController implements Initializable {
             listview_Client.setItems(FXCollections.observableArrayList(clientModels));
 
             listview_Client.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
-                System.out.println(newValue.phoneProperty().getValue());
-                Model.getInstance().getViewFactory().showDetailClientWindow();
+                //load halaman detail client atau update client
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/admin/DetailClient.fxml"));
+                Scene scene = null;
+                try {
+                    scene = new Scene(loader.load());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                DetailClientController detailClientController = loader.getController();
+                detailClientController.setData(
+                        newValue.idUserProperty().getValue(),
+                        newValue.usernameProperty().getValue(),
+                        newValue.passwordProperty().getValue(),
+                        newValue.nameProperty().getValue(),
+                        newValue.addressProperty().getValue(),
+                        newValue.phoneProperty().getValue(),
+                        newValue.pinProperty().getValue(),
+                        newValue.balanceProperty().getValue().toString(),
+                        newValue.accountTypeProperty().getValue(),
+                        newValue.statusProperty().getValue()
+                );
+
+                // close stage list client
                 Stage stage = (Stage) listview_Client.getScene().getWindow();
                 stage.close();
             });
