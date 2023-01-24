@@ -67,7 +67,7 @@
                   <Insets bottom="20.0" />
                </VBox.margin>
             </TextField>
-            <CheckBox fx:id="ckb_verifikasi" mnemonicParsing="false" text="Semua Data Telah Benar" textFill="#3c6255">
+            <CheckBox fx:id="ckb_verifikasi" mnemonicParsing="false" stylesheets="@../../style/CheckBox.css" text="Semua Data Telah Benar" textFill="#3c6255">
                <padding>
                   <Insets bottom="20.0" />
                </padding>
