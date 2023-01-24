@@ -197,6 +197,7 @@ public class ViewFactory {
     * Admin (Teller) Views Section
     * */
     public StringProperty getAdminSelectedMenuItem() {
+        System.out.println(adminSelectedMenuItem);
         return adminSelectedMenuItem;
     }
 

@@ -16,9 +16,6 @@ public class AdminMenuController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        btn_buatNasabah.setOnAction(actionEvent -> onBuatNasabah());
-        btn_nasabah.setOnAction(actionEvent -> onNasabah());
-        btn_deposit.setOnAction(actionEvent -> onDeposit());
         addListener();
 
         btn_logout.setOnAction(event -> {
@@ -30,7 +27,6 @@ public class AdminMenuController implements Initializable {
     }
 
     private void addListener(){
-        System.out.println("terset");
         btn_buatNasabah.setOnAction(actionEvent -> onBuatNasabah());
         btn_nasabah.setOnAction(actionEvent -> onNasabah());
         btn_deposit.setOnAction(actionEvent -> onDeposit());

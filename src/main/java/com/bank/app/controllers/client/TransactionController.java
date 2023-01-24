@@ -9,8 +9,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.print.PrinterJob;
 import javafx.scene.Scene;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
+import javafx.scene.image.WritableImage;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -197,6 +200,9 @@ public class TransactionController implements Initializable {
                 stage.setScene(scene);
                 stage.show();
 
+                Scene root = (Scene) listview_transaksi.getScene();
+
+                // PRINT STRUK
                 PrinterJob job = PrinterJob.createPrinterJob();
                 if (job != null) {
                     boolean success = job.printPage(stage.getScene().getRoot());
