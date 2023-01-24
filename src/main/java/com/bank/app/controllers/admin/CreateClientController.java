@@ -1,14 +1,9 @@
 package com.bank.app.controllers.admin;
 
-import com.bank.app.models.Model;
 import com.bank.app.models.Teller;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
