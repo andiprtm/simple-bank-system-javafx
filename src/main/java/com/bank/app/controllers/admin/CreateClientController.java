@@ -26,6 +26,7 @@ public class CreateClientController extends AdminController implements Initializ
     public CheckBox ckb_verifikasi;
     public Label tv_say_hi;
     public Label tv_alert;
+    public TextField tf_saldo_awal;
 
     Object[] tipeAkun = {"Silver", "Gold", "Platinum"};
 
@@ -47,7 +48,20 @@ public class CreateClientController extends AdminController implements Initializ
             tambahNasabah();
             tv_alert.setVisible(true);
             tv_alert.setText("Nasabah berhasil ditambahkan");
+            setNull();
         }
+    }
+
+    public void setNull(){
+        tf_username.setText(null);
+        tf_password.setText(null);
+        tf_nama.setText(null);
+        tf_alamat.setText(null);
+        tf_nomorHandphone.setText(null);
+        tf_pin.setText(null);
+        tf_saldo_awal.setText(null);
+        cb_tipeAkun.setValue(null);
+        ckb_verifikasi.setSelected(false);
     }
 
     public void tambahNasabah() {
