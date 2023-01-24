@@ -58,7 +58,7 @@ public class ClientListController implements Initializable {
     public void setListCustomer() {
         try {
             PreparedStatement ps = conn.prepareStatement("""
-                    SELECT DISTINCT cd.id_customer, cd.name, cd.address, cd.phone, cd.username, cba.account_balance, IF(cba.customer_is_active, 'Active', 'Not Active') as status, cat.customer_account_type
+                    SELECT DISTINCT cd.id_customer, cd.name, cd.address, cd.phone, cd.username, cba.account_balance, cba.account_pin, IF(cba.customer_is_active, 'Active', 'Not Active') as status, cat.customer_account_type
                     FROM customer_bank_account cba, customer_account_type cat, customer_data cd
                     WHERE cat.id_customer_account_type=cba.customer_account_type_id AND cba.customer_id=cd.id_customer;""");
 
@@ -69,12 +69,16 @@ public class ClientListController implements Initializable {
             int i = 0;
             while (rs.next() && i < this.countRow) {
                 clientModels[i] = new ClientModel(
+                        rs.getString("id_customer"),
                         rs.getString("username"),
-                        rs.getString("phone"),
+                        rs.getString("password"),
+                        rs.getString("name"),
                         rs.getString("address"),
-                        rs.getString("status"),
+                        rs.getString("phone"),
+                        rs.getString("account_pin"),
+                        rs.getBigDecimal("customer_balance"),
                         rs.getString("customer_account_type"),
-                        rs.getBigDecimal("account_balance")
+                        rs.getString("status")
                 );
                 i++;
             }
