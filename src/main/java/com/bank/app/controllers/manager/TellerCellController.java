@@ -21,6 +21,7 @@ public class TellerCellController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        tv_tipe_pegawai.setText(tellerModel.accountTypeProperty().getValue());
         tv_username.setText(tellerModel.usernameProperty().getValue());
         tv_phone.setText(tellerModel.phoneProperty().getValue());
         counter++;

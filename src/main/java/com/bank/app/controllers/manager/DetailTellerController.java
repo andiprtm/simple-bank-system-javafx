@@ -45,23 +45,24 @@ public class DetailTellerController implements Initializable {
         tv_title_page.setText("DETAIL PEGAWAI");
         setFalse();
 
-        // BUTTON EDIT NASABAH DITEKAN
+        // BUTTON EDIT TELLER DITEKAN
         btn_editPegawai.setOnAction(actionEvent -> {
             box_btn_to_edit.setVisible(false);
             box_when_edit_click.setVisible(true);
             tv_title_page.setText("UPDATE PEGAWAI");
             setTrue();
 
-            // kondisi jika sesama manager tidak bisa menghapus akun manager lain
-            if(isMyTypeManager() && cb_tipeAkun.getValue().equals("Manager")){
-                cb_statusPegawai.setDisable(true);
-            }else{
-                cb_statusPegawai.setDisable(false);
-            }
+//            // kondisi jika sesama manager tidak bisa menghapus akun manager lain
+//            if(isMyTypeManager() && cb_tipeAkun.getValue().equals("Manager")){
+//                cb_statusPegawai.setDisable(true);
+//            }else{
+//                cb_statusPegawai.setDisable(false);
+//            }
         });
 
         // BUTTON UPDATE NASABAH DITEKAN
         btn_updatePegawai.setOnAction(actionEvent -> {
+            tv_alert.setVisible(false);
             cekInput();
         });
 
@@ -120,13 +121,11 @@ public class DetailTellerController implements Initializable {
     }
 
     public void setTrue(){
-        tf_idPegawai.setDisable(false);
         tf_username.setDisable(false);
         tf_password.setDisable(false);
         tf_nama.setDisable(false);
         tf_alamat.setDisable(false);
         tf_nomorHandphone.setDisable(false);
-        cb_tipeAkun.setDisable(false);
         ckb_verifikasi.setDisable(false);
         cb_statusPegawai.setDisable(false);
     }

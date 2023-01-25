@@ -34,7 +34,7 @@
                 <Insets right="15.0" />
             </padding>
         </HBox>
-        <Label fx:id="tv_title_page" layoutX="42.0" layoutY="44.0" text="UPDATE PEGAWAI" textFill="#eae7b1" AnchorPane.leftAnchor="22.0" AnchorPane.topAnchor="24.0">
+        <Label fx:id="tv_title_page" layoutX="42.0" layoutY="44.0" text="DETAIL TELLER" textFill="#eae7b1" AnchorPane.leftAnchor="22.0" AnchorPane.topAnchor="24.0">
             <font>
                 <Font name="System Bold" size="18.0" />
             </font>
@@ -136,7 +136,7 @@
                                         <String fx:value="cell" />
                                     </styleClass>
                                 </ComboBox>
-                                <Label text="Status Pegawai" textFill="#3c6255">
+                                <Label text="Status Teller" textFill="#3c6255">
                                     <font>
                                         <Font name="System Bold" size="14.0" />
                                     </font>
@@ -169,7 +169,7 @@
                     <children>
                         <AnchorPane>
                             <children>
-                                <HBox fx:id="box_btn_to_edit" visible="false">
+                                <HBox fx:id="box_btn_to_edit">
                                     <children>
                                         <Button fx:id="btn_kembaliKeList" mnemonicParsing="false" prefHeight="32.0" style="-fx-background-color: #3c6255; -fx-background-radius: 8;" text="Kembali ke List" textFill="#eae7b1">
                                             <font>
@@ -189,7 +189,7 @@
                                         </Button>
                                     </children>
                                 </HBox>
-                                <HBox fx:id="box_when_edit_click">
+                                <HBox fx:id="box_when_edit_click" visible="false">
                                     <children>
                                         <Button fx:id="btn_Cancel" mnemonicParsing="false" prefHeight="32.0" style="-fx-background-color: #800000; -fx-background-radius: 8;" text="Cancel" textFill="#eae7b1">
                                             <font>
