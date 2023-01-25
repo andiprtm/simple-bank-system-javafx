@@ -175,6 +175,7 @@ public class DashboardController implements Initializable {
             int i = 0;
             while (rs.next() && i < this.countRow) {
                 transactionModels[i] = new TransactionModel(
+                        customer.name,
                         rs.getInt("id_transaction_history"),
                         rs.getTimestamp("transaction_date"),
                         rs.getString("transaction_type"),

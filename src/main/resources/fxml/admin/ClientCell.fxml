@@ -9,7 +9,7 @@
 
 <AnchorPane maxWidth="-Infinity" prefHeight="60.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="60.0" prefWidth="550.0" style="-fx-background-color: #3C6255; -fx-background-radius: 10;" AnchorPane.leftAnchor="125.0" AnchorPane.rightAnchor="125.0">
+        <HBox fx:id="box_client" alignment="CENTER" layoutX="67.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="60.0" prefWidth="717.0" style="-fx-background-color: #3C6255; -fx-background-radius: 10;" AnchorPane.leftAnchor="36.0" AnchorPane.rightAnchor="36.0">
             <children>
                 <HBox alignment="CENTER" prefHeight="60.0" prefWidth="112.0">
                     <children>
@@ -49,6 +49,15 @@
                         </Label>
                     </children>
                 </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="tv_status" text="Tipe User" textFill="#eae7b1">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
             </children>
         </HBox>
     </children>

@@ -98,7 +98,7 @@ public class TransactionController implements Initializable {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 this.countRow = rs.getInt("total_rows");
-                tv_jumlah_transaksi.setText(this.countRow.toString());
+                tv_jumlah_transaksi.setText("Total Transaksi "+this.countRow.toString());
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -162,6 +162,7 @@ public class TransactionController implements Initializable {
             int i = 0;
             while (rs.next() && i < this.countRow) {
                 transactionModels[i] = new TransactionModel(
+                        customer.name,
                         rs.getInt("id_transaction_history"),
                         rs.getTimestamp("transaction_date"),
                         rs.getString("transaction_type"),

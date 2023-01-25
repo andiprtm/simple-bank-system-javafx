@@ -35,8 +35,8 @@
          </font>
       </Label>
       <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#3c6255" height="38.0" layoutX="7.0" layoutY="129.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="431.0" />
-      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#3c6255" height="564.0" layoutX="7.0" layoutY="179.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="588.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="7.0" />
-      <ListView fx:id="listview_transaksi" layoutX="9.0" layoutY="182.0" prefHeight="555.0" prefWidth="581.0" style="-fx-background-color: TRANSPARANT; -fx-background-radius: 10;" stylesheets="@../../style/Client.css" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="9.0">
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#3c6255" height="564.0" layoutX="7.0" layoutY="179.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="843.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="7.0" />
+      <ListView fx:id="listview_transaksi" layoutX="9.0" layoutY="182.0" prefHeight="555.0" prefWidth="835.0" style="-fx-background-color: TRANSPARANT; -fx-background-radius: 10;" stylesheets="@../../style/Client.css" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="9.0">
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
@@ -45,20 +45,9 @@
             <String fx:value="scroll-bar" />
          </styleClass>
       </ListView>
-      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#3c6255" height="184.0" layoutX="608.0" layoutY="179.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="242.0" />
-      <Label layoutX="22.0" layoutY="134.0" text="Daftar Transaksi" textFill="#eae7b1" AnchorPane.leftAnchor="22.0" AnchorPane.topAnchor="134.0">
+      <Label fx:id="tv_jumlah_transaksi" alignment="BOTTOM_LEFT" layoutX="22.0" layoutY="134.0" prefWidth="200.0" text="Total Transaksi 26" textFill="#eae7b1" AnchorPane.leftAnchor="22.0" AnchorPane.topAnchor="134.0">
          <font>
             <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="665.0" layoutY="190.0" text="Total Transaksi" textFill="#eae7b1" AnchorPane.rightAnchor="64.0" AnchorPane.topAnchor="190.0">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="tv_jumlah_transaksi" alignment="CENTER" layoutX="608.0" layoutY="215.0" prefHeight="114.0" prefWidth="242.0" text="26" textFill="#eae7b1" AnchorPane.rightAnchor="6.599999999999994" AnchorPane.topAnchor="215.0">
-         <font>
-            <Font name="System Bold" size="78.0" />
          </font>
       </Label>
    </children>

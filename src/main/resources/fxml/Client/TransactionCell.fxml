@@ -6,14 +6,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="60.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="60.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox alignment="CENTER" prefHeight="60.0" prefWidth="530.0" style="-fx-background-color: #61876E; -fx-background-radius: 8;" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+      <HBox alignment="CENTER" prefHeight="60.0" style="-fx-background-color: #61876E; -fx-background-radius: 8;" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="121.0">
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="92.0">
                <children>
                   <VBox alignment="CENTER" prefHeight="60.0" prefWidth="60.0">
                      <children>
@@ -27,7 +26,7 @@
                   </VBox>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="221.0">
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="130.0">
                <children>
                   <Label fx:id="tv_date" text="Date" textFill="#eae7b1">
                      <font>
@@ -48,7 +47,6 @@
                   </Label>
                </children>
             </HBox>
-            <Line endX="-99.70710754394531" endY="32.29289245605469" fill="#a6bb8d" startX="-100.0" stroke="#a6bb8d" />
             <HBox alignment="CENTER" prefHeight="60.0" prefWidth="175.0">
                <children>
                   <Label fx:id="tv_receiver" text="Receiver" textFill="#eae7b1">
@@ -64,6 +62,18 @@
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="175.0">
                <children>
                   <Label fx:id="tv_amount" text="Amount" textFill="#eae7b1">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="175.0">
+               <children>
+                  <Label fx:id="tv_tipeTransaksi" text="Tipe Transaksi" textFill="#eae7b1">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>

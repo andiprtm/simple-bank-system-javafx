@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 public class TransactionModel {
+    private final StringProperty username;
     private final StringProperty transactionType;
     private final SimpleIntegerProperty idTransaction;
     private final SimpleIntegerProperty adminFeePercent;
@@ -14,7 +15,8 @@ public class TransactionModel {
     private final ObjectProperty<BigDecimal> amount;
     private final ObjectProperty<Timestamp> date;
 
-    public TransactionModel(Integer idTransaction,Timestamp date, String transactionType, String sender, String receiver, BigDecimal amount, Integer adminFeePercent) {
+    public TransactionModel(String MyUsername, Integer idTransaction,Timestamp date, String transactionType, String sender, String receiver, BigDecimal amount, Integer adminFeePercent) {
+        this.username = new SimpleStringProperty(this, "username", MyUsername);
         this.idTransaction = new SimpleIntegerProperty(this, "idTransaction", idTransaction);
         this.transactionType = new SimpleStringProperty(this, "transactionType", transactionType);
         this.sender = new SimpleStringProperty(this, "sender", sender);
@@ -24,6 +26,9 @@ public class TransactionModel {
         this.adminFeePercent = new SimpleIntegerProperty(this, "adminFeePercent", adminFeePercent);
     }
 
+    public StringProperty usernameProperty() {
+        return username;
+    }
     public StringProperty transactionTypeProperty() {
         return transactionType;
     }
