@@ -20,4 +20,8 @@ public class ManagerController implements Initializable {
         });
 
     }
+
+    public void refreshTeller(){
+        manager_parent.setCenter(Model.getInstance().getViewFactory().getTellerView());
+    }
 }

@@ -24,9 +24,9 @@
                 </VBox>
                 <VBox prefHeight="400.0" prefWidth="160.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
                     <children>
-                        <Button fx:id="btn_buatNasabah" alignment="BASELINE_LEFT" mnemonicParsing="false" prefWidth="150.0" style="-fx-background-color: #EAE7B1; -fx-background-radius: 8;" text="Buat Nasabah" textFill="#3c6255">
+                        <Button fx:id="btn_nasabah" alignment="BASELINE_LEFT" mnemonicParsing="false" prefWidth="150.0" style="-fx-background-color: #EAE7B1; -fx-background-radius: 8;" text=" Nasabah" textFill="#3c6255">
                             <graphic>
-                                <FontAwesomeIconView fill="#3c6255" glyphName="PLUS" size="25" translateX="-1.0" />
+                                <FontAwesomeIconView fill="#3c6255" glyphName="USER" size="25" translateX="1.0" />
                             </graphic>
                             <VBox.margin>
                                 <Insets bottom="20.0" />
@@ -35,9 +35,9 @@
                                 <Font name="System Bold" size="14.0" />
                             </font>
                         </Button>
-                        <Button fx:id="btn_nasabah" alignment="BASELINE_LEFT" mnemonicParsing="false" prefWidth="150.0" style="-fx-background-color: #EAE7B1; -fx-background-radius: 8;" text=" Nasabah" textFill="#3c6255">
+                        <Button fx:id="btn_buatNasabah" alignment="BASELINE_LEFT" mnemonicParsing="false" prefWidth="150.0" style="-fx-background-color: #EAE7B1; -fx-background-radius: 8;" text="Buat Nasabah" textFill="#3c6255">
                             <graphic>
-                                <FontAwesomeIconView fill="#3c6255" glyphName="USER" size="25" translateX="1.0" />
+                                <FontAwesomeIconView fill="#3c6255" glyphName="PLUS" size="25" translateX="-1.0" />
                             </graphic>
                             <VBox.margin>
                                 <Insets bottom="20.0" />

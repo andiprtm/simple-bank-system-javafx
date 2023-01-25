@@ -312,6 +312,7 @@ public class ViewFactory {
         stage.setScene(scene);
         stage.setTitle("Dashboard Manager");
         stage.show();
+        managerController.refreshTeller();
     }
 
     public void showDetailTellerWindow(){
