@@ -1,5 +1,6 @@
 package com.bank.app.controllers.admin;
 
+import com.bank.app.models.Customer;
 import com.bank.app.models.Teller;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -40,10 +41,7 @@ public class CreateClientController extends AdminController implements Initializ
             tv_alert.setVisible(true);
             tv_alert.setText("Mohon isi semua data");
         } else {
-            tambahNasabah();
-            tv_alert.setVisible(true);
-            tv_alert.setText("Nasabah berhasil ditambahkan");
-            setNull();
+            addCustomerAccount();
         }
     }
 
@@ -57,10 +55,6 @@ public class CreateClientController extends AdminController implements Initializ
         tf_saldo_awal.setText(null);
         cb_tipeAkun.setValue(null);
         ckb_verifikasi.setSelected(false);
-    }
-
-    public void tambahNasabah() {
-        System.out.println("Tambah Nasabah");
     }
 
 
@@ -82,10 +76,18 @@ public class CreateClientController extends AdminController implements Initializ
                 String accountType = cb_tipeAkun.getValue().toString();
                 Integer pin = Integer.parseInt(tf_pin.getText());
 
-                teller.createCustomerAccount(accountType, username, password, name, address, phone, new BigDecimal(50000), pin);
+                Customer customer = teller.createCustomerAccount(accountType, username, password, name, address, phone, new BigDecimal(50000), pin);
+                System.out.println(customer.name);
+                tv_alert.setVisible(true);
+                tv_alert.setText("Nasabah " + customer.name + " berhasil ditambahkan!");
+                setNull();
             } catch (NumberFormatException e) {
-                System.out.println("Input tidak sah!");
+                tv_alert.setVisible(true);
+                tv_alert.setText("Input tidak sah!");
             }
+        } else {
+            tv_alert.setVisible(true);
+            tv_alert.setText("Silahkan checklist jika data sudah benar!");
         }
     }
 }

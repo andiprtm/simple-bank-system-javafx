@@ -15,10 +15,11 @@ public class Teller extends Employee {
         super(accountType, username, password, name, address, phone, isActive);
     }
 
-    public void createCustomerAccount (String accountType, String username, String password, String name, String address, String phone, BigDecimal accountBalance, Integer pin) {
+    public Customer createCustomerAccount (String accountType, String username, String password, String name, String address, String phone, BigDecimal accountBalance, Integer pin) {
         Customer customer = new Customer(accountType, username, password, name, address, phone, accountBalance, pin);
         customer.authenticate();
         customer.getCustomerData();
+        return customer;
     }
 
     public void setIsActiveCustomerAccount (String username, Boolean isActive) {
@@ -40,13 +41,15 @@ public class Teller extends Employee {
         customer.depositBalance(amount);
     }
 
-    public void updateDataCustomerAccount (String username, String accountType, String newUsername, String password, String name, String address, String phone, Integer pin) {
+    public Customer updateDataCustomerAccount (String username, String accountType, String newUsername, String password, String name, String address, String phone, Integer pin) {
         Customer customer = new Customer(username);
+        customer.authenticate();
         customer.getCustomerData();
 
         customer.updateCustomerData(name, address, phone, newUsername, password);
         customer.updateCustomerBankAccount(accountType, pin);
 
-        System.out.println("Berhasil mengupdate data nasabah!");
+        customer.getCustomerData();
+        return customer;
     }
 }

@@ -101,6 +101,7 @@ public class ClientListController implements Initializable {
                     e.printStackTrace();
                 }
                 DetailClientController detailClientController = loader.getController();
+                detailClientController.setTeller(teller);
                 detailClientController.setData(
                         newValue.idUserProperty().getValue(),
                         newValue.usernameProperty().getValue(),

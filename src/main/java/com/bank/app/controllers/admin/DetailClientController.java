@@ -2,6 +2,7 @@ package com.bank.app.controllers.admin;
 
 import com.bank.app.models.Customer;
 import com.bank.app.models.Model;
+import com.bank.app.models.Teller;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -11,7 +12,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class DetailClientController implements Initializable {
-    public Customer customer;
+    public Teller teller;
     String[] tipeNasabah = {"Silver", "Gold", "Platinum"};
     String[] statusNasabah = {"Active", "Not Active"};
     public Label tv_say_hi;
@@ -33,6 +34,7 @@ public class DetailClientController implements Initializable {
     public Button btn_updateNasabah;
     public TextField tf_username;
     public Label tv_title_page;
+    public String usernameCustomer;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -48,20 +50,24 @@ public class DetailClientController implements Initializable {
         tv_title_page.setText("DETAIL NASABAH");
         setFalse();
 
-        // BUTTON EDIT NASABAH DITEKAN
+        // BUTTON UBAH DATA NASABAH DITEKAN
         btn_editNasabah.setOnAction(actionEvent -> {
             box_btn_to_edit.setVisible(false);
             box_when_edit_click.setVisible(true);
             tv_title_page.setText("UPDATE NASABAH");
+            usernameCustomer = tf_username.getText();
             setTrue();
         });
 
         // BUTTON UPDATE NASABAH DITEKAN
         btn_updateNasabah.setOnAction(actionEvent -> {
-            box_btn_to_edit.setVisible(true);
-            box_when_edit_click.setVisible(false);
-            tv_title_page.setText("DETAIL NASABAH");
-            setFalse();
+            Boolean isSuccess = updateDataCustomer();
+            if (isSuccess) {
+                box_btn_to_edit.setVisible(true);
+                box_when_edit_click.setVisible(false);
+                tv_title_page.setText("DETAIL NASABAH");
+                setFalse();
+            }
         });
 
         // BUTTON KEMBALI KE LIST NASABAH DITEKAN
@@ -79,6 +85,9 @@ public class DetailClientController implements Initializable {
         }
     }
 
+    public void setTeller(Teller teller) {
+        this.teller = teller;
+    }
 
     public void setData(String idUser, String username, String password, String nama, String alamat, String nomorHandphone, String pin, String saldo, String tipeAkun, String statusNasabahh) {
         tf_idNasabah.setText(idUser);
@@ -128,5 +137,35 @@ public class DetailClientController implements Initializable {
         cb_tipeAkun.setDisable(false);
         ckb_verifikasi.setDisable(false);
         cb_statusNasabah.setDisable(false);
+    }
+
+    public Boolean updateDataCustomer() {
+        Boolean isSuccess = null;
+        if (ckb_verifikasi.isSelected()) {
+            try {
+                String username = usernameCustomer;
+                String accountType = cb_tipeAkun.getValue();
+                String newUsername = tf_username.getText();
+                String password = tf_password.getText();
+                String name = tf_nama.getText();
+                String address = tf_alamat.getText();
+                String phone = tf_nomorHandphone.getText();
+                Integer pin = Integer.parseInt(tf_pin.getText());
+
+                Customer customer = teller.updateDataCustomerAccount(username, accountType, newUsername, password, name, address, phone, pin);
+                tv_alert.setVisible(true);
+                tv_alert.setText("Nasabah " + customer.name + " berhasil di ubah!");
+                isSuccess = true;
+            } catch (NumberFormatException e) {
+                tv_alert.setVisible(true);
+                tv_alert.setText("Input tidak sah!");
+                isSuccess = false;
+            }
+        } else {
+            tv_alert.setVisible(true);
+            tv_alert.setText("Silahkan checklist jika data sudah benar!");
+            isSuccess = false;
+        }
+        return isSuccess;
     }
 }

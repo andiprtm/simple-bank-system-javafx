@@ -199,7 +199,7 @@
                                     <Insets right="20.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button fx:id="btn_editNasabah" mnemonicParsing="false" prefHeight="32.0" prefWidth="140.0" style="-fx-background-color: #3c6255; -fx-background-radius: 8;" text="Edit Nasabah" textFill="#eae7b1">
+                              <Button fx:id="btn_editNasabah" mnemonicParsing="false" prefHeight="32.0" prefWidth="150.0" style="-fx-background-color: #3c6255; -fx-background-radius: 8;" text="Ubah Data Nasabah" textFill="#eae7b1">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
