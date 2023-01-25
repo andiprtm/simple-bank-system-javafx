@@ -1,5 +1,6 @@
 package com.bank.app.controllers.manager;
 
+import com.bank.app.models.Manager;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -10,6 +11,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class CreateTellerController implements Initializable {
+    Manager manager;
     public TextField tf_username;
     public TextField tf_password;
     public TextField tf_nama;
@@ -24,5 +26,12 @@ public class CreateTellerController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         cb_tipeAkun.getItems().addAll(tipeAkun);
+    }
+
+    public void setManager(Manager manager) {
+        this.manager = manager;
+        String[] name = manager.name.split(" ");
+
+        tv_say_hi.setText("Hi, " + name[0]);
     }
 }

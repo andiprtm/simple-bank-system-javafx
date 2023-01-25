@@ -1,5 +1,6 @@
 package com.bank.app.controllers.client;
 
+import com.bank.app.controllers.utils.CurrencyController;
 import com.bank.app.models.TransactionModel;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.fxml.Initializable;
@@ -40,7 +41,8 @@ public class TransactionCellController implements Initializable {
             tv_tipeTransaksi.setText(transactionModel.transactionTypeProperty().getValue());
             tv_sender.setText(transactionModel.senderProperty().getValue());
             tv_receiver.setText(transactionModel.receiverProperty().getValue());
-            tv_amount.setText(transactionModel.amountProperty().getValue().toString());
+//            tv_amount.setText(transactionModel.amountProperty().getValue().toString());
+            tv_amount.setText(new CurrencyController().getIndonesianCurrency(transactionModel.amountProperty().getValue()));
             tv_date.setText(date[0]);
         }
     }

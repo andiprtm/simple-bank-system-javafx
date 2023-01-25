@@ -2,6 +2,8 @@ package com.bank.app.views;
 
 import com.bank.app.controllers.admin.*;
 import com.bank.app.controllers.client.*;
+import com.bank.app.controllers.manager.CreateTellerController;
+import com.bank.app.controllers.manager.TellerController;
 import com.bank.app.models.Customer;
 import com.bank.app.controllers.manager.ManagerController;
 import com.bank.app.models.Manager;
@@ -103,12 +105,14 @@ public class ViewFactory {
     }
 
     public AnchorPane getProfileView() {
-        if(profileView == null) {
-            try {
-                profileView = new FXMLLoader(getClass().getResource("/fxml/client/Profile.fxml")).load();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/client/Profile.fxml"));
+            profileView = fxmlLoader.load();
+
+            ProfileController controller = fxmlLoader.getController();
+            controller.setCustomer(this.customer);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return profileView;
     }
@@ -280,7 +284,11 @@ public class ViewFactory {
     public AnchorPane getCreateTellerView(){
         if(CreateTellerView == null) {
             try {
-                CreateTellerView = new FXMLLoader(getClass().getResource("/fxml/manager/CreateTeller.fxml")).load();
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/manager/CreateTeller.fxml"));
+                CreateTellerView = fxmlLoader.load();
+
+                CreateTellerController createTellerController = fxmlLoader.getController();
+                createTellerController.setManager(manager);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -292,6 +300,10 @@ public class ViewFactory {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/manager/Tellers.fxml"));
                 TellerView = loader.load();
+                TellerController tellerController = loader.getController();
+                tellerController.setManager(manager);
+                tellerController.setCountRow();
+                tellerController.setItem();
             } catch (IOException e) {
                 e.printStackTrace();
             }

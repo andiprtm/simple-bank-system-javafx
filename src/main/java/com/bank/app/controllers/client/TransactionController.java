@@ -106,6 +106,7 @@ public class TransactionController implements Initializable {
     }
 
     public void setTransactionList () {
+
         try {
             PreparedStatement ps = conn.prepareStatement("""
                     SELECT th.transaction_type_id,
