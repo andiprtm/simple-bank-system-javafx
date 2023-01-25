@@ -441,18 +441,19 @@ public class Customer {
         return idAccountType;
     }
 
-    public void updateCustomerBankAccount (String accountType, Integer pin) {
+    public void updateCustomerBankAccount (String accountType, Integer pin, Boolean isActive) {
         Integer idAccountType = getIdAccountType(accountType);
 
         try {
             PreparedStatement ps = conn.prepareStatement(
-                    "UPDATE customer_bank_account cba SET cba.customer_account_type_id=?, cba.account_pin=? WHERE cba.customer_id=?;",
+                    "UPDATE customer_bank_account cba SET cba.customer_account_type_id=?, cba.account_pin=?, cba.customer_is_active=? WHERE cba.customer_id=?;",
                     Statement.RETURN_GENERATED_KEYS
             );
 
             ps.setInt(1, idAccountType);
             ps.setInt(2, pin);
-            ps.setInt(3, this.customerId);
+            ps.setBoolean(3, isActive);
+            ps.setInt(4, this.customerId);
 
             int affectedRows = ps.executeUpdate();
 

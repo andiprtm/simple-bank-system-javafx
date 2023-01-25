@@ -41,13 +41,13 @@ public class Teller extends Employee {
         customer.depositBalance(amount);
     }
 
-    public Customer updateDataCustomerAccount (String username, String accountType, String newUsername, String password, String name, String address, String phone, Integer pin) {
+    public Customer updateDataCustomerAccount (String username, String accountType, String newUsername, String password, String name, String address, String phone, Integer pin, Boolean isActive) {
         Customer customer = new Customer(username);
         customer.authenticate();
         customer.getCustomerData();
 
         customer.updateCustomerData(name, address, phone, newUsername, password);
-        customer.updateCustomerBankAccount(accountType, pin);
+        customer.updateCustomerBankAccount(accountType, pin, isActive);
 
         customer.getCustomerData();
         return customer;
