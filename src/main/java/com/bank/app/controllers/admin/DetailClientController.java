@@ -13,6 +13,7 @@ import java.util.ResourceBundle;
 
 public class DetailClientController implements Initializable {
     public Teller teller;
+    public Button btn_cancel;
     String[] tipeNasabah = {"Silver", "Gold", "Platinum"};
     String[] statusNasabah = {"Active", "Not Active"};
     public Label tv_say_hi;
@@ -61,20 +62,17 @@ public class DetailClientController implements Initializable {
 
         // BUTTON UPDATE NASABAH DITEKAN
         btn_updateNasabah.setOnAction(actionEvent -> {
-            Boolean isSuccess = updateDataCustomer();
-            if (isSuccess) {
-                box_btn_to_edit.setVisible(true);
-                box_when_edit_click.setVisible(false);
-                tv_title_page.setText("DETAIL NASABAH");
-                setFalse();
-            }
+            cekInput();
         });
 
         // BUTTON KEMBALI KE LIST NASABAH DITEKAN
         btn_kembaliKeList.setOnAction(actionEvent -> {
-            Stage stage = (Stage) btn_kembaliKeList.getScene().getWindow();
-            Model.getInstance().getViewFactory().closeStage(stage);
-            Model.getInstance().getViewFactory().showAdminWindow();
+            toList();
+        });
+
+        // BUTTON BATAL DITEKAN
+        btn_cancel.setOnAction(actionEvent -> {
+            toList();
         });
 
         // DOUBLE SET UNTUK CADANGAN
@@ -87,6 +85,28 @@ public class DetailClientController implements Initializable {
 
     public void setTeller(Teller teller) {
         this.teller = teller;
+    }
+
+    public void cekInput(){
+        if ((tf_username.getText().isEmpty() || tf_password.getText().isEmpty() || tf_nama.getText().isEmpty() || tf_alamat.getText().isEmpty() || tf_nomorHandphone.getText().isEmpty() || tf_pin.getText().isEmpty() || tf_idNasabah.getText().isEmpty() || tf_saldo.getText().isEmpty())) {
+            tv_alert.setVisible(true);
+            tv_alert.setText("Mohon isi semua data");
+        } else {
+            Boolean isSuccess = updateDataCustomer();
+            if (isSuccess) {
+                box_btn_to_edit.setVisible(true);
+                box_when_edit_click.setVisible(false);
+                tv_title_page.setText("DETAIL NASABAH");
+                setFalse();
+            }
+
+        }
+    }
+
+    public void toList(){
+        Stage stage = (Stage) btn_kembaliKeList.getScene().getWindow();
+        Model.getInstance().getViewFactory().closeStage(stage);
+        Model.getInstance().getViewFactory().showAdminWindow();
     }
 
     public void setData(String idUser, String username, String password, String nama, String alamat, String nomorHandphone, String pin, String saldo, String tipeAkun, String statusNasabahh) {
@@ -113,27 +133,27 @@ public class DetailClientController implements Initializable {
     }
 
     public void setFalse(){
-        tf_idNasabah.setEditable(false);
-        tf_username.setEditable(false);
-        tf_password.setEditable(false);
-        tf_nama.setEditable(false);
-        tf_alamat.setEditable(false);
-        tf_nomorHandphone.setEditable(false);
-        tf_pin.setEditable(false);
+        tf_idNasabah.setDisable(true);
+        tf_username.setDisable(true);
+        tf_password.setDisable(true);
+        tf_nama.setDisable(true);
+        tf_alamat.setDisable(true);
+        tf_nomorHandphone.setDisable(true);
+        tf_pin.setDisable(true);
         cb_tipeAkun.setDisable(true);
         ckb_verifikasi.setDisable(true);
-        tf_idNasabah.setEditable(false);
-        tf_saldo.setEditable(false);
+        tf_idNasabah.setDisable(true);
+        tf_saldo.setDisable(true);
         cb_statusNasabah.setDisable(true);
     }
 
     public void setTrue(){
-        tf_username.setEditable(true);
-        tf_password.setEditable(true);
-        tf_nama.setEditable(true);
-        tf_alamat.setEditable(true);
-        tf_nomorHandphone.setEditable(true);
-        tf_pin.setEditable(true);
+        tf_username.setDisable(false);
+        tf_password.setDisable(false);
+        tf_nama.setDisable(false);
+        tf_alamat.setDisable(false);
+        tf_nomorHandphone.setDisable(false);
+        tf_pin.setDisable(false);
         cb_tipeAkun.setDisable(false);
         ckb_verifikasi.setDisable(false);
         cb_statusNasabah.setDisable(false);

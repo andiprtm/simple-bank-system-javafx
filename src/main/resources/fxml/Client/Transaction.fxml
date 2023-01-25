@@ -56,7 +56,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="tv_jumlah_transaksi" layoutX="684.0" layoutY="215.0" text="26" textFill="#eae7b1" AnchorPane.rightAnchor="83.0" AnchorPane.topAnchor="215.0">
+      <Label fx:id="tv_jumlah_transaksi" alignment="CENTER" layoutX="608.0" layoutY="215.0" prefHeight="114.0" prefWidth="242.0" text="26" textFill="#eae7b1" AnchorPane.rightAnchor="6.599999999999994" AnchorPane.topAnchor="215.0">
          <font>
             <Font name="System Bold" size="78.0" />
          </font>

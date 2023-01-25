@@ -211,6 +211,14 @@
                         </HBox>
                         <HBox fx:id="box_when_edit_click" visible="false">
                            <children>
+                              <Button fx:id="btn_cancel" mnemonicParsing="false" prefHeight="32.0" style="-fx-background-color: #800000; -fx-background-radius: 8;" text="Cancel" textFill="#eae7b1">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets right="20.0" />
+                                 </HBox.margin>
+                              </Button>
                               <Button fx:id="btn_updateNasabah" mnemonicParsing="false" prefHeight="32.0" prefWidth="140.0" style="-fx-background-color: #3c6255; -fx-background-radius: 8;" text="Update Nasabah" textFill="#eae7b1">
                                  <font>
                                     <Font name="System Bold" size="14.0" />

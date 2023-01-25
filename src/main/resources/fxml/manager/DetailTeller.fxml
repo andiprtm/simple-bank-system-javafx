@@ -169,7 +169,7 @@
                     <children>
                         <AnchorPane>
                             <children>
-                                <HBox fx:id="box_btn_to_edit">
+                                <HBox fx:id="box_btn_to_edit" visible="false">
                                     <children>
                                         <Button fx:id="btn_kembaliKeList" mnemonicParsing="false" prefHeight="32.0" style="-fx-background-color: #3c6255; -fx-background-radius: 8;" text="Kembali ke List" textFill="#eae7b1">
                                             <font>
@@ -189,9 +189,9 @@
                                         </Button>
                                     </children>
                                 </HBox>
-                                <HBox fx:id="box_when_edit_click" visible="false">
+                                <HBox fx:id="box_when_edit_click">
                                     <children>
-                                        <Button fx:id="btn_updatePegawai" mnemonicParsing="false" prefHeight="32.0" prefWidth="140.0" style="-fx-background-color: #3c6255; -fx-background-radius: 8;" text="Update Pegawai" textFill="#eae7b1">
+                                        <Button fx:id="btn_Cancel" mnemonicParsing="false" prefHeight="32.0" style="-fx-background-color: #800000; -fx-background-radius: 8;" text="Cancel" textFill="#eae7b1">
                                             <font>
                                                 <Font name="System Bold" size="14.0" />
                                             </font>
@@ -199,6 +199,11 @@
                                                 <Insets right="20.0" />
                                             </HBox.margin>
                                         </Button>
+                              <Button fx:id="btn_updatePegawai" mnemonicParsing="false" prefHeight="32.0" prefWidth="140.0" style="-fx-background-color: #3c6255; -fx-background-radius: 8;" text="Update Pegawai" textFill="#eae7b1">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Button>
                                     </children>
                                 </HBox>
                             </children>

@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class DetailTellerController implements Initializable {
+    public Button btn_Cancel;
     String[] tipeNasabah = {"Teller", "Manager"};
     String[] statusNasabah = {"Active", "Not Active"};
     public Label tv_say_hi;
@@ -66,9 +67,12 @@ public class DetailTellerController implements Initializable {
 
         // BUTTON KEMBALI KE LIST NASABAH DITEKAN
         btn_kembaliKeList.setOnAction(actionEvent -> {
-            Stage stage = (Stage) btn_kembaliKeList.getScene().getWindow();
-            Model.getInstance().getViewFactory().closeStage(stage);
-            Model.getInstance().getViewFactory().showManagerWindow();
+            toList();
+        });
+
+        // BUTTON CANCEL DITEKAN
+        btn_Cancel.setOnAction(actionEvent -> {
+            toList();
         });
 
         // DOUBLE SET UNTUK CADANGAN
@@ -77,6 +81,12 @@ public class DetailTellerController implements Initializable {
         }else{
             setFalse();
         }
+    }
+
+    public void toList(){
+        Stage stage = (Stage) btn_kembaliKeList.getScene().getWindow();
+        Model.getInstance().getViewFactory().closeStage(stage);
+        Model.getInstance().getViewFactory().showManagerWindow();
     }
 
     public void setData(String idPegawai, String username, String password, String nama, String alamat, String nomorHandphone, String tipeAkun, String statusPegawai){

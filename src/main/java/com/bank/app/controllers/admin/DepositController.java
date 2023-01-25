@@ -21,7 +21,27 @@ public class DepositController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        btn_deposit.setOnAction(event -> {
+            cekInput();
+        });
 
+    }
+
+    public void cekInput(){
+        if ((tf_username.getText().isEmpty() || tf_amount.getText().isEmpty())) {
+            tv_alert.setVisible(true);
+            tv_alert.setText("Mohon isi semua data");
+        } else {
+            if(ckb_verifikasi.isSelected()){
+                /*
+                 * QUERY DEPOSIT TO DATABASE
+                 * */
+            } else {
+                tv_alert.setVisible(true);
+                tv_alert.setText("Mohon verifikasi");
+            }
+
+        }
     }
 
     public void setTellerData(Teller teller) {
