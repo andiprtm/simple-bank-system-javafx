@@ -3,6 +3,7 @@ package com.bank.app.views;
 import com.bank.app.controllers.admin.*;
 import com.bank.app.controllers.client.*;
 import com.bank.app.controllers.manager.CreateTellerController;
+import com.bank.app.controllers.manager.DetailTellerController;
 import com.bank.app.controllers.manager.TellerController;
 import com.bank.app.models.Customer;
 import com.bank.app.controllers.manager.ManagerController;
@@ -329,6 +330,8 @@ public class ViewFactory {
 
     public void showDetailTellerWindow(){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/manager/DetailTeller.fxml"));
+        DetailTellerController detailTellerController = fxmlLoader.getController();
+        detailTellerController.setManager(manager);
         Scene scene = null;
         try {
             scene = new Scene(fxmlLoader.load());

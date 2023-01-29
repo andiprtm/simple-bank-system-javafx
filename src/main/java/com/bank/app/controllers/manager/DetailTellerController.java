@@ -1,6 +1,8 @@
 package com.bank.app.controllers.manager;
 
+import com.bank.app.models.Manager;
 import com.bank.app.models.Model;
+import com.bank.app.models.Teller;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -10,6 +12,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class DetailTellerController implements Initializable {
+    public Manager manager;
+    String oldUsername;
     public Button btn_Cancel;
     String[] tipeNasabah = {"Teller", "Manager"};
     String[] statusNasabah = {"Active", "Not Active"};
@@ -84,6 +88,14 @@ public class DetailTellerController implements Initializable {
         }
     }
 
+    public void setManager(Manager manager) {
+        this.manager = manager;
+
+        String[] name = manager.name.split(" ");
+
+        tv_say_hi.setText("Hi, " + name[0]);
+    }
+
     public void toList(){
         Stage stage = (Stage) btn_kembaliKeList.getScene().getWindow();
         Model.getInstance().getViewFactory().closeStage(stage);
@@ -93,6 +105,7 @@ public class DetailTellerController implements Initializable {
     public void setData(String idPegawai, String username, String password, String nama, String alamat, String nomorHandphone, String tipeAkun, String statusPegawai){
         tf_idPegawai.setText(idPegawai);
         tf_username.setText(username);
+        oldUsername = username;
         tf_password.setText(password);
         tf_nama.setText(nama);
         tf_alamat.setText(alamat);
@@ -139,16 +152,16 @@ public class DetailTellerController implements Initializable {
                 tv_alert.setVisible(true);
                 tv_alert.setText("Mohon centang verifikasi");
             }else{
-                /*
-                * update data to database in here
-                * */
+                Teller teller = manager.updateTellerDataAccount(oldUsername, cb_tipeAkun.getValue(), tf_username.getText(), tf_password.getText(), tf_nama.getText(), tf_alamat.getText(), tf_nomorHandphone.getText(), true);
 
-                // view
-                box_btn_to_edit.setVisible(true);
-                box_when_edit_click.setVisible(false);
-                tv_title_page.setText("DETAIL PEGAWAI");
-                setFalse();
-
+                if (teller.employeeId != null) {
+                    tv_alert.setVisible(true);
+                    tv_alert.setText("Berhasil mengubah data teller " + teller.name + '!');
+                    box_btn_to_edit.setVisible(true);
+                    box_when_edit_click.setVisible(false);
+                    tv_title_page.setText("DETAIL PEGAWAI");
+                    setFalse();
+                }
             }
         }
     }
