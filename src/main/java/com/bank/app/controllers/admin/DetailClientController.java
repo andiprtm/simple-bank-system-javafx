@@ -172,6 +172,7 @@ public class DetailClientController implements Initializable {
                 String phone = tf_nomorHandphone.getText();
                 Integer pin = Integer.parseInt(tf_pin.getText());
                 Boolean isActive = cb_statusNasabah.getValue().equals(statusNasabah[0]);
+                System.out.println("isActive: " + isActive);
 
                 Customer customer = teller.updateDataCustomerAccount(username, accountType, newUsername, password, name, address, phone, pin, isActive);
                 tv_alert.setVisible(true);

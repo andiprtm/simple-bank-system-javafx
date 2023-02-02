@@ -9,7 +9,7 @@
 
 <AnchorPane maxWidth="-Infinity" prefHeight="60.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="60.0" prefWidth="550.0" style="-fx-background-color: #3C6255; -fx-background-radius: 10;" AnchorPane.leftAnchor="125.0" AnchorPane.rightAnchor="125.0">
+        <HBox fx:id="box_teller" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="60.0" prefWidth="550.0" style="-fx-background-color: #3C6255; -fx-background-radius: 10;" AnchorPane.leftAnchor="125.0" AnchorPane.rightAnchor="125.0">
             <children>
             <HBox alignment="CENTER" prefHeight="60.0" prefWidth="112.0">
                <children>

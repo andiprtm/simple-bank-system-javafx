@@ -30,7 +30,7 @@ public class Employee {
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                this.employeeId = rs.getInt("employee_id");
+                this.employeeId = rs.getInt("id_employee");
             }
         } catch (SQLException e) {
             e.printStackTrace();

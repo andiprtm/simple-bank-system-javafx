@@ -55,13 +55,6 @@ public class DetailTellerController implements Initializable {
             box_when_edit_click.setVisible(true);
             tv_title_page.setText("UPDATE PEGAWAI");
             setTrue();
-
-//            // kondisi jika sesama manager tidak bisa menghapus akun manager lain
-//            if(isMyTypeManager() && cb_tipeAkun.getValue().equals("Manager")){
-//                cb_statusPegawai.setDisable(true);
-//            }else{
-//                cb_statusPegawai.setDisable(false);
-//            }
         });
 
         // BUTTON UPDATE NASABAH DITEKAN
@@ -111,7 +104,11 @@ public class DetailTellerController implements Initializable {
         tf_alamat.setText(alamat);
         tf_nomorHandphone.setText(nomorHandphone);
         cb_tipeAkun.setValue(tipeAkun);
-        cb_statusPegawai.setValue(statusPegawai);
+        if(statusPegawai.equals("Active")){
+            cb_statusPegawai.setValue(statusNasabah[0]);
+        }else{
+            cb_statusPegawai.setValue(statusNasabah[1]);
+        }
 
     }
 
@@ -152,7 +149,8 @@ public class DetailTellerController implements Initializable {
                 tv_alert.setVisible(true);
                 tv_alert.setText("Mohon centang verifikasi");
             }else{
-                Teller teller = manager.updateTellerDataAccount(oldUsername, cb_tipeAkun.getValue(), tf_username.getText(), tf_password.getText(), tf_nama.getText(), tf_alamat.getText(), tf_nomorHandphone.getText(), true);
+                Boolean isActive = cb_statusPegawai.getValue().equals(statusNasabah[0]);
+                Teller teller = manager.updateTellerDataAccount(oldUsername, cb_tipeAkun.getValue(), tf_username.getText(), tf_password.getText(), tf_nama.getText(), tf_alamat.getText(), tf_nomorHandphone.getText(), isActive);
 
                 if (teller.employeeId != null) {
                     tv_alert.setVisible(true);

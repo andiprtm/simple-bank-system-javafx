@@ -92,6 +92,7 @@ public class TellerController implements Initializable {
                     e.printStackTrace();
                 }
                 DetailTellerController detailTellerController = loader.getController();
+                detailTellerController.setManager(manager);
                 detailTellerController.setData(
                         newValue.idPegawaiProperty().getValue(),
                         newValue.usernameProperty().getValue(),

@@ -55,22 +55,27 @@ public class LoginController implements Initializable {
                 Employee employee = new Employee(username, password);
                 employee.authenticate();
                 if (employee.employeeId != null){
-                    if (employee.accountType.equals(statusPegawai[0])) {
-                        Teller teller = new Teller(username, password);
-                        teller.authenticate();
-                        teller.getEmployeeData();
-                        Stage stage = (Stage) button_login.getScene().getWindow();
-                        Model.getInstance().getViewFactory().closeStage(stage);
-                        Model.getInstance().getViewFactory().setTellerData(teller);
-                        Model.getInstance().getViewFactory().showAdminWindow();
-                    } else if (employee.accountType.equals(statusPegawai[1])) {
-                        Manager manager = new Manager(username, password);
-                        manager.authenticate();
-                        manager.getEmployeeData();
-                        Stage stage = (Stage) button_login.getScene().getWindow();
-                        Model.getInstance().getViewFactory().closeStage(stage);
-                        Model.getInstance().getViewFactory().setManagerData(manager);
-                        Model.getInstance().getViewFactory().showManagerWindow();
+                    if(employee.isActive){
+                        if (employee.accountType.equals(statusPegawai[0])) {
+                            Teller teller = new Teller(username, password);
+                            teller.authenticate();
+                            teller.getEmployeeData();
+                            Stage stage = (Stage) button_login.getScene().getWindow();
+                            Model.getInstance().getViewFactory().closeStage(stage);
+                            Model.getInstance().getViewFactory().setTellerData(teller);
+                            Model.getInstance().getViewFactory().showAdminWindow();
+                        } else if (employee.accountType.equals(statusPegawai[1])) {
+                            Manager manager = new Manager(username, password);
+                            manager.authenticate();
+                            manager.getEmployeeData();
+                            Stage stage = (Stage) button_login.getScene().getWindow();
+                            Model.getInstance().getViewFactory().closeStage(stage);
+                            Model.getInstance().getViewFactory().setManagerData(manager);
+                            Model.getInstance().getViewFactory().showManagerWindow();
+                        }
+                    }else {
+                        label_eror.setText("Akun Anda Telah di Non-aktifkan");
+                        label_eror.setVisible(true);
                     }
                 } else {
                     label_eror.setVisible(true);
@@ -85,13 +90,19 @@ public class LoginController implements Initializable {
                 Customer customer = new Customer(username, password);
                 customer.authenticate();
                 if (customer.customerId != null) {
-                    customer.getCustomerData();
+                    if(customer.isActive){
+                        customer.getCustomerData();
 
-                    Model.getInstance().getViewFactory().closeStage(stage);
-                    System.out.println("Login Client Berhasil");
+                        Model.getInstance().getViewFactory().closeStage(stage);
+                        System.out.println("Login Client Berhasil");
 
-                    Model.getInstance().getViewFactory().setCustomerData(customer);
-                    Model.getInstance().getViewFactory().showClientWindow();
+                        Model.getInstance().getViewFactory().setCustomerData(customer);
+                        Model.getInstance().getViewFactory().showClientWindow();
+                    }else {
+                        label_eror.setText("Akun Anda Telah di Non-aktifkan");
+                        label_eror.setVisible(true);
+                    }
+
                 } else {
                     label_eror.setVisible(true);
                 }

@@ -283,16 +283,14 @@ public class ViewFactory {
     }
 
     public AnchorPane getCreateTellerView(){
-        if(CreateTellerView == null) {
-            try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/manager/CreateTeller.fxml"));
-                CreateTellerView = fxmlLoader.load();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/manager/CreateTeller.fxml"));
+            CreateTellerView = fxmlLoader.load();
 
-                CreateTellerController createTellerController = fxmlLoader.getController();
-                createTellerController.setManager(manager);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            CreateTellerController createTellerController = fxmlLoader.getController();
+            createTellerController.setManager(manager);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return CreateTellerView;
     }
