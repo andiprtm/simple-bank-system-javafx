@@ -1,5 +1,6 @@
 package com.bank.app.controllers.manager;
 
+import com.bank.app.ConnectionManager;
 import com.bank.app.models.Manager;
 import com.bank.app.models.Model;
 import com.bank.app.models.Teller;
@@ -9,6 +10,10 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 
 public class DetailTellerController implements Initializable {
@@ -32,8 +37,10 @@ public class DetailTellerController implements Initializable {
     public HBox box_btn_to_edit;
     public Button btn_kembaliKeList;
     public Button btn_editPegawai;
+    public Button btn_delete;
     public HBox box_when_edit_click;
     public Button btn_updatePegawai;
+    Connection conn = ConnectionManager.getInstance().getConnection();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -71,6 +78,18 @@ public class DetailTellerController implements Initializable {
         // BUTTON CANCEL DITEKAN
         btn_Cancel.setOnAction(actionEvent -> {
             toList();
+        });
+
+        // BUTTON DELETE DITEKAN
+        btn_delete.setOnAction(actionEvent -> {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Kamu yakin ingin menghapus akun " + tf_username.getText() + " ?.\nData akun yang telah dihapus tidak dapat dikembalikan.", ButtonType.YES, ButtonType.CANCEL);
+            alert.showAndWait();
+
+            if (alert.getResult() == ButtonType.YES) {
+                setBtn_deletePegawai();
+                toList();
+            }
+
         });
 
         // DOUBLE SET UNTUK CADANGAN
@@ -161,6 +180,22 @@ public class DetailTellerController implements Initializable {
                     setFalse();
                 }
             }
+        }
+    }
+
+    public void setBtn_deletePegawai() {
+        System.out.println(tf_idPegawai.getText());
+        try {
+            PreparedStatement ps = conn.prepareStatement(
+                    "DELETE FROM `employee_data` WHERE `id_employee` =?;"
+            );
+
+            ps.setString(1, tf_idPegawai.getText());
+
+            int row = ps.executeUpdate();
+            System.out.println(row + " row(s) terhapus");
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }

@@ -211,7 +211,15 @@
                         </HBox>
                         <HBox fx:id="box_when_edit_click" visible="false">
                            <children>
-                              <Button fx:id="btn_cancel" mnemonicParsing="false" prefHeight="32.0" style="-fx-background-color: #800000; -fx-background-radius: 8;" text="Cancel" textFill="#eae7b1">
+                              <Button fx:id="btn_cancel" mnemonicParsing="false" prefHeight="32.0" style="-fx-background-color: #808080; -fx-background-radius: 8;" text="Cancel" textFill="#eae7b1">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets right="20.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="btn_delete" mnemonicParsing="false" prefHeight="32.0" style="-fx-background-color: #800000; -fx-background-radius: 8;" text="Hapus Data" textFill="#eae7b1">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>

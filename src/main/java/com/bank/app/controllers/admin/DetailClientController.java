@@ -1,5 +1,6 @@
 package com.bank.app.controllers.admin;
 
+import com.bank.app.ConnectionManager;
 import com.bank.app.models.Customer;
 import com.bank.app.models.Model;
 import com.bank.app.models.Teller;
@@ -9,6 +10,9 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class DetailClientController implements Initializable {
@@ -36,6 +40,8 @@ public class DetailClientController implements Initializable {
     public TextField tf_username;
     public Label tv_title_page;
     public String usernameCustomer;
+    public Button btn_delete;
+    Connection conn = ConnectionManager.getInstance().getConnection();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -73,6 +79,18 @@ public class DetailClientController implements Initializable {
         // BUTTON BATAL DITEKAN
         btn_cancel.setOnAction(actionEvent -> {
             toList();
+        });
+
+        // BUTTON DELETE DITEKAN
+        btn_delete.setOnAction(actionEvent -> {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Kamu yakin ingin menghapus akun " + tf_username.getText() + " ?.\nData akun yang telah dihapus tidak dapat dikembalikan.", ButtonType.YES, ButtonType.CANCEL);
+            alert.showAndWait();
+
+            if (alert.getResult() == ButtonType.YES) {
+                setBtn_deleteNasabah();
+                toList();
+            }
+
         });
 
         // DOUBLE SET UNTUK CADANGAN
@@ -189,5 +207,30 @@ public class DetailClientController implements Initializable {
             isSuccess = false;
         }
         return isSuccess;
+    }
+
+    public void setBtn_deleteNasabah() {
+        System.out.println(tf_idNasabah.getText());
+        try {
+            PreparedStatement ps = conn.prepareStatement(
+                    "SET FOREIGN_KEY_CHECKS = 0;"
+            );
+
+            PreparedStatement ps1 = conn.prepareStatement(
+                    "DELETE FROM `customer_bank_account` WHERE `id_customer_bank_account` =?;"
+            );
+
+            ps1.setString(1, tf_idNasabah.getText());
+
+            PreparedStatement ps2 = conn.prepareStatement(
+                    "SET FOREIGN_KEY_CHECKS = 1;"
+            );
+
+            ps.executeUpdate();
+            ps1.executeUpdate();
+            ps2.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
