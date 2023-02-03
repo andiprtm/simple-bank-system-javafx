@@ -1,5 +1,6 @@
 package com.bank.app.controllers.admin;
 
+import com.bank.app.ConnectionManager;
 import com.bank.app.models.Customer;
 import com.bank.app.models.Teller;
 import javafx.fxml.Initializable;
@@ -7,6 +8,10 @@ import javafx.scene.control.*;
 
 import java.math.BigDecimal;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class CreateClientController extends AdminController implements Initializable {
@@ -23,6 +28,7 @@ public class CreateClientController extends AdminController implements Initializ
     public Label tv_say_hi;
     public Label tv_alert;
     public TextField tf_saldo_awal;
+    Connection conn = ConnectionManager.getInstance().getConnection();
 
     Object[] tipeAkun = {"Silver", "Gold", "Platinum"};
 
@@ -41,7 +47,11 @@ public class CreateClientController extends AdminController implements Initializ
             tv_alert.setVisible(true);
             tv_alert.setText("Mohon isi semua data");
         } else {
-            addCustomerAccount();
+            if(findUser(tf_username.getText())){
+                System.out.println("Username sudah ada");
+            }else{
+                addCustomerAccount();
+            }
         }
     }
 
@@ -89,5 +99,33 @@ public class CreateClientController extends AdminController implements Initializ
             tv_alert.setVisible(true);
             tv_alert.setText("Silahkan checklist jika data sudah benar!");
         }
+    }
+
+    public Boolean findUser(String usernameInput){
+        boolean isExist = false;
+        String id = null;
+        try {
+            PreparedStatement ps = conn.prepareStatement(
+                    "SELECT id_customer FROM customer_data CD WHERE CD.username=?;"
+            );
+            ps.setString(1, usernameInput);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()){
+                System.out.println(rs.getString("id_customer"));
+                id = rs.getString("id_customer");
+            }
+            System.out.println(id);
+
+            if(id != null){
+                tv_alert.setVisible(true);
+                tv_alert.setText("Username sudah ada, silahkan gunakan username lain");
+                isExist = true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return isExist;
     }
 }
