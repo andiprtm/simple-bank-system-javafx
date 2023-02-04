@@ -3,11 +3,13 @@ package com.bank.app.controllers.admin;
 import com.bank.app.ConnectionManager;
 import com.bank.app.controllers.utils.CurrencyController;
 import com.bank.app.models.Teller;
+import javafx.animation.FadeTransition;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.util.Duration;
 
 import java.math.BigDecimal;
 import java.net.URL;
@@ -27,6 +29,7 @@ public class DepositController implements Initializable {
     public Label tv_alert;
     public int maxDeposit;
     Connection conn = ConnectionManager.getInstance().getConnection();
+    private FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000));
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -64,11 +67,17 @@ public class DepositController implements Initializable {
     }
 
     public void cekInput(){
+        fadeTransition.setNode(tv_alert);
+        fadeTransition.setFromValue(0.0);
+        fadeTransition.setToValue(1.0);
+        fadeTransition.setCycleCount(1);
+        fadeTransition.setAutoReverse(true);
         String username = tf_username.getText();
         String amountString = tf_amount.getText();
 
         if ((username.isEmpty() || amountString.isEmpty())) {
             tv_alert.setVisible(true);
+            fadeTransition.playFromStart();
             tv_alert.setText("Mohon isi semua data");
         } else {
             BigDecimal amount = new BigDecimal(amountString);
@@ -80,21 +89,29 @@ public class DepositController implements Initializable {
                     }else{
                         teller.depositBalanceToCustomerAccount(username, amount);
                         tv_alert.setVisible(true);
+                        fadeTransition.playFromStart();
                         tv_alert.setText("Sukses melakukan deposit sejumlah " + new CurrencyController().getIndonesianCurrency(amount));
                     }
 
                 } else {
                     tv_alert.setVisible(true);
+                    fadeTransition.playFromStart();
                     tv_alert.setText("Silahkan checklist jika data sudah benar!");
                 }
             } catch (NumberFormatException e) {
                 tv_alert.setVisible(true);
+                fadeTransition.playFromStart();
                 tv_alert.setText("Input tidak sah!");
             }
         }
     }
 
     public Boolean checkMaksimunDeposit(String usernameInput, BigDecimal amountInput){
+        fadeTransition.setNode(tv_alert);
+        fadeTransition.setFromValue(0.0);
+        fadeTransition.setToValue(1.0);
+        fadeTransition.setCycleCount(1);
+        fadeTransition.setAutoReverse(true);
         String amountString = tf_amount.getText();
         BigDecimal amount = new BigDecimal(amountString);
         boolean isDepositMax = false;
@@ -117,18 +134,22 @@ public class DepositController implements Initializable {
 
             if (maxDeposit.compareTo(new BigDecimal(0)) == 0){
                 tv_alert.setVisible(true);
+                fadeTransition.playFromStart();
                 tv_alert.setText("Rekening penerima tidak ditemukan");
                 isDepositMax = true;
             }else if(amountInput.compareTo(new BigDecimal(10000)) < 0){
                 tv_alert.setVisible(true);
+                fadeTransition.playFromStart();
                 tv_alert.setText("Deposit gagal, deposit minimal adalah Rp. 10.000");
                 isDepositMax = true;
             } else if (amount.add(getBalance(usernameInput)).compareTo(getMaxBalanceLimit(usernameInput)) > 0){
                 tv_alert.setVisible(true);
+                fadeTransition.playFromStart();
                 tv_alert.setText("Deposit gagal, deposit melebihi batas saldo maksimal");
                 isDepositMax = true;
             } else if (amountInput.compareTo(maxDeposit) > 0){
                 tv_alert.setVisible(true);
+                fadeTransition.playFromStart();
                 tv_alert.setText("Deposit gagal, deposit maksimal adalah " + new CurrencyController().getIndonesianCurrency(new BigDecimal(this.maxDeposit)) + "");
                 isDepositMax = true;
             }

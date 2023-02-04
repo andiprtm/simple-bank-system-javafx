@@ -3,11 +3,13 @@ package com.bank.app.controllers.manager;
 import com.bank.app.ConnectionManager;
 import com.bank.app.models.Manager;
 import com.bank.app.models.Teller;
+import javafx.animation.FadeTransition;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.util.Duration;
 
 import java.math.BigDecimal;
 import java.net.URL;
@@ -29,6 +31,7 @@ public class CreateTellerController implements Initializable {
     public Label tv_say_hi;
     public Label tv_alert;
     Connection conn = ConnectionManager.getInstance().getConnection();
+    private FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000));
     Object[] tipeAkun = {"Teller", "Manager"};
 
     @Override
@@ -42,8 +45,14 @@ public class CreateTellerController implements Initializable {
     }
 
     public void cekInput(){
+        fadeTransition.setNode(tv_alert);
+        fadeTransition.setFromValue(0.0);
+        fadeTransition.setToValue(1.0);
+        fadeTransition.setCycleCount(1);
+        fadeTransition.setAutoReverse(true);
         if( (tf_username.getText().isEmpty() || tf_password.getText().isEmpty() || tf_nama.getText().isEmpty() || tf_alamat.getText().isEmpty() || tf_nomorHandphone.getText().isEmpty() || cb_tipeAkun.getValue() == null ) ){
             tv_alert.setVisible(true);
+            fadeTransition.playFromStart();
             tv_alert.setText("Mohon isi semua data");
         } else {
             if(findUser(tf_username.getText())){
@@ -55,6 +64,11 @@ public class CreateTellerController implements Initializable {
     }
 
     public void addTellerAccount(){
+        fadeTransition.setNode(tv_alert);
+        fadeTransition.setFromValue(0.0);
+        fadeTransition.setToValue(1.0);
+        fadeTransition.setCycleCount(1);
+        fadeTransition.setAutoReverse(true);
         try{
             String username = tf_username.getText();
             String password = tf_password.getText();
@@ -69,10 +83,12 @@ public class CreateTellerController implements Initializable {
 
             if (teller.employeeId != null) {
                 tv_alert.setVisible(true);
+                fadeTransition.playFromStart();
                 tv_alert.setText("Berhasil membuat akun " + teller.accountType + " " + teller.name);
             }
         }catch(NumberFormatException e) {
             tv_alert.setVisible(true);
+            fadeTransition.playFromStart();
             tv_alert.setText("Nomor handphone harus berupa angka");
         }
 
@@ -86,6 +102,11 @@ public class CreateTellerController implements Initializable {
     }
 
     public Boolean findUser(String usernameInput){
+        fadeTransition.setNode(tv_alert);
+        fadeTransition.setFromValue(0.0);
+        fadeTransition.setToValue(1.0);
+        fadeTransition.setCycleCount(1);
+        fadeTransition.setAutoReverse(true);
         boolean isExist = false;
         String id = null;
         try {
@@ -103,6 +124,7 @@ public class CreateTellerController implements Initializable {
 
             if(id != null){
                 tv_alert.setVisible(true);
+                fadeTransition.playFromStart();
                 tv_alert.setText("Username sudah ada, silahkan gunakan username lain");
                 isExist = true;
             }

@@ -3,8 +3,10 @@ package com.bank.app.controllers.admin;
 import com.bank.app.ConnectionManager;
 import com.bank.app.models.Customer;
 import com.bank.app.models.Teller;
+import javafx.animation.FadeTransition;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.util.Duration;
 
 import java.math.BigDecimal;
 import java.net.URL;
@@ -29,6 +31,7 @@ public class CreateClientController extends AdminController implements Initializ
     public Label tv_alert;
     public TextField tf_saldo_awal;
     Connection conn = ConnectionManager.getInstance().getConnection();
+    private FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000));
 
     Object[] tipeAkun = {"Silver", "Gold", "Platinum"};
 
@@ -43,8 +46,14 @@ public class CreateClientController extends AdminController implements Initializ
     }
 
     public void cekInput(){
+        fadeTransition.setNode(tv_alert);
+        fadeTransition.setFromValue(0.0);
+        fadeTransition.setToValue(1.0);
+        fadeTransition.setCycleCount(1);
+        fadeTransition.setAutoReverse(true);
         if ((tf_username.getText().isEmpty() || tf_password.getText().isEmpty() || tf_nama.getText().isEmpty() || tf_alamat.getText().isEmpty() || tf_nomorHandphone.getText().isEmpty() || tf_pin.getText().isEmpty() || cb_tipeAkun.getValue() == null )) {
             tv_alert.setVisible(true);
+            fadeTransition.playFromStart();
             tv_alert.setText("Mohon isi semua data");
         } else {
             if(findUser(tf_username.getText())){
@@ -76,6 +85,11 @@ public class CreateClientController extends AdminController implements Initializ
     }
 
     public void addCustomerAccount() {
+        fadeTransition.setNode(tv_alert);
+        fadeTransition.setFromValue(0.0);
+        fadeTransition.setToValue(1.0);
+        fadeTransition.setCycleCount(1);
+        fadeTransition.setAutoReverse(true);
         if (ckb_verifikasi.isSelected()) {
             try {
                 String username = tf_username.getText();
@@ -90,19 +104,27 @@ public class CreateClientController extends AdminController implements Initializ
                 Customer customer = teller.createCustomerAccount(accountType, username, password, name, address, phone.toString(), saldo, pin);
                 System.out.println(customer.name);
                 tv_alert.setVisible(true);
+                fadeTransition.playFromStart();
                 tv_alert.setText("Nasabah " + customer.name + " berhasil ditambahkan!");
                 setNull();
             } catch (NumberFormatException e) {
                 tv_alert.setVisible(true);
+                fadeTransition.playFromStart();
                 tv_alert.setText("Input tidak sah!, Mohon cek kembali!\nNomor Handphone, Saldo Awal dan PIN harus berupa angka");
             }
         } else {
             tv_alert.setVisible(true);
+            fadeTransition.playFromStart();
             tv_alert.setText("Silahkan checklist jika data sudah benar!");
         }
     }
 
     public Boolean findUser(String usernameInput){
+        fadeTransition.setNode(tv_alert);
+        fadeTransition.setFromValue(0.0);
+        fadeTransition.setToValue(1.0);
+        fadeTransition.setCycleCount(1);
+        fadeTransition.setAutoReverse(true);
         boolean isExist = false;
         String id = null;
         try {
@@ -120,6 +142,7 @@ public class CreateClientController extends AdminController implements Initializ
 
             if(id != null){
                 tv_alert.setVisible(true);
+                fadeTransition.playFromStart();
                 tv_alert.setText("Username sudah ada, silahkan gunakan username lain");
                 isExist = true;
             }

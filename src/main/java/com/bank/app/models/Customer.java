@@ -1,7 +1,9 @@
 package com.bank.app.models;
 
 import com.bank.app.ConnectionManager;
+import javafx.animation.FadeTransition;
 import javafx.scene.control.Label;
+import javafx.util.Duration;
 
 import java.math.BigDecimal;
 import java.sql.*;
@@ -25,6 +27,7 @@ public class Customer {
     public String phone;
     public BigDecimal balance;
     Connection conn = ConnectionManager.getInstance().getConnection();
+    private FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000));
 
     public Customer(String username, String password){
         this.username = username;
@@ -262,11 +265,17 @@ public class Customer {
     }
 
     public Boolean transferToAnotherBankAccount (String username, BigDecimal amount, Label label) {
+        fadeTransition.setNode(label);
+        fadeTransition.setFromValue(0.0);
+        fadeTransition.setToValue(1.0);
+        fadeTransition.setCycleCount(1);
+        fadeTransition.setAutoReverse(true);
         Boolean isSuccess = false;
 
         Integer receiverCustomerId = getCustomerId(username);
         if (receiverCustomerId == null) {
             label.setText("Rekening penerima tidak ditemukan!");
+            fadeTransition.playFromStart();
             isSuccess = false;
         } else {
             Boolean isReceiverAccountActive = getIsActive(receiverCustomerId);
@@ -295,6 +304,7 @@ public class Customer {
                         Transaction transaction = new Transaction();
                         transaction.createTransaction(receiverCustomerId, this.customerId, BigDecimal.valueOf(0), "Transfer", false, "Saldo anda tidak cukup untuk melakukan transfer sebesar " + amount + " + biaya admin sebesar " + adminFeeTotal, adminFeeTotal);
                         label.setText("Saldo anda tidak cukup untuk melakukan transfer sebesar " + amount + " + biaya admin sebesar " + adminFeeTotal);
+                        fadeTransition.playFromStart();
                         isSuccess = false;
 
                     } else {
@@ -302,6 +312,7 @@ public class Customer {
                         Transaction transaction = new Transaction();
                         transaction.createTransaction(receiverCustomerId, this.customerId, BigDecimal.valueOf(0), "Transfer", false, "Rekening penerima telah mencapai batas saldo!", adminFeeTotal);
                         label.setText("Rekening penerima telah mencapai batas saldo!");
+                        fadeTransition.playFromStart();
                         isSuccess = false;
 
                     }
@@ -309,12 +320,14 @@ public class Customer {
                 } else {
 
                     label.setText("Maksimal transfer adalah " + this.maximumTransfer);
+                    fadeTransition.playFromStart();
                     isSuccess = false;
 
                 }
             } else {
 
                 label.setText("Username rekening penerima tidak aktif!");
+                fadeTransition.playFromStart();
                 isSuccess = false;
 
             }

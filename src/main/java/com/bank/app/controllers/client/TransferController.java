@@ -3,6 +3,7 @@ package com.bank.app.controllers.client;
 import com.bank.app.ConnectionManager;
 import com.bank.app.models.Customer;
 import com.bank.app.models.Model;
+import javafx.animation.FadeTransition;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -11,6 +12,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.math.BigDecimal;
 import java.net.URL;
@@ -30,8 +32,15 @@ public class TransferController implements Initializable {
     public Button btn_cancel;
     public Button btn_transfer;
 
+    private FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000));
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        fadeTransition.setNode(tv_errorTransfer);
+        fadeTransition.setFromValue(0.0);
+        fadeTransition.setToValue(1.0);
+        fadeTransition.setCycleCount(1);
+        fadeTransition.setAutoReverse(true);
 
         btn_cancel.setOnAction(event -> {
             System.out.println("Cancel");
@@ -51,6 +60,7 @@ public class TransferController implements Initializable {
                 }
             }catch (NumberFormatException e){
                 tv_errorTransfer.setText("Nominal transfer harus berupa angka");
+                fadeTransition.playFromStart();
             }
 
         });
@@ -80,19 +90,23 @@ public class TransferController implements Initializable {
                     isSuccess = customer.transferToAnotherBankAccount(tf_username.getText(), transferAmount, tv_errorTransfer);
                 } else {
                     tv_errorTransfer.setText("PIN salah");
+                    fadeTransition.playFromStart();
                     isSuccess =  false;
                 }
             } catch (NumberFormatException e) {
                 tv_errorTransfer.setText("Input tidak sah!");
+                fadeTransition.playFromStart();
                 isSuccess = false;
             }
         } else {
             tv_errorTransfer.setText("Isi semua form dibawah ini!");
+            fadeTransition.playFromStart();
             isSuccess = false;
         }
 
         if (!isSuccess) {
             tv_errorTransfer.setBackground(new Background(new BackgroundFill(Color.RED, null, null)));
+            fadeTransition.playFromStart();
         }
 
         return isSuccess;

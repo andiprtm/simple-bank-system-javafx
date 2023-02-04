@@ -1,9 +1,11 @@
 package com.bank.app.controllers;
 
 import com.bank.app.models.*;
+import javafx.animation.FadeTransition;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -24,8 +26,13 @@ public class LoginController implements Initializable {
 
     public String[] statusPegawai = {"Teller","Manager"};
 
+    private FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000));
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+
         statusCheck = statusPegawai[1];
 
         dropdwon_tipe_user.getItems().addAll(userType);
@@ -46,6 +53,14 @@ public class LoginController implements Initializable {
 
 
     public void login() {
+        //ANIMATION FADE IN
+        fadeTransition.setNode(label_eror);
+        fadeTransition.setFromValue(0.0);
+        fadeTransition.setToValue(1.0);
+        fadeTransition.setCycleCount(1);
+        fadeTransition.setAutoReverse(true);
+
+        //LOGIN
         String username = field_username.getText();
         String password = field_password.getText();
 
@@ -76,12 +91,15 @@ public class LoginController implements Initializable {
                     }else {
                         label_eror.setText("Akun Anda Telah di Non-aktifkan");
                         label_eror.setVisible(true);
+                        fadeTransition.playFromStart();
                     }
                 } else {
                     label_eror.setVisible(true);
+                    fadeTransition.playFromStart();
                 }
             } else {
                 label_eror.setVisible(true);
+                fadeTransition.playFromStart();
             }
         } else {
             if (!username.equals("") && !password.equals("")) {
@@ -101,13 +119,16 @@ public class LoginController implements Initializable {
                     }else {
                         label_eror.setText("Akun Anda Telah di Non-aktifkan");
                         label_eror.setVisible(true);
+                        fadeTransition.playFromStart();
                     }
 
                 } else {
                     label_eror.setVisible(true);
+                    fadeTransition.playFromStart();
                 }
             } else {
                 label_eror.setVisible(true);
+                fadeTransition.playFromStart();
             }
         }
     }
