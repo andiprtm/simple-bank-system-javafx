@@ -1,5 +1,6 @@
 package com.bank.app.controllers.client;
 
+import com.bank.app.controllers.utils.CurrencyController;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 
@@ -32,10 +33,10 @@ public class DetailTransaksiController implements Initializable {
         tv_tipe_transaksi.setText(": "+transactionType);
         tv_nama_penerima_username.setText(": "+NamaPenerimaUsername);
         tv_nama_pengirim_username.setText(": "+NamaPengirimUsername);
-        tv_nominal_transaksi.setText(": "+NominalTransaksi);
+        tv_nominal_transaksi.setText(": "+new CurrencyController().getIndonesianCurrency(NominalTransaksi));
         tv_biaya_admin_persen.setText("Biaya Admin ("+BiayaAdminPersen+"%)");
-        tv_biaya_admin.setText(": "+ NominalTransaksi.multiply(new BigDecimal(BiayaAdminPersen)).divide(new BigDecimal(100)));
-        tv_total_akhir.setText(": "+NominalTransaksi.add(NominalTransaksi.multiply(new BigDecimal(BiayaAdminPersen)).divide(new BigDecimal(100))));
+        tv_biaya_admin.setText(": "+ new CurrencyController().getIndonesianCurrency(NominalTransaksi.multiply(new BigDecimal(BiayaAdminPersen)).divide(new BigDecimal(100))));
+        tv_total_akhir.setText(": "+ new CurrencyController().getIndonesianCurrency(NominalTransaksi.add(NominalTransaksi.multiply(new BigDecimal(BiayaAdminPersen)).divide(new BigDecimal(100)))));
 
 
     }

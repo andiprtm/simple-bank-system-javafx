@@ -7,8 +7,10 @@ import com.bank.app.views.TransactionCellFactory;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.print.Printer;
 import javafx.print.PrinterJob;
 import javafx.scene.Scene;
+import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
@@ -16,6 +18,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class TransactionController implements Initializable {
@@ -190,8 +193,8 @@ public class TransactionController implements Initializable {
                         newValue.idTransactionProperty().getValue().toString(),
                         newValue.transactionTypeProperty().getValue(),
                         newValue.dateProperty().getValue().toString(),
-                        newValue.senderProperty().getValue(),
                         newValue.receiverProperty().getValue(),
+                        newValue.senderProperty().getValue(),
                         newValue.amountProperty().getValue(),
                         newValue.adminFeePercentProperty().getValue()
                 );
@@ -202,8 +205,20 @@ public class TransactionController implements Initializable {
                 Scene root = (Scene) listview_transaksi.getScene();
 
                 // PRINT STRUK
-                PrinterJob job = PrinterJob.createPrinterJob();
-                if (job != null) {
+                ChoiceDialog dialog = new ChoiceDialog(Printer.getDefaultPrinter(), Printer.getAllPrinters());
+                dialog.setHeaderText("Choose the printer!");
+                dialog.setContentText("Choose a printer from available printers");
+                dialog.setTitle("Printer Choice");
+                Optional<Printer> opt = dialog.showAndWait();
+                if (opt.isPresent()) {
+                    Printer printer = opt.get();
+                    // start printing ...
+                    printer.getPrinterAttributes();
+                    PrinterJob job = PrinterJob.createPrinterJob(printer);
+                    StringBuffer sbf = new StringBuffer(newValue.dateProperty().getValue().toString());
+                    sbf.deleteCharAt(sbf.length() - 1);
+                    sbf.deleteCharAt(sbf.length() - 1);
+                    job.getJobSettings().setJobName(newValue.transactionTypeProperty().getValue()+" from "+newValue.senderProperty().getValue()+" to "+newValue.receiverProperty().getValue()+" at "+sbf+" WIB");
                     boolean success = job.printPage(stage.getScene().getRoot());
                     if (success) {
                         job.endJob();

@@ -1,6 +1,7 @@
 package com.bank.app.controllers.admin;
 
 import com.bank.app.ConnectionManager;
+import com.bank.app.controllers.utils.CurrencyController;
 import com.bank.app.models.Customer;
 import com.bank.app.models.Model;
 import com.bank.app.models.Teller;
@@ -9,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
+import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -147,7 +149,7 @@ public class DetailClientController implements Initializable {
         }else if(statusNasabahh.equals("Not Active")) {
             cb_statusNasabah.setValue(this.statusNasabah[1]);
         }
-        tf_saldo.setText(saldo);
+        tf_saldo.setText(new CurrencyController().getIndonesianCurrency(new BigDecimal(saldo)));
     }
 
     public void setFalse(){
