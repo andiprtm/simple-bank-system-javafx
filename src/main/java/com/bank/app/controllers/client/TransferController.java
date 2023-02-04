@@ -1,5 +1,6 @@
 package com.bank.app.controllers.client;
 
+import com.bank.app.ConnectionManager;
 import com.bank.app.models.Customer;
 import com.bank.app.models.Model;
 import javafx.fxml.Initializable;
@@ -13,6 +14,10 @@ import javafx.stage.Stage;
 
 import java.math.BigDecimal;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -34,15 +39,20 @@ public class TransferController implements Initializable {
         });
 
         btn_transfer.setOnAction(event -> {
-            if(customer.balance.compareTo(new BigDecimal(tf_nominalTransfer.getText())) <= 0){
-                tv_errorTransfer.setText("Saldo tidak cukup. Sisa saldo: " + customer.balance);
-            }else{
-                System.out.println("Transfer");
-                Boolean isSuccess = transfer();
-                if (isSuccess) {
-                    backToDashboard();
+            try{
+                if(customer.balance.compareTo(new BigDecimal(tf_nominalTransfer.getText())) <= 0){
+                    tv_errorTransfer.setText("Saldo tidak cukup. Sisa saldo: " + customer.balance);
+                }else{
+                    System.out.println("Transfer");
+                    Boolean isSuccess = transfer();
+                    if (isSuccess) {
+                        backToDashboard();
+                    }
                 }
+            }catch (NumberFormatException e){
+                tv_errorTransfer.setText("Nominal transfer harus berupa angka");
             }
+
         });
     }
 
@@ -59,7 +69,7 @@ public class TransferController implements Initializable {
     }
 
     public Boolean transfer() {
-        Boolean isSuccess = null;
+        Boolean isSuccess = true;
         
         if (!tf_username.getText().equals("") && !tf_nominalTransfer.getText().equals("") && !tf_PIN.getText().equals("")) {
             try {
@@ -87,4 +97,6 @@ public class TransferController implements Initializable {
 
         return isSuccess;
     }
+
+
 }

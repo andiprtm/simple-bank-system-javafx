@@ -82,18 +82,19 @@ public class CreateClientController extends AdminController implements Initializ
                 String password = tf_password.getText();
                 String name = tf_nama.getText();
                 String address = tf_alamat.getText();
-                String phone = tf_nomorHandphone.getText();
+                BigDecimal phone = new BigDecimal(tf_nomorHandphone.getText());
                 String accountType = cb_tipeAkun.getValue().toString();
+                BigDecimal saldo = new BigDecimal(tf_saldo_awal.getText());
                 Integer pin = Integer.parseInt(tf_pin.getText());
 
-                Customer customer = teller.createCustomerAccount(accountType, username, password, name, address, phone, new BigDecimal(50000), pin);
+                Customer customer = teller.createCustomerAccount(accountType, username, password, name, address, phone.toString(), saldo, pin);
                 System.out.println(customer.name);
                 tv_alert.setVisible(true);
                 tv_alert.setText("Nasabah " + customer.name + " berhasil ditambahkan!");
                 setNull();
             } catch (NumberFormatException e) {
                 tv_alert.setVisible(true);
-                tv_alert.setText("Input tidak sah!");
+                tv_alert.setText("Input tidak sah!, Mohon cek kembali!\nNomor Handphone, Saldo Awal dan PIN harus berupa angka");
             }
         } else {
             tv_alert.setVisible(true);

@@ -9,6 +9,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -54,21 +55,27 @@ public class CreateTellerController implements Initializable {
     }
 
     public void addTellerAccount(){
-        String username = tf_username.getText();
-        String password = tf_password.getText();
-        String name = tf_nama.getText();
-        String address = tf_alamat.getText();
-        String phone = tf_nomorHandphone.getText();
-        String accountType = cb_tipeAkun.getValue().toString();
+        try{
+            String username = tf_username.getText();
+            String password = tf_password.getText();
+            String name = tf_nama.getText();
+            String address = tf_alamat.getText();
+            BigDecimal phone = new BigDecimal(tf_nomorHandphone.getText());
+            String accountType = cb_tipeAkun.getValue().toString();
 
-        Teller teller = manager.createTellerAccount(accountType, username, password, name, address, phone);
-        teller.authenticate();
-        teller.getEmployeeData();
+            Teller teller = manager.createTellerAccount(accountType, username, password, name, address, phone.toString());
+            teller.authenticate();
+            teller.getEmployeeData();
 
-        if (teller.employeeId != null) {
+            if (teller.employeeId != null) {
+                tv_alert.setVisible(true);
+                tv_alert.setText("Berhasil membuat akun " + teller.accountType + " " + teller.name);
+            }
+        }catch(NumberFormatException e) {
             tv_alert.setVisible(true);
-            tv_alert.setText("Berhasil membuat akun " + teller.accountType + " " + teller.name);
+            tv_alert.setText("Nomor handphone harus berupa angka");
         }
+
     }
 
     public void setManager(Manager manager) {

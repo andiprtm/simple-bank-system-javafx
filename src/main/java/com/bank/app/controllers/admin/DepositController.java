@@ -36,6 +36,33 @@ public class DepositController implements Initializable {
 
     }
 
+    public BigDecimal getBalance(String username) throws SQLException {
+        String sql = "select cba.account_balance from customer_bank_account cba where cba.customer_id = (select id_customer from customer_data where username=?);";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString(1, username);
+        ResultSet rs = stmt.executeQuery();
+        BigDecimal balance = null;
+        while (rs.next()) {
+            balance = rs.getBigDecimal("account_balance");
+        }
+        return balance;
+    }
+
+    public BigDecimal getMaxBalanceLimit(String username) throws SQLException {
+        String sql = "SELECT cat.max_balance_limit from customer_bank_account cba\n" +
+                "join customer_account_type cat\n" +
+                "on cba.customer_account_type_id = cat.id_customer_account_type\n" +
+                "where cba.customer_id = (select id_customer from customer_data where username=?);";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString(1, username);
+        ResultSet rs = stmt.executeQuery();
+        BigDecimal balance = null;
+        while (rs.next()) {
+            balance = rs.getBigDecimal("max_balance_limit");
+        }
+        return balance;
+    }
+
     public void cekInput(){
         String username = tf_username.getText();
         String amountString = tf_amount.getText();
@@ -49,12 +76,11 @@ public class DepositController implements Initializable {
             try {
                 if(ckb_verifikasi.isSelected()){
                     if(checkMaksimunDeposit(username, amount)){
-                        tv_alert.setVisible(true);
-                        tv_alert.setText("Deposit ke nasabah " + username + " sejumlah " + new CurrencyController().getIndonesianCurrency(amount) + " gagal,\ndeposit maksimal adalah " + new CurrencyController().getIndonesianCurrency(new BigDecimal(maxDeposit)) + "");
+                        System.out.println("deposit gagal");
                     }else{
                         teller.depositBalanceToCustomerAccount(username, amount);
                         tv_alert.setVisible(true);
-                        tv_alert.setText("Deposit ke nasabah " + username + " sejumlah " + new CurrencyController().getIndonesianCurrency(amount));
+                        tv_alert.setText("Sukses melakukan deposit sejumlah " + new CurrencyController().getIndonesianCurrency(amount));
                     }
 
                 } else {
@@ -69,6 +95,8 @@ public class DepositController implements Initializable {
     }
 
     public Boolean checkMaksimunDeposit(String usernameInput, BigDecimal amountInput){
+        String amountString = tf_amount.getText();
+        BigDecimal amount = new BigDecimal(amountString);
         boolean isDepositMax = false;
         BigDecimal maxDeposit = new BigDecimal(0);
         try {
@@ -87,7 +115,21 @@ public class DepositController implements Initializable {
             }
             System.out.println(maxDeposit);
 
-            if(amountInput.compareTo(maxDeposit) > 0){
+            if (maxDeposit.compareTo(new BigDecimal(0)) == 0){
+                tv_alert.setVisible(true);
+                tv_alert.setText("Rekening penerima tidak ditemukan");
+                isDepositMax = true;
+            }else if(amountInput.compareTo(new BigDecimal(10000)) < 0){
+                tv_alert.setVisible(true);
+                tv_alert.setText("Deposit gagal, deposit minimal adalah Rp. 10.000");
+                isDepositMax = true;
+            } else if (amount.add(getBalance(usernameInput)).compareTo(getMaxBalanceLimit(usernameInput)) > 0){
+                tv_alert.setVisible(true);
+                tv_alert.setText("Deposit gagal, deposit melebihi batas saldo maksimal");
+                isDepositMax = true;
+            } else if (amountInput.compareTo(maxDeposit) > 0){
+                tv_alert.setVisible(true);
+                tv_alert.setText("Deposit gagal, deposit maksimal adalah " + new CurrencyController().getIndonesianCurrency(new BigDecimal(this.maxDeposit)) + "");
                 isDepositMax = true;
             }
         } catch (SQLException e) {

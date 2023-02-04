@@ -262,7 +262,7 @@ public class Customer {
     }
 
     public Boolean transferToAnotherBankAccount (String username, BigDecimal amount, Label label) {
-        Boolean isSuccess = null;
+        Boolean isSuccess = false;
 
         Integer receiverCustomerId = getCustomerId(username);
         if (receiverCustomerId == null) {
@@ -281,7 +281,7 @@ public class Customer {
                     BigDecimal remainingBalanceSender = this.getBalanceAfterSubtraction(this.customerId, amountAfterAdminFee);
                     BigDecimal remainingBalanceReceiver = this.getBalanceAfterAddition(receiverCustomerId, amountAfterAdminFee);
 
-                    if (remainingBalanceSender.compareTo(BigDecimal.valueOf(0)) > 0 && remainingBalanceReceiver.compareTo(BigDecimal.valueOf(0)) > 0) {
+                    if ((remainingBalanceSender.compareTo(BigDecimal.valueOf(0)) > 0) && (remainingBalanceReceiver.compareTo(BigDecimal.valueOf(0)) > 0)) {
 
                         updateBalance(this.customerId, remainingBalanceSender);
                         updateBalance(receiverCustomerId, remainingBalanceReceiver);
@@ -293,18 +293,19 @@ public class Customer {
                     } else if (remainingBalanceSender.compareTo(BigDecimal.valueOf(0)) < 0) {
 
                         Transaction transaction = new Transaction();
-                        transaction.createTransaction(receiverCustomerId, this.customerId, amount, "Transfer", false, "Saldo anda tidak cukup untuk melakukan transfer sebesar " + amount + " + biaya admin sebesar " + adminFeeTotal, adminFeeTotal);
+                        transaction.createTransaction(receiverCustomerId, this.customerId, BigDecimal.valueOf(0), "Transfer", false, "Saldo anda tidak cukup untuk melakukan transfer sebesar " + amount + " + biaya admin sebesar " + adminFeeTotal, adminFeeTotal);
                         label.setText("Saldo anda tidak cukup untuk melakukan transfer sebesar " + amount + " + biaya admin sebesar " + adminFeeTotal);
-                        isSuccess = true;
+                        isSuccess = false;
 
-                    } else if (remainingBalanceReceiver.compareTo(BigDecimal.valueOf(0)) < 0) {
+                    } else {
 
                         Transaction transaction = new Transaction();
-                        transaction.createTransaction(receiverCustomerId, this.customerId, amount, "Transfer", false, "Rekening penerima telah mencapai batas saldo!", adminFeeTotal);
+                        transaction.createTransaction(receiverCustomerId, this.customerId, BigDecimal.valueOf(0), "Transfer", false, "Rekening penerima telah mencapai batas saldo!", adminFeeTotal);
                         label.setText("Rekening penerima telah mencapai batas saldo!");
-                        isSuccess = true;
+                        isSuccess = false;
 
                     }
+
                 } else {
 
                     label.setText("Maksimal transfer adalah " + this.maximumTransfer);
@@ -486,5 +487,6 @@ public class Customer {
             e.printStackTrace();
         }
     }
+    
 }
 
