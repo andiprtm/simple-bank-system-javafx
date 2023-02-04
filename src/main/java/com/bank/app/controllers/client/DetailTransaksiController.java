@@ -1,10 +1,7 @@
 package com.bank.app.controllers.client;
 
 import javafx.fxml.Initializable;
-import javafx.print.PrinterJob;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
 
 import java.math.BigDecimal;
 import java.net.URL;

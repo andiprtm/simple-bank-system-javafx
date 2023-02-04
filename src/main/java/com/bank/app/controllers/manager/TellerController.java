@@ -2,7 +2,6 @@ package com.bank.app.controllers.manager;
 
 import com.bank.app.ConnectionManager;
 import com.bank.app.models.Manager;
-import com.bank.app.models.Model;
 import com.bank.app.models.TellerModel;
 import com.bank.app.views.TellerCellFactory;
 import javafx.collections.FXCollections;

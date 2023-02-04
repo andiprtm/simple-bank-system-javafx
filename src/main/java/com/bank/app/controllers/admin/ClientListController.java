@@ -1,9 +1,7 @@
 package com.bank.app.controllers.admin;
 
 import com.bank.app.ConnectionManager;
-import com.bank.app.controllers.client.DetailTransaksiController;
 import com.bank.app.models.ClientModel;
-import com.bank.app.models.Model;
 import com.bank.app.models.Teller;
 import com.bank.app.views.ClientCellFactory;
 import javafx.collections.FXCollections;
@@ -14,7 +12,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

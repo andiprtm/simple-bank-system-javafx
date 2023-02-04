@@ -2,7 +2,6 @@ package com.bank.app.controllers.admin;
 
 import com.bank.app.ConnectionManager;
 import com.bank.app.controllers.utils.CurrencyController;
-import com.bank.app.models.Customer;
 import com.bank.app.models.Teller;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
