@@ -35,10 +35,14 @@ public class TransferController implements Initializable {
         });
 
         btn_transfer.setOnAction(event -> {
-            System.out.println("Transfer");
-            Boolean isSuccess = transfer();
-            if (isSuccess) {
-                backToDashboard();
+            if(customer.balance.compareTo(new BigDecimal(tf_nominalTransfer.getText())) <= 0){
+                tv_errorTransfer.setText("Saldo tidak cukup. Sisa saldo: " + customer.balance);
+            }else{
+                System.out.println("Transfer");
+                Boolean isSuccess = transfer();
+                if (isSuccess) {
+                    backToDashboard();
+                }
             }
         });
     }

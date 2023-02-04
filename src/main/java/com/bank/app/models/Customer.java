@@ -8,9 +8,9 @@ import java.sql.*;
 
 public class Customer {
     /*Limitasi customer*/
-    BigDecimal maximumTransfer;
-    BigDecimal maximumDeposit;
-    BigDecimal maximumWithdraw;
+    public BigDecimal maximumTransfer;
+    public BigDecimal maximumDeposit;
+    public BigDecimal maximumWithdraw;
     double adminFee;
 
     /*Customer Data*/

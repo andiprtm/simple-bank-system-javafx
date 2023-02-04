@@ -33,9 +33,13 @@ public class WithdrawController implements Initializable {
         });
 
         btn_withdraw.setOnAction(actionEvent -> {
-            Boolean isSuccess = withdraw();
-            if (isSuccess) {
-                backToDashboard();
+            if(customer.balance.compareTo(new BigDecimal(tf_nominalWithdraw.getText())) <= 0){
+                tv_errorWithdraw.setText("Saldo tidak cukup. Sisa saldo: " + customer.balance);
+            }else{
+                Boolean isSuccess = withdraw();
+                if (isSuccess) {
+                    backToDashboard();
+                }
             }
         });
     }

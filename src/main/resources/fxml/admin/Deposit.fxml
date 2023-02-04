@@ -41,7 +41,7 @@
             <Insets bottom="20.0" left="20.0" right="20.0" />
          </padding>
          <children>
-            <Label fx:id="tv_alert" alignment="CENTER" prefHeight="45.0" prefWidth="824.0" style="-fx-background-color: #eae7b1; -fx-background-radius: 10;" text="Pastikan Semua Data Telah Terisi!" textFill="#3c6255" visible="false">
+            <Label fx:id="tv_alert" alignment="CENTER" prefWidth="824.0" style="-fx-background-color: #eae7b1; -fx-background-radius: 10;" text="Pastikan Semua Data Telah Terisi!" textFill="#3c6255" visible="false">
                <font>
                   <Font name="System Bold" size="27.0" />
                </font>
