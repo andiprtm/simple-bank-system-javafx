@@ -63,6 +63,7 @@ public class LoginController implements Initializable {
         //LOGIN
         String username = field_username.getText();
         String password = field_password.getText();
+        label_eror.setText("Username atau Password Salah");
 
         if (dropdwon_tipe_user.getValue().equals(userType[0])) {
             if (!username.equals("") && !password.equals("")) {
