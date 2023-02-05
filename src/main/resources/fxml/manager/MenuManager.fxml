@@ -35,7 +35,7 @@
                                 <Font name="System Bold" size="14.0" />
                             </font>
                         </Button>
-                        <Button fx:id="btn_buatTeller" alignment="BASELINE_LEFT" mnemonicParsing="false" prefWidth="150.0" style="-fx-background-color: #EAE7B1; -fx-background-radius: 8;" text="Buat Teller" textFill="#3c6255">
+                        <Button fx:id="btn_buatTeller" alignment="BASELINE_LEFT" mnemonicParsing="false" prefWidth="150.0" style="-fx-background-color: #EAE7B1; -fx-background-radius: 8;" text="Buat Pegawai" textFill="#3c6255">
                             <graphic>
                                 <FontAwesomeIconView fill="#3c6255" glyphName="PLUS" size="25" translateX="-1.0" />
                             </graphic>

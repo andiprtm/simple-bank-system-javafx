@@ -80,9 +80,9 @@ public class DepositController implements Initializable {
             fadeTransition.playFromStart();
             tv_alert.setText("Mohon isi semua data");
         } else {
-            BigDecimal amount = new BigDecimal(amountString);
 
             try {
+                BigDecimal amount = new BigDecimal(amountString);
                 if(ckb_verifikasi.isSelected()){
                     if(checkMaksimunDeposit(username, amount)){
                         System.out.println("deposit gagal");

@@ -1,6 +1,7 @@
 package com.bank.app.controllers.client;
 
 import com.bank.app.ConnectionManager;
+import com.bank.app.controllers.utils.CurrencyController;
 import com.bank.app.models.Customer;
 import com.bank.app.models.Model;
 import javafx.animation.FadeTransition;
@@ -48,22 +49,37 @@ public class TransferController implements Initializable {
         });
 
         btn_transfer.setOnAction(event -> {
-            try{
-                if(customer.balance.compareTo(new BigDecimal(tf_nominalTransfer.getText())) <= 0){
-                    tv_errorTransfer.setText("Saldo tidak cukup. Sisa saldo: " + customer.balance);
-                }else{
-                    System.out.println("Transfer");
-                    Boolean isSuccess = transfer();
-                    if (isSuccess) {
-                        backToDashboard();
+            if(cekInput()){
+                System.out.println("Input tidak boleh kosong");
+            }else {
+                try{
+                    if(customer.balance.compareTo(new BigDecimal(tf_nominalTransfer.getText())) <= 0){
+                        tv_errorTransfer.setText("Saldo tidak cukup. Sisa saldo: " + new CurrencyController().getIndonesianCurrency(customer.balance));
+                        fadeTransition.playFromStart();
+                    }else{
+                        System.out.println("Transfer");
+                        Boolean isSuccess = transfer();
+                        if (isSuccess) {
+                            backToDashboard();
+                        }
                     }
+                }catch (NumberFormatException e){
+                    tv_errorTransfer.setText("Input tidak sah!, Nominal transfer dan pin harus berupa angka");
+                    fadeTransition.playFromStart();
                 }
-            }catch (NumberFormatException e){
-                tv_errorTransfer.setText("Nominal transfer harus berupa angka");
-                fadeTransition.playFromStart();
             }
 
         });
+    }
+
+    public Boolean cekInput(){
+        boolean isEmpty = false;
+        if(Objects.equals(tf_nominalTransfer.getText(), "") || Objects.equals(tf_PIN.getText(), "")) {
+            tv_errorTransfer.setText("Nominal dan PIN tidak boleh kosong");
+            fadeTransition.playFromStart();
+            isEmpty = true;
+        }
+        return isEmpty;
     }
 
     public void backToDashboard() {
@@ -94,7 +110,7 @@ public class TransferController implements Initializable {
                     isSuccess =  false;
                 }
             } catch (NumberFormatException e) {
-                tv_errorTransfer.setText("Input tidak sah!");
+                tv_errorTransfer.setText("Input tidak sah!, Nominal transfer dan pin harus berupa angka");
                 fadeTransition.playFromStart();
                 isSuccess = false;
             }

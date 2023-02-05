@@ -26,7 +26,7 @@ public class DetailTellerController implements Initializable {
     public Label tv_alert;
     public TextField tf_idPegawai;
     public TextField tf_username;
-    public TextField tf_password;
+    public PasswordField tf_password;
     public TextField tf_nama;
     public TextField tf_alamat;
     public TextField tf_nomorHandphone;
@@ -149,7 +149,6 @@ public class DetailTellerController implements Initializable {
     }
 
     public void setTrue(){
-        tf_username.setDisable(false);
         tf_password.setDisable(false);
         tf_nama.setDisable(false);
         tf_alamat.setDisable(false);

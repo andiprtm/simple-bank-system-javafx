@@ -1,5 +1,6 @@
 package com.bank.app.controllers.client;
 
+import com.bank.app.controllers.utils.CurrencyController;
 import com.bank.app.models.Customer;
 import com.bank.app.models.Model;
 import javafx.animation.FadeTransition;
@@ -41,16 +42,30 @@ public class WithdrawController implements Initializable {
         });
 
         btn_withdraw.setOnAction(actionEvent -> {
-            if(customer.balance.compareTo(new BigDecimal(tf_nominalWithdraw.getText())) <= 0){
-                tv_errorWithdraw.setText("Saldo tidak cukup. Sisa saldo: " + customer.balance);
-                fadeTransition.playFromStart();
-            }else{
-                Boolean isSuccess = withdraw();
-                if (isSuccess) {
-                    backToDashboard();
+            if(cekInput()){
+                System.out.println("Input tidak boleh kosong");
+            }else {
+                if(customer.balance.compareTo(new BigDecimal(tf_nominalWithdraw.getText())) <= 0){
+                    tv_errorWithdraw.setText("Saldo tidak cukup. Sisa saldo: " + new CurrencyController().getIndonesianCurrency(customer.balance));
+                    fadeTransition.playFromStart();
+                }else{
+                    Boolean isSuccess = withdraw();
+                    if (isSuccess) {
+                        backToDashboard();
+                    }
                 }
             }
         });
+    }
+
+    public Boolean cekInput(){
+        boolean isEmpty = false;
+        if(Objects.equals(tf_nominalWithdraw.getText(), "") || Objects.equals(wd_pin.getText(), "")) {
+            tv_errorWithdraw.setText("Nominal dan PIN tidak boleh kosong");
+            fadeTransition.playFromStart();
+            isEmpty = true;
+        }
+        return isEmpty;
     }
 
     public void backToDashboard() {

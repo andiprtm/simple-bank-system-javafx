@@ -5,10 +5,7 @@ import com.bank.app.models.Manager;
 import com.bank.app.models.Teller;
 import javafx.animation.FadeTransition;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.util.Duration;
 
 import java.math.BigDecimal;
@@ -22,7 +19,7 @@ import java.util.ResourceBundle;
 public class CreateTellerController implements Initializable {
     Manager manager;
     public TextField tf_username;
-    public TextField tf_password;
+    public PasswordField tf_password;
     public TextField tf_nama;
     public TextField tf_alamat;
     public TextField tf_nomorHandphone;

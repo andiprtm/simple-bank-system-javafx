@@ -24,7 +24,7 @@ public class DetailClientController implements Initializable {
     String[] statusNasabah = {"Active", "Not Active"};
     public Label tv_say_hi;
     public Label tv_alert;
-    public TextField tf_password;
+    public PasswordField tf_password;
     public TextField tf_nama;
     public TextField tf_alamat;
     public TextField tf_nomorHandphone;
@@ -168,7 +168,6 @@ public class DetailClientController implements Initializable {
     }
 
     public void setTrue(){
-        tf_username.setDisable(false);
         tf_password.setDisable(false);
         tf_nama.setDisable(false);
         tf_alamat.setDisable(false);
