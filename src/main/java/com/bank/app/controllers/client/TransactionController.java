@@ -10,9 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.print.Printer;
 import javafx.print.PrinterJob;
 import javafx.scene.Scene;
-import javafx.scene.control.ChoiceDialog;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -22,15 +20,26 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class TransactionController implements Initializable {
+    public String[] transactionType = {"Transfer", "Withdraw", "Deposit"};
     public ListView<TransactionModel> listview_transaksi;
     public Customer customer;
     public Integer countRow;
+    public int countDate;
+    public int countType;
+    public int countDateAndType;
     public Label tv_say_hi;
     public Label tv_jumlah_transaksi;
+    public DatePicker search_date;
+    public ChoiceBox<String> search_type_transaksi;
+    public Button btn_search_transaksi;
     Connection conn = ConnectionManager.getInstance().getConnection();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        search_type_transaksi.setItems(FXCollections.observableArrayList(transactionType));
+        btn_search_transaksi.setOnAction(event -> {
+            search();
+        });
 
     }
 
@@ -39,6 +48,95 @@ public class TransactionController implements Initializable {
         String[] name = customer.name.split(" ");
 
         tv_say_hi.setText("Hi, " + name[0]);
+    }
+
+    public void countByDate(){
+        try{
+            PreparedStatement ps = conn.prepareStatement("select count(*) as total_rows from (select cd.name,\n" +
+                    "       id_transaction_history,\n" +
+                    "       transaction_date,\n" +
+                    "       transaction_type,\n" +
+                    "       transaction_amount,\n" +
+                    "       (SELECT cd.name FROM customer_data cd WHERE cd.id_customer=th.transaction_sender) AS transaction_sender,\n" +
+                    "       (SELECT cd.name FROM customer_data cd WHERE cd.id_customer=th.transaction_receiver) AS transaction_receiver,\n" +
+                    "       (ROUND((th.transaction_admin_fee / th.transaction_amount) * 100)) as admin_fee_percent from customer_data cd\n" +
+                    "join transaction_history th\n" +
+                    "    on (cd.id_customer = th.transaction_sender) or (cd.id_customer = th.transaction_receiver)\n" +
+                    "join transaction_type tt\n" +
+                    "    on th.transaction_type_id = tt.id_transaction_type\n" +
+                    "where cd.username = ? and transaction_date LIKE concat(?,'%') order by transaction_date desc) as total;");
+
+            ps.setString(1, customer.username);
+            ps.setString(2, this.search_date.getValue().toString());
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                this.countDate = rs.getInt("total_rows");
+                tv_jumlah_transaksi.setText("Total Transaksi "+this.countDate);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+    }
+
+    public void countByType(){
+        try{
+            PreparedStatement ps = conn.prepareStatement("select count(*) as total_rows from(select cd.name,\n" +
+                    "       id_transaction_history,\n" +
+                    "       transaction_date,\n" +
+                    "       transaction_type,\n" +
+                    "       transaction_amount,\n" +
+                    "       (SELECT cd.name FROM customer_data cd WHERE cd.id_customer=th.transaction_sender) AS transaction_sender,\n" +
+                    "       (SELECT cd.name FROM customer_data cd WHERE cd.id_customer=th.transaction_receiver) AS transaction_receiver,\n" +
+                    "       (ROUND((th.transaction_admin_fee / th.transaction_amount) * 100)) as admin_fee_percent from customer_data cd\n" +
+                    "join transaction_history th\n" +
+                    "    on (cd.id_customer = th.transaction_sender) or (cd.id_customer = th.transaction_receiver)\n" +
+                    "join transaction_type tt\n" +
+                    "    on th.transaction_type_id = tt.id_transaction_type\n" +
+                    "where cd.username =? and transaction_type =? order by transaction_date desc)as total;");
+
+            ps.setString(1, customer.username);
+            ps.setString(2, this.search_type_transaksi.getValue());
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                this.countType = rs.getInt("total_rows");
+                tv_jumlah_transaksi.setText("Total Transaksi "+this.countType);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void countByDateAndType(){
+        try{
+            PreparedStatement ps = conn.prepareStatement("select count(*) as total_rows from(select cd.name,\n" +
+                    "       id_transaction_history,\n" +
+                    "       transaction_date,\n" +
+                    "       transaction_type,\n" +
+                    "       transaction_amount,\n" +
+                    "       (SELECT cd.name FROM customer_data cd WHERE cd.id_customer=th.transaction_sender) AS transaction_sender,\n" +
+                    "       (SELECT cd.name FROM customer_data cd WHERE cd.id_customer=th.transaction_receiver) AS transaction_receiver,\n" +
+                    "       (ROUND((th.transaction_admin_fee / th.transaction_amount) * 100)) as admin_fee_percent from customer_data cd\n" +
+                    "join transaction_history th\n" +
+                    "    on (cd.id_customer = th.transaction_sender) or (cd.id_customer = th.transaction_receiver)\n" +
+                    "join transaction_type tt\n" +
+                    "    on th.transaction_type_id = tt.id_transaction_type\n" +
+                    "where cd.username =? and transaction_date LIKE concat(?,'%') and transaction_type =? order by transaction_date desc)as total;");
+
+            ps.setString(1, customer.username);
+            ps.setString(2, this.search_date.getValue().toString());
+            ps.setString(3, this.search_type_transaksi.getValue());
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                this.countDateAndType = rs.getInt("total_rows");
+                tv_jumlah_transaksi.setText("Total Transaksi "+this.countDateAndType);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 
     public void setCountRow () {
@@ -228,6 +326,166 @@ public class TransactionController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void search(){
+        if(search_date.getValue() != null && search_type_transaksi.getValue() == null) {
+            countByDate();
+            searchByDate();
+        }
+
+        if(search_date.getValue() == null && search_type_transaksi.getValue() != null) {
+            countByType();
+            searchByType();
+        }
+
+        if(search_date.getValue() != null && search_type_transaksi.getValue() != null) {
+            countByDateAndType();
+            searchByDateAndType();
+        }
+    }
+
+    public void searchByDate(){
+        try {
+            PreparedStatement ps = conn.prepareStatement("select cd.name,\n" +
+                    "       id_transaction_history,\n" +
+                    "       transaction_date,\n" +
+                    "       transaction_type,\n" +
+                    "       transaction_amount,\n" +
+                    "       (SELECT cd.name FROM customer_data cd WHERE cd.id_customer=th.transaction_sender) AS transaction_sender,\n" +
+                    "       (SELECT cd.name FROM customer_data cd WHERE cd.id_customer=th.transaction_receiver) AS transaction_receiver,\n" +
+                    "       (ROUND((th.transaction_admin_fee / th.transaction_amount) * 100)) as admin_fee_percent from customer_data cd\n" +
+                    "join transaction_history th\n" +
+                    "    on (cd.id_customer = th.transaction_sender) or (cd.id_customer = th.transaction_receiver)\n" +
+                    "join transaction_type tt\n" +
+                    "    on th.transaction_type_id = tt.id_transaction_type\n" +
+                    "where cd.username = ? and transaction_date LIKE concat(?,'%') order by transaction_date desc;");
+
+            ps.setString(1, customer.username);
+            ps.setString(2, this.search_date.getValue().toString());
+
+            ResultSet rs = ps.executeQuery();
+
+            TransactionModel[] transactionModels = new TransactionModel[this.countDate];
+
+            int i = 0;
+            while (rs.next() && i < this.countDate) {
+                transactionModels[i] = new TransactionModel(
+                        customer.name,
+                        rs.getInt("id_transaction_history"),
+                        rs.getTimestamp("transaction_date"),
+                        rs.getString("transaction_type"),
+                        rs.getString("transaction_sender"),
+                        rs.getString("transaction_receiver"),
+                        rs.getBigDecimal("transaction_amount"),
+                        rs.getInt("admin_fee_percent")
+                );
+                i++;
+            }
+
+            listview_transaksi.setCellFactory(tellerListView -> new TransactionCellFactory());
+
+            listview_transaksi.setItems(FXCollections.observableArrayList(transactionModels));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void searchByType(){
+
+        try {
+            PreparedStatement ps = conn.prepareStatement("select cd.name,\n" +
+                    "       id_transaction_history,\n" +
+                    "       transaction_date,\n" +
+                    "       transaction_type,\n" +
+                    "       transaction_amount,\n" +
+                    "       (SELECT cd.name FROM customer_data cd WHERE cd.id_customer=th.transaction_sender) AS transaction_sender,\n" +
+                    "       (SELECT cd.name FROM customer_data cd WHERE cd.id_customer=th.transaction_receiver) AS transaction_receiver,\n" +
+                    "       (ROUND((th.transaction_admin_fee / th.transaction_amount) * 100)) as admin_fee_percent from customer_data cd\n" +
+                    "join transaction_history th\n" +
+                    "    on (cd.id_customer = th.transaction_sender) or (cd.id_customer = th.transaction_receiver)\n" +
+                    "join transaction_type tt\n" +
+                    "    on th.transaction_type_id = tt.id_transaction_type\n" +
+                    "where cd.username =? and transaction_type =? order by transaction_date desc;");
+
+            ps.setString(1, customer.username);
+            ps.setString(2, this.search_type_transaksi.getValue());
+
+            ResultSet rs = ps.executeQuery();
+
+            TransactionModel[] transactionModels = new TransactionModel[this.countType];
+
+            int i = 0;
+            while (rs.next() && i < this.countType) {
+                transactionModels[i] = new TransactionModel(
+                        customer.name,
+                        rs.getInt("id_transaction_history"),
+                        rs.getTimestamp("transaction_date"),
+                        rs.getString("transaction_type"),
+                        rs.getString("transaction_sender"),
+                        rs.getString("transaction_receiver"),
+                        rs.getBigDecimal("transaction_amount"),
+                        rs.getInt("admin_fee_percent")
+                );
+                i++;
+            }
+
+            listview_transaksi.setCellFactory(tellerListView -> new TransactionCellFactory());
+
+            listview_transaksi.setItems(FXCollections.observableArrayList(transactionModels));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void searchByDateAndType(){
+
+        try {
+            PreparedStatement ps = conn.prepareStatement("select cd.name,\n" +
+                    "       id_transaction_history,\n" +
+                    "       transaction_date,\n" +
+                    "       transaction_type,\n" +
+                    "       transaction_amount,\n" +
+                    "       (SELECT cd.name FROM customer_data cd WHERE cd.id_customer=th.transaction_sender) AS transaction_sender,\n" +
+                    "       (SELECT cd.name FROM customer_data cd WHERE cd.id_customer=th.transaction_receiver) AS transaction_receiver,\n" +
+                    "       (ROUND((th.transaction_admin_fee / th.transaction_amount) * 100)) as admin_fee_percent from customer_data cd\n" +
+                    "join transaction_history th\n" +
+                    "    on (cd.id_customer = th.transaction_sender) or (cd.id_customer = th.transaction_receiver)\n" +
+                    "join transaction_type tt\n" +
+                    "    on th.transaction_type_id = tt.id_transaction_type\n" +
+                    "where cd.username =? and transaction_date LIKE concat(?,'%') and transaction_type =? order by transaction_date desc;");
+
+            ps.setString(1, customer.username);
+            ps.setString(2, this.search_date.getValue().toString());
+            ps.setString(3, this.search_type_transaksi.getValue());
+
+            ResultSet rs = ps.executeQuery();
+
+            TransactionModel[] transactionModels = new TransactionModel[this.countDateAndType];
+
+            int i = 0;
+            while (rs.next() && i < this.countDateAndType) {
+                transactionModels[i] = new TransactionModel(
+                        customer.name,
+                        rs.getInt("id_transaction_history"),
+                        rs.getTimestamp("transaction_date"),
+                        rs.getString("transaction_type"),
+                        rs.getString("transaction_sender"),
+                        rs.getString("transaction_receiver"),
+                        rs.getBigDecimal("transaction_amount"),
+                        rs.getInt("admin_fee_percent")
+                );
+                i++;
+            }
+
+            listview_transaksi.setCellFactory(tellerListView -> new TransactionCellFactory());
+
+            listview_transaksi.setItems(FXCollections.observableArrayList(transactionModels));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
 

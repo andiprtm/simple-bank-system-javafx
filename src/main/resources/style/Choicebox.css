@@ -1,0 +1,12 @@
+.jfx-choice-box {
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+    -fx-text-fill: #eae7b1;
+    -fx-tick-label-fill: #eae7b1;
+}
+
+.jfx-choice-box .label {
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+    -fx-text-fill: #eae7b1;
+}

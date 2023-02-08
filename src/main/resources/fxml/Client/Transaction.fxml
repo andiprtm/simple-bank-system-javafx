@@ -3,6 +3,9 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -34,7 +37,6 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#3c6255" height="38.0" layoutX="7.0" layoutY="129.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="431.0" />
       <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#3c6255" height="564.0" layoutX="7.0" layoutY="179.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="843.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="7.0" />
       <ListView fx:id="listview_transaksi" layoutX="9.0" layoutY="182.0" prefHeight="555.0" prefWidth="835.0" style="-fx-background-color: TRANSPARANT; -fx-background-radius: 10;" stylesheets="@../../style/Client.css" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="9.0">
          <padding>
@@ -45,10 +47,42 @@
             <String fx:value="scroll-bar" />
          </styleClass>
       </ListView>
-      <Label fx:id="tv_jumlah_transaksi" alignment="BOTTOM_LEFT" layoutX="22.0" layoutY="134.0" prefWidth="200.0" text="Total Transaksi 26" textFill="#eae7b1" AnchorPane.leftAnchor="22.0" AnchorPane.topAnchor="134.0">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
+      <HBox alignment="BOTTOM_LEFT" layoutY="132.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Label fx:id="tv_jumlah_transaksi" alignment="CENTER" prefHeight="35.0" style="-fx-background-color: #3c6255; -fx-background-radius: 8; -fx-pref-height: 35;" text="Total Transaksi 26" textFill="#eae7b1">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <padding>
+                  <Insets left="12.0" right="12.0" />
+               </padding>
+            </Label>
+            <DatePicker fx:id="search_date" style="-fx-pref-height: 35;" styleClass="date-picker" stylesheets="@../../style/TimePick.css">
+               <HBox.margin>
+                  <Insets left="120.0" />
+               </HBox.margin>
+            </DatePicker>
+            <ChoiceBox fx:id="search_type_transaksi" prefWidth="150.0" style="-fx-background-color: #3c6255; -fx-pref-height: 35; -fx-background-radius: 8;" stylesheets="@../../style/Choicebox.css">
+               <HBox.margin>
+                  <Insets left="12.0" />
+               </HBox.margin>
+               <styleClass>
+                  <String fx:value="jfx-choice-box" />
+                  <String fx:value="label" />
+               </styleClass>
+            </ChoiceBox>
+            <Button fx:id="btn_search_transaksi" mnemonicParsing="false" prefHeight="35.0" style="-fx-background-color: #3c6255; -fx-background-radius: 8;" text="Cari Transaksi" textFill="#eae7b1">
+               <HBox.margin>
+                  <Insets left="12.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+         </children>
+         <padding>
+            <Insets left="8.0" />
+         </padding>
+      </HBox>
    </children>
 </AnchorPane>
