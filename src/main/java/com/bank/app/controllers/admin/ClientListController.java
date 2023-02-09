@@ -8,8 +8,10 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -22,13 +24,21 @@ import java.util.ResourceBundle;
 public class ClientListController implements Initializable {
     public Teller teller;
     public Integer countRow;
+    public int countSearchData;
     public ListView<ClientModel> listview_Client;
 
     public Label tv_say_hi;
+    public TextField input_search_username;
+    public Button btn_search_username;
     Connection conn = ConnectionManager.getInstance().getConnection();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        btn_search_username.setOnAction(event -> {
+            countSearch();
+            search();
+        });
     }
 
     public void setTellerData(Teller teller) {
@@ -36,6 +46,34 @@ public class ClientListController implements Initializable {
         String[] name = teller.name.split(" ");
 
         tv_say_hi.setText("Hi, " + name[0]);
+    }
+
+    public void countSearch(){
+        try {
+            PreparedStatement ps = conn.prepareStatement("select count(*) as total_rows from(select id_customer,\n" +
+                    "       name,\n" +
+                    "       address,\n" +
+                    "       phone,\n" +
+                    "       username,\n" +
+                    "       password,\n" +
+                    "       cba.account_balance,\n" +
+                    "       cba.account_pin,\n" +
+                    "       IF(cba.customer_is_active, 'Active', 'Not Active') as status,\n" +
+                    "       cat.customer_account_type from customer_data\n" +
+                    "join customer_bank_account cba\n" +
+                    "    on customer_data.id_customer = cba.customer_id\n" +
+                    "join customer_account_type cat\n" +
+                    "    on cba.customer_account_type_id = cat.id_customer_account_type\n" +
+                    "where username =?) as total;");
+
+            ps.setString(1, input_search_username.getText());
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                this.countSearchData = rs.getInt("total_rows");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void setCountRow() {
@@ -119,6 +157,55 @@ public class ClientListController implements Initializable {
                 stage.close();
             });
         } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void search(){
+        try{
+            PreparedStatement ps = conn.prepareStatement("select id_customer,\n" +
+                    "       name,\n" +
+                    "       address,\n" +
+                    "       phone,\n" +
+                    "       username,\n" +
+                    "       password,\n" +
+                    "       cba.account_balance,\n" +
+                    "       cba.account_pin,\n" +
+                    "       IF(cba.customer_is_active, 'Active', 'Not Active') as status,\n" +
+                    "       cat.customer_account_type from customer_data\n" +
+                    "join customer_bank_account cba\n" +
+                    "    on customer_data.id_customer = cba.customer_id\n" +
+                    "join customer_account_type cat\n" +
+                    "    on cba.customer_account_type_id = cat.id_customer_account_type\n" +
+                    "where username =?;");
+
+            ps.setString(1, input_search_username.getText());
+
+            ResultSet rs = ps.executeQuery();
+
+            ClientModel[] clientModels = new ClientModel[this.countSearchData];
+
+            int i = 0;
+            while (rs.next() && i < this.countSearchData) {
+                clientModels[i] = new ClientModel(
+                        rs.getString("id_customer"),
+                        rs.getString("username"),
+                        rs.getString("password"),
+                        rs.getString("name"),
+                        rs.getString("address"),
+                        rs.getString("phone"),
+                        rs.getString("account_pin"),
+                        rs.getBigDecimal("account_balance"),
+                        rs.getString("customer_account_type"),
+                        rs.getString("status")
+                );
+                i++;
+            }
+
+            listview_Client.setCellFactory(tellerListView -> new ClientCellFactory());
+
+            listview_Client.setItems(FXCollections.observableArrayList(clientModels));
+        }catch (Exception e){
             e.printStackTrace();
         }
     }
